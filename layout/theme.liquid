@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2D1B0E">
+  <title>{{ page_title }} — DeskPaws</title>
+  <meta name="description" content="{{ page_description | escape }}">
+
+  {{ content_for_header }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="page-loading">
+  <div id="page-loader">
+    <div class="loader-cat">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <ellipse cx="30" cy="38" rx="18" ry="14" fill="#C4956A"/>
+        <circle cx="30" cy="24" r="12" fill="#C4956A"/>
+        <polygon points="20,14 16,4 24,10" fill="#C4956A"/>
+        <polygon points="40,14 44,4 36,10" fill="#C4956A"/>
+        <circle cx="25" cy="23" r="3" fill="#2D1B0E"/>
+        <circle cx="35" cy="23" r="3" fill="#2D1B0E"/>
+        <circle cx="26" cy="22" r="1" fill="white"/>
+        <circle cx="36" cy="22" r="1" fill="white"/>
+        <ellipse cx="30" cy="27" rx="2" ry="1.5" fill="#E8924A"/>
+      </svg>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <header id="site-header" class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="2" width="24" height="4" rx="2" fill="#E8924A"/>
+          <rect x="13" y="6" width="6" height="12" rx="3" fill="#E8924A"/>
+          <ellipse cx="16" cy="22" rx="9" ry="8" fill="#C4956A"/>
+          <circle cx="12.5" cy="20.5" r="2" fill="#2D1B0E"/>
+          <circle cx="19.5" cy="20.5" r="2" fill="#2D1B0E"/>
+          <ellipse cx="16" cy="23" rx="1.5" ry="1" fill="#E8924A"/>
+          <polygon points="10,14 8,9 13,13" fill="#C4956A"/>
+          <polygon points="22,14 24,9 19,13" fill="#C4956A"/>
+        </svg>
+        <span>DeskPaws</span>
+      </a>
+      <nav class="header-nav">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#buy" class="nav-cta">Get Yours</a>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>{{ content_for_layout }}</main>
+
+  {{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

@@ -1,0 +1,101 @@
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header reveal-up">
+      <div class="section-label">— Real cat parents</div>
+      <h2 class="section-heading">They're obsessed.<br><em>(The cats too.)</em></h2>
+      <div class="reviews-summary">
+        <div class="big-rating">4.9</div>
+        <div class="rating-detail">
+          <div class="stars-row">★★★★★</div>
+          <div class="rating-count">Based on 2,418 reviews</div>
+        </div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5★</span><div class="bar"><div class="bar-fill" style="width:91%"></div></div><span>91%</span></div>
+          <div class="rating-bar-row"><span>4★</span><div class="bar"><div class="bar-fill" style="width:7%"></div></div><span>7%</span></div>
+          <div class="rating-bar-row"><span>3★</span><div class="bar"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-track-outer">
+      <div class="reviews-track" id="reviews-track">
+        {% assign reviews = "Sarah M.,★★★★★,My cat Biscuit wouldn't leave my side during WFH — he'd sit on my laptop constantly. The DeskPaws bucket was a game changer. He climbed in on day one and hasn't left.,NYC · Tabby owner|James T.,★★★★★,Setup took 45 seconds. My bengal immediately sniffed it out and was curled up asleep within 10 minutes. This is the best pet product I've bought in years.,Austin · Bengal owner|Priya K.,★★★★★,I was skeptical — my cat ignores everything I buy him. Spritzed it with the included catnip spray and he literally knocked it with his paw until I installed it. Product is exceptional quality.,London · Ragdoll owner|Marco R.,★★★★★,The quality is outstanding. The rattan is thick, the cushion is plush, the clamp is solid steel. Feels like a premium product. My cat Espresso approves.,Milan · Scottish Fold owner|Amara O.,★★★★★,My two cats now fight over who gets the desk bucket during my morning calls. Ordering a second one. Also — customer service is incredible.,Toronto · 2-cat household|Hana W.,★★★★★,Bought this for my WFH setup and it's transformed my relationship with my cat. She sits right at eye level with me. We make eye contact during Zoom calls and my coworkers lose it.,Tokyo · Persian owner" | split: "|" %}
+        {% for review in reviews %}
+          {% assign parts = review | split: "," %}
+          <div class="review-card">
+            <div class="review-top">
+              <div class="reviewer-avatar">{{ parts[0] | slice: 0 }}</div>
+              <div class="reviewer-info">
+                <div class="reviewer-name">{{ parts[0] }}</div>
+                <div class="reviewer-location">{{ parts[3] }}</div>
+              </div>
+              <div class="review-stars">{{ parts[1] }}</div>
+            </div>
+            <p class="review-text">"{{ parts[2] }}"</p>
+            <div class="review-verified">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="6" fill="#2D6B2F"/>
+                <path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Verified purchase
+            </div>
+          </div>
+        {% endfor %}
+        <!-- Duplicate for infinite scroll effect -->
+        {% for review in reviews %}
+          {% assign parts = review | split: "," %}
+          <div class="review-card" aria-hidden="true">
+            <div class="review-top">
+              <div class="reviewer-avatar">{{ parts[0] | slice: 0 }}</div>
+              <div class="reviewer-info">
+                <div class="reviewer-name">{{ parts[0] }}</div>
+                <div class="reviewer-location">{{ parts[3] }}</div>
+              </div>
+              <div class="review-stars">{{ parts[1] }}</div>
+            </div>
+            <p class="review-text">"{{ parts[2] }}"</p>
+            <div class="review-verified">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="6" fill="#2D6B2F"/>
+                <path d="M4 7l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Verified purchase
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Featured video testimonial placeholder -->
+    <div class="video-testimonial reveal-up">
+      <div class="video-thumb">
+        <div class="video-play-btn">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M10 7l14 7-14 7V7z" fill="white"/>
+          </svg>
+        </div>
+        <svg class="video-thumb-cat" viewBox="0 0 320 180" fill="none">
+          <rect width="320" height="180" fill="#2D1B0E"/>
+          <ellipse cx="160" cy="120" rx="60" ry="45" fill="#C4956A"/>
+          <circle cx="160" cy="80" rx="45" ry="42" fill="#D4A870"/>
+          <polygon points="138,50 130,28 148,46" fill="#C4956A"/>
+          <polygon points="182,50 190,28 172,46" fill="#C4956A"/>
+          <circle cx="148" cy="78" r="8" fill="#2D4A2F"/>
+          <circle cx="172" cy="78" r="8" fill="#2D4A2F"/>
+          <circle cx="150" cy="76" r="3" fill="#1A1209"/>
+          <circle cx="174" cy="76" r="3" fill="#1A1209"/>
+          <ellipse cx="160" cy="90" rx="5" ry="3.5" fill="#E8924A"/>
+          <text x="50" y="166" font-family="DM Sans, sans-serif" font-size="13" fill="white" opacity="0.8">@biscuit_the_tabby · 1.2M views</text>
+        </svg>
+      </div>
+      <div class="video-caption">
+        <p>"I filmed my cat discovering it for the first time. 4 million people cried."</p>
+        <span>— @biscuit_the_tabby</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Reviews", "settings": [] }
+{% endschema %}

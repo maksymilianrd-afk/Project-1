@@ -1,0 +1,247 @@
+<section class="hero" id="hero">
+  <!-- Floating particles -->
+  <div class="particles" id="particles">
+    {% for i in (1..20) %}
+      <div class="particle particle-{{ i }}"></div>
+    {% endfor %}
+  </div>
+
+  <!-- Background gradient orbs -->
+  <div class="hero-orb hero-orb--1"></div>
+  <div class="hero-orb hero-orb--2"></div>
+  <div class="hero-orb hero-orb--3"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge reveal-up">
+        <span class="badge-dot"></span>
+        Now available — free shipping worldwide
+      </div>
+      <h1 class="hero-heading reveal-up" style="--delay:0.1s">
+        Your Cat's New<br>
+        <em>Favorite Desk</em><br>
+        <span class="heading-accent">Companion.</span>
+      </h1>
+      <p class="hero-sub reveal-up" style="--delay:0.2s">
+        The clip-on desk bucket that lets your cat sleep right beside you — no floor, no chair wars. Just pure desk-level bliss.
+      </p>
+      <div class="hero-actions reveal-up" style="--delay:0.3s">
+        <a href="#buy" class="btn btn--primary">
+          <span>Claim Your Bucket</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#how-it-works" class="btn btn--ghost">See how it works</a>
+      </div>
+      <div class="hero-social-proof reveal-up" style="--delay:0.4s">
+        <div class="proof-avatars">
+          <div class="proof-avatar" style="background:#E8924A">🐱</div>
+          <div class="proof-avatar" style="background:#C4956A">😸</div>
+          <div class="proof-avatar" style="background:#A07040">🐈</div>
+          <div class="proof-avatar" style="background:#8B5E3C">😺</div>
+        </div>
+        <div class="proof-text">
+          <div class="proof-stars">★★★★★</div>
+          <span>Loved by <strong>2,400+</strong> cat parents</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Cat Scene -->
+    <div class="hero-scene reveal-scale" style="--delay:0.2s">
+      <div class="scene-glow"></div>
+      <svg id="cat-scene" class="cat-svg" viewBox="0 0 480 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- Desk edge -->
+        <rect x="60" y="60" width="360" height="28" rx="6" fill="#3D2B1A"/>
+        <rect x="60" y="60" width="360" height="8" rx="4" fill="#5C3D22"/>
+        <!-- Wood grain lines -->
+        <line x1="80" y1="64" x2="80" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="120" y1="64" x2="115" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="160" y1="64" x2="168" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="240" y1="64" x2="235" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="300" y1="64" x2="305" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="360" y1="64" x2="355" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+        <line x1="400" y1="64" x2="402" y2="86" stroke="#4A3020" stroke-width="1" opacity="0.5"/>
+
+        <!-- Clamp mechanism -->
+        <rect x="196" y="52" width="88" height="18" rx="4" fill="#6B4C2A"/>
+        <rect x="206" y="44" width="68" height="14" rx="3" fill="#8B6340"/>
+        <rect x="214" y="38" width="52" height="10" rx="2" fill="#A07850"/>
+        <!-- Screws -->
+        <circle cx="220" cy="43" r="3" fill="#5C3D22"/>
+        <line x1="218" y1="43" x2="222" y2="43" stroke="#3D2B1A" stroke-width="1.5"/>
+        <line x1="220" y1="41" x2="220" y2="45" stroke="#3D2B1A" stroke-width="1.5"/>
+        <circle cx="260" cy="43" r="3" fill="#5C3D22"/>
+        <line x1="258" y1="43" x2="262" y2="43" stroke="#3D2B1A" stroke-width="1.5"/>
+        <line x1="260" y1="41" x2="260" y2="45" stroke="#3D2B1A" stroke-width="1.5"/>
+
+        <!-- Suspension bars -->
+        <rect x="218" y="86" width="10" height="32" rx="3" fill="#8B6340"/>
+        <rect x="252" y="86" width="10" height="32" rx="3" fill="#8B6340"/>
+
+        <!-- Bucket/basket body -->
+        <path d="M172 116 C172 112 180 108 240 108 C300 108 308 112 308 116 L320 310 C320 324 308 336 240 336 C172 336 160 324 160 310 Z" fill="#D4A870"/>
+        <!-- Bucket inner shadow -->
+        <path d="M180 120 C180 116 186 114 240 114 C294 114 300 116 300 120 L312 308 C312 316 302 324 240 324 C178 324 168 316 168 308 Z" fill="#C49060"/>
+        <!-- Bucket texture lines -->
+        <path d="M174 160 Q240 154 306 160" stroke="#B87D4A" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M170 200 Q240 194 310 200" stroke="#B87D4A" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M168 240 Q240 234 312 240" stroke="#B87D4A" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M166 280 Q240 274 314 280" stroke="#B87D4A" stroke-width="2" fill="none" opacity="0.5"/>
+        <!-- Bucket rim -->
+        <ellipse cx="240" cy="116" rx="70" ry="10" fill="#E8B880"/>
+        <ellipse cx="240" cy="116" rx="70" ry="10" fill="url(#rimGradient)"/>
+
+        <!-- Cushion/bedding inside bucket -->
+        <ellipse cx="240" cy="290" rx="58" ry="22" fill="#F5E0C4"/>
+        <ellipse cx="240" cy="286" rx="56" ry="20" fill="#FAE8D0"/>
+        <!-- Cushion texture -->
+        <path d="M194 286 Q217 280 240 286 Q263 292 286 286" stroke="#E8D0B0" stroke-width="1.5" fill="none"/>
+
+        <!-- CAT BODY (static) -->
+        <g id="cat-body">
+          <!-- Tail curling out -->
+          <path id="cat-tail" d="M285 280 Q320 260 330 230 Q340 200 320 190 Q305 184 300 196" stroke="#C4956A" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M300 196 Q295 188 302 182" stroke="#C4956A" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+          <!-- Body in bucket -->
+          <ellipse cx="230" cy="270" rx="52" ry="44" fill="#D4A870"/>
+          <!-- Body fur texture -->
+          <ellipse cx="218" cy="260" rx="28" ry="24" fill="#C4956A" opacity="0.5"/>
+
+          <!-- Front paws resting on rim -->
+          <ellipse cx="196" cy="230" rx="16" ry="10" fill="#C4956A"/>
+          <ellipse cx="196" cy="228" rx="14" ry="8" fill="#D4A870"/>
+          <!-- Paw toes -->
+          <ellipse cx="188" cy="230" rx="4" ry="3" fill="#C4956A"/>
+          <ellipse cx="196" cy="232" rx="4" ry="3" fill="#C4956A"/>
+          <ellipse cx="204" cy="230" rx="4" ry="3" fill="#C4956A"/>
+
+          <ellipse cx="276" cy="224" rx="16" ry="10" fill="#C4956A"/>
+          <ellipse cx="276" cy="222" rx="14" ry="8" fill="#D4A870"/>
+          <ellipse cx="268" cy="224" rx="4" ry="3" fill="#C4956A"/>
+          <ellipse cx="276" cy="226" rx="4" ry="3" fill="#C4956A"/>
+          <ellipse cx="284" cy="224" rx="4" ry="3" fill="#C4956A"/>
+        </g>
+
+        <!-- CAT HEAD GROUP — this rotates based on cursor -->
+        <g id="cat-head-group" style="transform-origin: 236px 206px">
+          <!-- Neck -->
+          <ellipse cx="236" cy="218" rx="22" ry="16" fill="#D4A870"/>
+
+          <!-- Head -->
+          <ellipse cx="236" cy="188" rx="44" ry="40" fill="#D4A870"/>
+
+          <!-- Ear tufts / inner ears -->
+          <polygon points="200,164 190,138 214,158" fill="#D4A870"/>
+          <polygon points="272,164 282,138 258,158" fill="#D4A870"/>
+          <polygon points="202,162 194,142 212,158" fill="#F0C0A0" opacity="0.7"/>
+          <polygon points="270,162 278,142 260,158" fill="#F0C0A0" opacity="0.7"/>
+
+          <!-- Forehead marking -->
+          <path d="M228 168 Q236 158 244 168 Q240 175 236 172 Q232 175 228 168Z" fill="#C4956A" opacity="0.4"/>
+
+          <!-- Eye whites -->
+          <ellipse cx="218" cy="188" rx="13" ry="11" fill="white"/>
+          <ellipse cx="254" cy="188" rx="13" ry="11" fill="white"/>
+
+          <!-- Pupils (move with cursor via JS) -->
+          <g id="left-eye-group">
+            <ellipse id="left-pupil-bg" cx="218" cy="188" rx="8" ry="9" fill="#2D6B2F"/>
+            <ellipse id="left-pupil" cx="218" cy="188" rx="5" ry="7" fill="#1A1209"/>
+            <circle id="left-shine-1" cx="220" cy="184" r="2" fill="white"/>
+            <circle id="left-shine-2" cx="215" cy="191" r="1" fill="white" opacity="0.6"/>
+          </g>
+          <g id="right-eye-group">
+            <ellipse id="right-pupil-bg" cx="254" cy="188" rx="8" ry="9" fill="#2D6B2F"/>
+            <ellipse id="right-pupil" cx="254" cy="188" rx="5" ry="7" fill="#1A1209"/>
+            <circle id="right-shine-1" cx="256" cy="184" r="2" fill="white"/>
+            <circle id="right-shine-2" cx="251" cy="191" r="1" fill="white" opacity="0.6"/>
+          </g>
+
+          <!-- Nose -->
+          <polygon points="236,200 231,207 241,207" fill="#E8924A"/>
+          <!-- Mouth -->
+          <path d="M231 207 Q236 212 241 207" stroke="#C4956A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Whiskers left -->
+          <line x1="232" y1="203" x2="196" y2="198" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+          <line x1="232" y1="206" x2="196" y2="206" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+          <line x1="232" y1="209" x2="198" y2="214" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+          <!-- Whiskers right -->
+          <line x1="240" y1="203" x2="276" y2="198" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+          <line x1="240" y1="206" x2="276" y2="206" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+          <line x1="240" y1="209" x2="274" y2="214" stroke="#8B6340" stroke-width="1.5" opacity="0.7"/>
+
+          <!-- Sleepy / curious expression indicator (animated by JS class) -->
+          <g id="blink-overlay" opacity="0">
+            <ellipse cx="218" cy="188" rx="13" ry="2" fill="#D4A870"/>
+            <ellipse cx="254" cy="188" rx="13" ry="2" fill="#D4A870"/>
+          </g>
+        </g>
+
+        <!-- Bucket rim overlay (in front of cat) -->
+        <path d="M170 116 C170 106 198 100 240 100 C282 100 310 106 310 116 L310 126 C310 136 282 142 240 142 C198 142 170 136 170 126 Z" fill="#E8B880" opacity="0.3"/>
+
+        <!-- Defs -->
+        <defs>
+          <linearGradient id="rimGradient" x1="170" y1="106" x2="310" y2="126" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F5C890" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#E8B880" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#C49060" stop-opacity="0.8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Floating label -->
+      <div class="scene-label scene-label--clip">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4 2h8a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#E8924A"/>
+          <path d="M7 6v8M9 6v8" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Universal desk clip
+      </div>
+      <div class="scene-label scene-label--size">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="6" stroke="#E8924A" stroke-width="1.5"/>
+          <path d="M8 5v3l2 2" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Fits cats up to 12 lbs
+      </div>
+
+      <!-- Zzz sleeping animation -->
+      <div class="zzz-container">
+        <span class="zzz zzz-1">z</span>
+        <span class="zzz zzz-2">z</span>
+        <span class="zzz zzz-3">Z</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <span>scroll</span>
+    <div class="scroll-line"><div class="scroll-dot"></div></div>
+  </div>
+</section>
+
+<style>
+  .zzz-container { position: absolute; top: 120px; right: 80px; pointer-events: none; }
+  .zzz { position: absolute; font-family: 'Playfair Display', serif; color: #C4956A; opacity: 0; animation: floatZzz 3s ease-in-out infinite; }
+  .zzz-1 { font-size: 1rem; animation-delay: 0s; left: 0; top: 0; }
+  .zzz-2 { font-size: 1.3rem; animation-delay: 1s; left: 14px; top: -18px; }
+  .zzz-3 { font-size: 1.6rem; animation-delay: 2s; left: 30px; top: -40px; }
+  @keyframes floatZzz {
+    0% { opacity: 0; transform: translate(0,0) rotate(-10deg); }
+    30% { opacity: 0.8; }
+    100% { opacity: 0; transform: translate(10px,-30px) rotate(10deg); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": []
+}
+{% endschema %}

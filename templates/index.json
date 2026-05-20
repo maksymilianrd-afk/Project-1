@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "product-showcase": {
+      "type": "product-showcase",
+      "settings": {}
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {}
+    },
+    "why-deskpaws": {
+      "type": "why-deskpaws",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "buy-now": {
+      "type": "buy-now",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "product-showcase", "how-it-works", "why-deskpaws", "reviews", "buy-now", "footer"]
+}
