@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <style>:root { --header-height: {{ settings.header_height }}px; }</style>
 </head>
 {% assign is_index = false %}
 {% if template == 'index' %}{% assign is_index = true %}{% endif %}

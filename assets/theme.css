@@ -160,7 +160,7 @@ body.body--framed {
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  min-height: 72px;
+  min-height: var(--header-height, 72px);
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
