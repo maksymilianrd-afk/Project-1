@@ -591,6 +591,24 @@ body.body--framed {
   filter: drop-shadow(0 30px 60px rgba(45,27,14,0.15));
   animation: catFloat 6s ease-in-out infinite;
 }
+.hero-photo {
+  border-radius: 24px;
+  object-fit: cover;
+}
+.hero-photo-placeholder {
+  width: 480px;
+  max-width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 24px;
+  background: var(--cream-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 24px;
+}
 @keyframes catFloat {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-12px); }
