@@ -42,7 +42,7 @@
           <img src="{{ logo_url }}"
                alt="{{ logo_alt }}"
                class="logo-image"
-               width="{{ settings.logo_width }}"
+               style="width: {{ settings.logo_width }}px; height: auto;"
                loading="eager">
         {% elsif request.design_mode %}
           <span class="logo-placeholder">Upload your logo</span>

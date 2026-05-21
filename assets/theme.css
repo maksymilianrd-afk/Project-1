@@ -136,8 +136,8 @@ ul { list-style: none; }
 
 .logo-image {
   display: block;
-  max-height: 44px;
   width: auto;
+  height: auto;
   object-fit: contain;
 }
 
