@@ -9,9 +9,9 @@
   --amber:        #E8924A;
   --amber-light:  #F5B272;
   --sand:         #C4956A;
-  --cream:        #FDF8F3;
-  --cream-2:      #F5E6D3;
-  --cream-3:      #FAE8D0;
+  --cream:        #EDE3D0;
+  --cream-2:      #E4D7C0;
+  --cream-3:      #DDD0B8;
   --white:        #ffffff;
   --text-dark:    #1A1209;
   --text-mid:     #4A3020;
@@ -151,7 +151,7 @@ body.body--framed {
 }
 
 .site-header.scrolled {
-  background: rgba(253, 248, 243, 0.92);
+  background: rgba(237, 227, 208, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow-sm);
@@ -280,32 +280,34 @@ body.body--framed {
    ============================================ */
 .section-label {
   font-family: 'DM Mono', monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--amber);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .section-heading {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: var(--brown-deep);
   margin-bottom: 20px;
 }
 
 .section-heading em {
   font-style: italic;
+  font-weight: 400;
   color: var(--amber);
 }
 
 .section-body {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-mid);
-  line-height: 1.7;
+  line-height: 1.78;
   max-width: 520px;
 }
 
@@ -413,7 +415,7 @@ body.body--framed {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(ellipse at 70% 50%, #F5E6D3 0%, #FDF8F3 60%);
+  background: radial-gradient(ellipse at 70% 50%, var(--cream-2) 0%, var(--cream) 65%);
   padding: 100px 24px 60px;
 }
 
@@ -518,13 +520,14 @@ body.body--framed {
 
 .hero-heading {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
   color: var(--brown-deep);
   margin-bottom: 24px;
 }
-.hero-heading em { font-style: italic; color: var(--amber); }
+.hero-heading em { font-style: italic; font-weight: 400; color: var(--amber); }
 .heading-accent { color: var(--brown-deep); }
 
 .hero-sub {
