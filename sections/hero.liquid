@@ -69,6 +69,9 @@
           <span class="heart heart-1">♥</span>
           <span class="heart heart-2">♥</span>
           <span class="heart heart-3">♥</span>
+          <span class="heart heart-4">♥</span>
+          <span class="heart heart-5">♥</span>
+          <span class="heart heart-6">♥</span>
         </div>
       </div>
       <div class="scene-label scene-label--clip">
@@ -176,14 +179,17 @@
     animation: floatHeart 3s ease-in-out infinite;
     filter: drop-shadow(0 1px 3px rgba(232,146,74,0.4));
   }
-  .heart-1 { font-size: 0.85rem; color: #E8924A; animation-delay: 0.4s;  left: 0;    top: 0; }
-  .heart-2 { font-size: 1.15rem; color: #F5B272; animation-delay: 1.6s;  left: -8px; top: -8px; }
-  .heart-3 { font-size: 0.7rem;  color: #E8924A; animation-delay: 2.8s;  left: 14px; top: -4px; }
+  .heart-1 { font-size: 0.7rem;  color: #E8924A; animation-delay: 0s;    left: 4px;  top: 0; }
+  .heart-2 { font-size: 1rem;    color: #F5B272; animation-delay: 0.5s;  left: -6px; top: -4px; }
+  .heart-3 { font-size: 0.65rem; color: #E8924A; animation-delay: 1s;    left: 16px; top: -2px; }
+  .heart-4 { font-size: 1.2rem;  color: #F5B272; animation-delay: 1.5s;  left: -2px; top: 2px; }
+  .heart-5 { font-size: 0.8rem;  color: #E8924A; animation-delay: 2s;    left: 12px; top: -6px; }
+  .heart-6 { font-size: 0.55rem; color: #F5B272; animation-delay: 2.5s;  left: 22px; top: 0px; }
   @keyframes floatHeart {
-    0%   { opacity: 0; transform: translate(0,0) scale(0.5) rotate(-5deg); }
-    20%  { opacity: 1; transform: translate(-3px,-10px) scale(1.1) rotate(5deg); }
-    65%  { opacity: 0.7; transform: translate(3px,-26px) scale(0.95) rotate(-3deg); }
-    100% { opacity: 0; transform: translate(-1px,-42px) scale(0.7) rotate(8deg); }
+    0%   { opacity: 0; transform: translate(0,0) scale(0.4) rotate(-8deg); }
+    15%  { opacity: 1; transform: translate(-4px,-12px) scale(1.1) rotate(4deg); }
+    60%  { opacity: 0.8; transform: translate(3px,-32px) scale(1) rotate(-3deg); }
+    100% { opacity: 0; transform: translate(-2px,-56px) scale(0.6) rotate(10deg); }
   }
 </style>
 
