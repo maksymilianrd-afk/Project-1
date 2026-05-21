@@ -939,6 +939,19 @@ body.body--framed {
 }
 
 /* ============================================
+   PAW TRAIL
+   ============================================ */
+.paw-trail {
+  width: 100%;
+  overflow: hidden;
+  background: var(--cream);
+  pointer-events: none;
+  line-height: 0;
+}
+.paw-trail-wrap { width: 100%; }
+.paw-trail-svg  { display: block; width: 100%; height: auto; }
+
+/* ============================================
    WHY DESKPAWS
    ============================================ */
 .why-deskpaws {

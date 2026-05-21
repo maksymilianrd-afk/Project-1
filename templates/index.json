@@ -12,6 +12,10 @@
       "type": "how-it-works",
       "settings": {}
     },
+    "paw-trail": {
+      "type": "paw-trail",
+      "settings": {}
+    },
     "why-deskpaws": {
       "type": "why-deskpaws",
       "settings": {}
@@ -29,5 +33,5 @@
       "settings": {}
     }
   },
-  "order": ["hero", "product-showcase", "how-it-works", "why-deskpaws", "reviews", "buy-now", "footer"]
+  "order": ["hero", "product-showcase", "how-it-works", "paw-trail", "why-deskpaws", "reviews", "buy-now", "footer"]
 }

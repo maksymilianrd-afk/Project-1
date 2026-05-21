@@ -1,0 +1,45 @@
+<section class="paw-trail" aria-hidden="true">
+  <div class="paw-trail-wrap">
+    <svg class="paw-trail-svg" viewBox="0 0 1400 190" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Cat paw shape: toes point in the +y direction (direction of travel = up/+y) -->
+        <g id="paw-trail-pw">
+          <ellipse cx="0" cy="7" rx="11" ry="9.5"/>
+          <circle cx="-12" cy="-2" r="5"/>
+          <circle cx="-5"  cy="-12" r="4.5"/>
+          <circle cx="5"   cy="-12" r="4.5"/>
+          <circle cx="12"  cy="-2" r="5"/>
+        </g>
+      </defs>
+
+      <!-- Subtle guide path (very faint) -->
+      <path d="M0,165 C180,165 320,25 500,25 C680,25 820,165 1000,165 C1100,165 1250,55 1400,55"
+            fill="none" stroke="#C4956A" stroke-width="2" stroke-opacity="0.1"/>
+
+      <!-- 18 paw prints positioned + rotated along the S-curve path.
+           Alternating L/R offset perpendicular to direction of travel. -->
+      <use href="#paw-trail-pw" transform="translate(36,163)  rotate(-7)"  fill="#C4956A" opacity="0.32"/>
+      <use href="#paw-trail-pw" transform="translate(126,142) rotate(-16)" fill="#C4956A" opacity="0.34"/>
+      <use href="#paw-trail-pw" transform="translate(187,121) rotate(-22)" fill="#C4956A" opacity="0.31"/>
+      <use href="#paw-trail-pw" transform="translate(267,87)  rotate(-24)" fill="#C4956A" opacity="0.29"/>
+      <use href="#paw-trail-pw" transform="translate(329,56)  rotate(-21)" fill="#C4956A" opacity="0.27"/>
+      <use href="#paw-trail-pw" transform="translate(414,35)  rotate(-14)" fill="#C4956A" opacity="0.28"/>
+      <use href="#paw-trail-pw" transform="translate(539,21)  rotate(7)"   fill="#C4956A" opacity="0.27"/>
+      <use href="#paw-trail-pw" transform="translate(626,42)  rotate(16)"  fill="#C4956A" opacity="0.28"/>
+      <use href="#paw-trail-pw" transform="translate(684,54)  rotate(22)"  fill="#C4956A" opacity="0.30"/>
+      <use href="#paw-trail-pw" transform="translate(767,93)  rotate(24)"  fill="#C4956A" opacity="0.32"/>
+      <use href="#paw-trail-pw" transform="translate(828,119) rotate(21)"  fill="#C4956A" opacity="0.34"/>
+      <use href="#paw-trail-pw" transform="translate(911,153) rotate(14)"  fill="#C4956A" opacity="0.35"/>
+      <use href="#paw-trail-pw" transform="translate(1009,159) rotate(-6)" fill="#C4956A" opacity="0.35"/>
+      <use href="#paw-trail-pw" transform="translate(1086,146) rotate(-19)" fill="#C4956A" opacity="0.32"/>
+      <use href="#paw-trail-pw" transform="translate(1159,115) rotate(-22)" fill="#C4956A" opacity="0.30"/>
+      <use href="#paw-trail-pw" transform="translate(1254,85)  rotate(-19)" fill="#C4956A" opacity="0.28"/>
+      <use href="#paw-trail-pw" transform="translate(1329,59)  rotate(-11)" fill="#C4956A" opacity="0.27"/>
+      <use href="#paw-trail-pw" transform="translate(1395,58)  rotate(-5)"  fill="#C4956A" opacity="0.28"/>
+    </svg>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Paw Trail" }
+{% endschema %}
