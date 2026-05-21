@@ -620,7 +620,7 @@ body.body--framed {
 
 .hero-scene-img-wrap {
   position: absolute;
-  inset: 0;
+  inset: 40px 0 40px 40px;
 }
 
 .scene-glow {
@@ -641,9 +641,8 @@ body.body--framed {
 .hero-photo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  max-width: none;
+  object-fit: contain;
+  object-position: center;
   display: block;
   transform: scale(var(--hero-img-scale, 1));
   transform-origin: center;
