@@ -160,7 +160,7 @@ body.body--framed {
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  min-height: var(--header-height, 72px);
+  min-height: var(--header-height, 56px);
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
@@ -185,6 +185,7 @@ body.body--framed {
   display: block;
   width: auto;
   height: auto;
+  max-height: calc(var(--header-height, 56px) - 24px);
   object-fit: contain;
   transform: translateY(var(--logo-offset, 0px));
 }

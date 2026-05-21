@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
-  <style>:root { --header-height: {{ settings.header_height }}px; }</style>
+  <style>:root { --header-height: {{ settings.header_height | default: 56 }}px; }</style>
 </head>
 {% assign is_index = false %}
 {% if template == 'index' %}{% assign is_index = true %}{% endif %}
@@ -52,7 +52,7 @@
                srcset="{{ logo_url }} 1x, {{ logo_url_2x }} 2x, {{ logo_url_3x }} 3x"
                alt="{{ logo_alt }}"
                class="logo-image"
-               style="width: {{ settings.logo_width }}px; height: auto; --logo-offset: {{ settings.logo_vertical_offset }}px;"
+               style="max-width: {{ settings.logo_width }}px; height: auto; --logo-offset: {{ settings.logo_vertical_offset }}px;"
                loading="eager">
         {% elsif request.design_mode %}
           <span class="logo-placeholder">Upload your logo</span>
