@@ -47,44 +47,43 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Hero Product Scene -->
-    <div class="hero-scene reveal-scale" style="--delay:0.2s; --hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
-      <div class="scene-glow"></div>
-      {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
-      {% unless _hero_src %}
-        {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_NZFeVTZ6D9_c7901243-78b5-4caa-827c-e2f88238b9f5.png?v=1779383060' %}
-      {% endunless %}
-      <div class="hero-scene-img-wrap">
-        <img
-          src="{{ _hero_src }}"
-          alt="DeskPaws cat desk bed"
-          class="hero-photo"
-          loading="eager">
-        <!-- Zzz sleeping animation -->
-        <div class="zzz-container">
-          <span class="zzz zzz-1">z</span>
-          <span class="zzz zzz-2">z</span>
-          <span class="zzz zzz-3">Z</span>
-        </div>
+  <!-- Hero Product Scene — absolutely fills the right half of the section -->
+  <div class="hero-scene" style="--hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
+    <div class="scene-glow"></div>
+    {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
+    {% unless _hero_src %}
+      {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_NZFeVTZ6D9_c7901243-78b5-4caa-827c-e2f88238b9f5.png?v=1779383060' %}
+    {% endunless %}
+    <div class="hero-scene-img-wrap">
+      <img
+        src="{{ _hero_src }}"
+        alt="DeskPaws cat desk bed"
+        class="hero-photo"
+        loading="eager">
+      <!-- Zzz sleeping animation -->
+      <div class="zzz-container">
+        <span class="zzz zzz-1">z</span>
+        <span class="zzz zzz-2">z</span>
+        <span class="zzz zzz-3">Z</span>
       </div>
+    </div>
 
-      <!-- Floating label -->
-      <div class="scene-label scene-label--clip">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M4 2h8a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#E8924A"/>
-          <path d="M7 6v8M9 6v8" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Universal desk clip
-      </div>
-      <div class="scene-label scene-label--size">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <circle cx="8" cy="8" r="6" stroke="#E8924A" stroke-width="1.5"/>
-          <path d="M8 5v3l2 2" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Fits cats up to 12 lbs
-      </div>
-
+    <!-- Floating label -->
+    <div class="scene-label scene-label--clip">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M4 2h8a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#E8924A"/>
+        <path d="M7 6v8M9 6v8" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Universal desk clip
+    </div>
+    <div class="scene-label scene-label--size">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6" stroke="#E8924A" stroke-width="1.5"/>
+        <path d="M8 5v3l2 2" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Fits cats up to 12 lbs
     </div>
   </div>
 
