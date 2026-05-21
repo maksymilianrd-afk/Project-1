@@ -15,7 +15,9 @@
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 </head>
-<body class="page-loading{% if template == 'index' %} body--framed{% endif %}">
+{% assign is_index = false %}
+{% if template == 'index' %}{% assign is_index = true %}{% endif %}
+<body class="page-loading{% if is_index %} body--framed{% endif %}">
   <div id="page-loader">
     <div class="loader-cat">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -33,9 +35,9 @@
     </div>
   </div>
 
-  {% if template == 'index' %}<div class="site-frame">{% endif %}
+  {% if is_index %}<div class="site-frame">{% endif %}
 
-  <header id="site-header" class="site-header">
+  <header id="site-header" class="site-header{% if is_index %} site-header--framed{% endif %}">
     <div class="header-inner">
       <a href="/" class="logo">
         {% if settings.logo %}
@@ -49,7 +51,7 @@
                srcset="{{ logo_url }} 1x, {{ logo_url_2x }} 2x, {{ logo_url_3x }} 3x"
                alt="{{ logo_alt }}"
                class="logo-image"
-               style="width: {{ settings.logo_width }}px; height: auto; transform: translateY({{ settings.logo_vertical_offset }}px);"
+               style="width: {{ settings.logo_width }}px; height: auto; --logo-offset: {{ settings.logo_vertical_offset }}px;"
                loading="eager">
         {% elsif request.design_mode %}
           <span class="logo-placeholder">Upload your logo</span>
@@ -69,7 +71,7 @@
 
   <main>{{ content_for_layout }}</main>
 
-  {% if template == 'index' %}</div>{% endif %}
+  {% if is_index %}</div>{% endif %}
 
   {{ 'theme.js' | asset_url | script_tag }}
 </body>

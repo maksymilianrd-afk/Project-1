@@ -26,6 +26,11 @@
   --shadow-lg:    0 20px 60px rgba(45,27,14,0.18);
   --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth:  cubic-bezier(0.4, 0, 0.2, 1);
+  /* Landing page frame tokens — keep these three in sync */
+  --frame-bg:             #C8BAA8;
+  --frame-padding:        12px;
+  --frame-padding-mobile: 8px;
+  --shadow-frame:         0 8px 40px rgba(45, 27, 14, 0.18);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,37 +101,39 @@ ul { list-style: none; }
    LANDING PAGE FRAME  (index template only)
    ============================================ */
 body.body--framed {
-  background: #C8BAA8;
-  padding: 12px;
+  background: var(--frame-bg);
+  padding: var(--frame-padding);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .site-frame {
   background: var(--cream);
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  /* Establishes stacking context so z-index layers render correctly inside frame */
   position: relative;
-  box-shadow: 0 8px 40px rgba(45, 27, 14, 0.18);
+  box-shadow: var(--shadow-frame);
 }
 
-/* Keep fixed header clipped inside the frame on the landing page */
-body.body--framed .site-header {
-  left: 12px;
-  right: 12px;
-  border-radius: 24px 24px 0 0;
+/* Inset the fixed header so its edges align with the frame — padding must match --frame-padding */
+.site-header--framed {
+  left: var(--frame-padding);
+  right: var(--frame-padding);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 @media (max-width: 768px) {
   body.body--framed {
-    padding: 8px;
+    padding: var(--frame-padding-mobile);
   }
   .site-frame {
-    border-radius: 18px;
+    border-radius: var(--radius-md);
   }
-  body.body--framed .site-header {
-    left: 8px;
-    right: 8px;
-    border-radius: 18px 18px 0 0;
+  .site-header--framed {
+    left: var(--frame-padding-mobile);
+    right: var(--frame-padding-mobile);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
 }
 
@@ -179,6 +186,7 @@ body.body--framed .site-header {
   width: auto;
   height: auto;
   object-fit: contain;
+  transform: translateY(var(--logo-offset, 0px));
 }
 
 .logo-image--footer {
