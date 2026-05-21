@@ -52,7 +52,7 @@
                srcset="{{ logo_url }} 1x, {{ logo_url_2x }} 2x, {{ logo_url_3x }} 3x"
                alt="{{ logo_alt }}"
                class="logo-image"
-               style="max-width: {{ settings.logo_width }}px; --logo-offset: {{ settings.logo_vertical_offset }}px;"
+               style="width: {{ settings.logo_width }}px; height: auto; --logo-offset: {{ settings.logo_vertical_offset }}px;"
                loading="eager">
         {% elsif request.design_mode %}
           <span class="logo-placeholder">Upload your logo</span>

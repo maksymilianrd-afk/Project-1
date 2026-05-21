@@ -181,8 +181,7 @@ body.body--framed {
 
 .logo-image {
   display: block;
-  width: auto;
-  height: calc(var(--header-height, 56px) - 8px);
+  height: auto;
   object-fit: contain;
   transform: translateY(var(--logo-offset, 0px));
 }
