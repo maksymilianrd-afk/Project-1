@@ -417,7 +417,7 @@ body.body--framed {
   position: relative;
   overflow: hidden;
   background: radial-gradient(ellipse at 70% 50%, var(--cream-2) 0%, var(--cream) 65%);
-  padding: 100px 24px 60px;
+  padding: 0;
 }
 
 .hero-orb {
@@ -482,17 +482,24 @@ body.body--framed {
 }
 
 .hero-inner {
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  gap: 0;
+  align-items: stretch;
+  flex: 1;
+  min-height: calc(100vh - 120px);
 }
 
 /* Hero Text */
-.hero-text { position: relative; z-index: 2; }
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 120px 60px 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .hero-badge {
   display: inline-flex;
@@ -578,9 +585,7 @@ body.body--framed {
   justify-content: center;
   gap: 0;
   border-top: 1px solid rgba(139,99,64,0.12);
-  max-width: 1200px;
-  margin: 32px auto 0;
-  padding-top: 28px;
+  padding: 28px 60px 48px;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -605,9 +610,13 @@ body.body--framed {
 /* Hero Scene */
 .hero-scene {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+.hero-scene-img-wrap {
+  position: absolute;
+  inset: 0;
 }
 
 .scene-glow {
@@ -627,15 +636,14 @@ body.body--framed {
 }
 .hero-photo {
   width: 100%;
-  max-width: 480px;
-  height: auto;
-  border-radius: 28px;
-  filter: drop-shadow(0 30px 60px rgba(45,27,14,0.18));
-  animation: catFloat 6s ease-in-out infinite;
-}
-@keyframes catFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-14px); }
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  max-width: none;
+  display: block;
+  transform: scale(var(--hero-img-scale, 1));
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
 
 .scene-label {
@@ -1639,9 +1647,9 @@ body.body--framed {
    RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr; text-align: center; }
-  .hero-text { order: 1; }
-  .hero-scene { order: 0; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; min-height: auto; }
+  .hero-text { order: 1; padding: 60px 24px 40px; }
+  .hero-scene { order: 0; min-height: 60vw; align-self: auto; }
   .hero-sub { margin: 0 auto 36px; }
   .hero-actions { justify-content: center; }
   .hero-social-proof { justify-content: center; }
