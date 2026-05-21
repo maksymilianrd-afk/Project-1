@@ -15,7 +15,7 @@
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 </head>
-<body class="page-loading">
+<body class="page-loading{% if template == 'index' %} body--framed{% endif %}">
   <div id="page-loader">
     <div class="loader-cat">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -32,6 +32,8 @@
       <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
   </div>
+
+  {% if template == 'index' %}<div class="site-frame">{% endif %}
 
   <header id="site-header" class="site-header">
     <div class="header-inner">
@@ -66,6 +68,8 @@
   </header>
 
   <main>{{ content_for_layout }}</main>
+
+  {% if template == 'index' %}</div>{% endif %}
 
   {{ 'theme.js' | asset_url | script_tag }}
 </body>

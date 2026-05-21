@@ -93,44 +93,41 @@ ul { list-style: none; }
 @keyframes loaderFill { from { width: 0; } to { width: 100%; } }
 
 /* ============================================
-   PAGE FRAME CORNERS
+   LANDING PAGE FRAME  (index template only)
    ============================================ */
-.page-frame {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 90;
-  opacity: 0;
-  animation: frameReveal 1s ease forwards 2s;
+body.body--framed {
+  background: #C8BAA8;
+  padding: 12px;
+  min-height: 100vh;
 }
 
-@keyframes frameReveal {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.site-frame {
+  background: var(--cream);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(45, 27, 14, 0.18);
 }
 
-.frame-corner {
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  color: #2D1B0E;
-  opacity: 0.22;
-  transition: opacity 0.4s ease;
+/* Keep fixed header clipped inside the frame on the landing page */
+body.body--framed .site-header {
+  left: 12px;
+  right: 12px;
+  border-radius: 24px 24px 0 0;
 }
-
-.page-frame:hover .frame-corner { opacity: 0.38; }
-
-.frame-corner--tl { top: 20px;    left: 20px;    }
-.frame-corner--tr { top: 20px;    right: 20px;   }
-.frame-corner--bl { bottom: 20px; left: 20px;    }
-.frame-corner--br { bottom: 20px; right: 20px;   }
 
 @media (max-width: 768px) {
-  .frame-corner { width: 48px; height: 48px; }
-  .frame-corner--tl { top: 12px;    left: 12px;    }
-  .frame-corner--tr { top: 12px;    right: 12px;   }
-  .frame-corner--bl { bottom: 12px; left: 12px;    }
-  .frame-corner--br { bottom: 12px; right: 12px;   }
+  body.body--framed {
+    padding: 8px;
+  }
+  .site-frame {
+    border-radius: 18px;
+  }
+  body.body--framed .site-header {
+    left: 8px;
+    right: 8px;
+    border-radius: 18px 18px 0 0;
+  }
 }
 
 /* ============================================
