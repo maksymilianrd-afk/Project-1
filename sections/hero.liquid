@@ -11,127 +11,125 @@
   <div class="hero-orb hero-orb--2"></div>
   <div class="hero-orb hero-orb--3"></div>
 
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge reveal-up">
-        <span class="badge-dot"></span>
-        Now available — free shipping worldwide
-      </div>
-      <h1 class="hero-heading reveal-up" style="--delay:0.1s">
-        Your Cat's New<br>
-        <em>Favorite Desk</em><br>
-        <span class="heading-accent">Companion.</span>
-      </h1>
-      <p class="hero-sub reveal-up" style="--delay:0.2s">
-        The clip-on desk bucket that lets your cat sleep right beside you — no floor, no chair wars. Just pure desk-level bliss.
-      </p>
-      <div class="hero-actions reveal-up" style="--delay:0.3s">
-        <a href="#buy" class="btn btn--primary">
-          <span>Claim Your Bucket</span>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="#how-it-works" class="btn btn--ghost">See how it works</a>
-      </div>
-      <div class="hero-social-proof reveal-up" style="--delay:0.4s">
-        <div class="proof-avatars">
-          <div class="proof-avatar" style="background:#E8924A">🐱</div>
-          <div class="proof-avatar" style="background:#C4956A">😸</div>
-          <div class="proof-avatar" style="background:#A07040">🐈</div>
-          <div class="proof-avatar" style="background:#8B5E3C">😺</div>
+  <!-- Two-column split: text left, image right -->
+  <div class="hero-split">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge reveal-up">
+          <span class="badge-dot"></span>
+          Now available — free shipping worldwide
         </div>
-        <div class="proof-text">
-          <div class="proof-stars">★★★★★</div>
-          <span>Loved by <strong>2,400+</strong> cat parents</span>
+        <h1 class="hero-heading reveal-up" style="--delay:0.1s">
+          Your Cat's New<br>
+          <em>Favorite Desk</em><br>
+          <span class="heading-accent">Companion.</span>
+        </h1>
+        <p class="hero-sub reveal-up" style="--delay:0.2s">
+          The clip-on desk bucket that lets your cat sleep right beside you — no floor, no chair wars. Just pure desk-level bliss.
+        </p>
+        <div class="hero-actions reveal-up" style="--delay:0.3s">
+          <a href="#buy" class="btn btn--primary">
+            <span>Claim Your Bucket</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#how-it-works" class="btn btn--ghost">See how it works</a>
+        </div>
+        <div class="hero-social-proof reveal-up" style="--delay:0.4s">
+          <div class="proof-avatars">
+            <div class="proof-avatar" style="background:#E8924A">🐱</div>
+            <div class="proof-avatar" style="background:#C4956A">😸</div>
+            <div class="proof-avatar" style="background:#A07040">🐈</div>
+            <div class="proof-avatar" style="background:#8B5E3C">😺</div>
+          </div>
+          <div class="proof-text">
+            <div class="proof-stars">★★★★★</div>
+            <span>Loved by <strong>2,400+</strong> cat parents</span>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Feature bar -->
-      <div class="hero-feature-bar reveal-up" style="--delay:0.5s">
-        <div class="hero-feature-item">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M10 2C10 2 6 5 4 9c-1.2 2.5-.8 5.5 1.5 7 1.2.8 2.7 1 4 .6 1.3.4 2.8.2 4-.6C15.8 14.5 16.2 11.5 15 9c-2-4-5-7-5-7z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M10 8v5M8 11c.6.8 1.4 1.2 2 1.2s1.4-.4 2-1.2" stroke="#8B6340" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-          <div>
-            <strong>Premium Materials</strong>
-            <span>Safe, soft &amp; sustainable</span>
-          </div>
+    <!-- Hero image — absolutely fills the right half -->
+    <div class="hero-scene" style="--hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
+      <div class="scene-glow"></div>
+      {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
+      {% unless _hero_src %}
+        {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
+      {% endunless %}
+      <div class="hero-scene-img-wrap">
+        <img
+          src="{{ _hero_src }}"
+          alt="DeskPaws cat desk bed"
+          class="hero-photo"
+          loading="eager">
+        <div class="zzz-container">
+          <span class="zzz zzz-1">z</span>
+          <span class="zzz zzz-2">z</span>
+          <span class="zzz zzz-3">Z</span>
         </div>
-        <div class="hero-feature-item">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <!-- paw pad -->
-            <ellipse cx="10" cy="13.5" rx="4.2" ry="3.2" fill="#8B6340" opacity="0.75"/>
-            <!-- four toe pads -->
-            <ellipse cx="5.5" cy="9.5" rx="1.5" ry="1.8" fill="#8B6340" opacity="0.75"/>
-            <ellipse cx="8.2" cy="7.8" rx="1.5" ry="1.8" fill="#8B6340" opacity="0.75"/>
-            <ellipse cx="11.8" cy="7.8" rx="1.5" ry="1.8" fill="#8B6340" opacity="0.75"/>
-            <ellipse cx="14.5" cy="9.5" rx="1.5" ry="1.8" fill="#8B6340" opacity="0.75"/>
-          </svg>
-          <div>
-            <strong>Cat Approved</strong>
-            <span>Loved by cats, trusted by humans</span>
-          </div>
-        </div>
-        <div class="hero-feature-item">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M10 16s-7-4.5-7-8.5C3 5 4.8 3 7 3c1.3 0 2.4.7 3 1.7C10.6 3.7 11.7 3 13 3c2.2 0 4 2 4 4.5C17 11.5 10 16 10 16z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
-          <div>
-            <strong>Made with Love</strong>
-            <span>Thoughtful designs for happy naps</span>
-          </div>
-        </div>
-        <div class="hero-feature-item">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M10 2C10 2 6 5 4 9c-1.2 2.5-.8 5.5 1.5 7 1.2.8 2.7 1 4 .6 1.3.4 2.8.2 4-.6C15.8 14.5 16.2 11.5 15 9c-2-4-5-7-5-7z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M10 7v4M8.5 9.5h3" stroke="#8B6340" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-          <div>
-            <strong>Designed for Comfort</strong>
-            <span>Ergonomic, supportive, and cozy</span>
-          </div>
-        </div>
+      </div>
+      <div class="scene-label scene-label--clip">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M4 2h8a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#E8924A"/>
+          <path d="M7 6v8M9 6v8" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Universal desk clip
+      </div>
+      <div class="scene-label scene-label--size">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="6" stroke="#E8924A" stroke-width="1.5"/>
+          <path d="M8 5v3l2 2" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Fits cats up to 12 lbs
       </div>
     </div>
   </div>
 
-  <!-- Hero Product Scene — absolutely fills the right half of the section -->
-  <div class="hero-scene" style="--hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
-    <div class="scene-glow"></div>
-    {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
-    {% unless _hero_src %}
-      {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
-    {% endunless %}
-    <div class="hero-scene-img-wrap">
-      <img
-        src="{{ _hero_src }}"
-        alt="DeskPaws cat desk bed"
-        class="hero-photo"
-        loading="eager">
-      <!-- Zzz sleeping animation -->
-      <div class="zzz-container">
-        <span class="zzz zzz-1">z</span>
-        <span class="zzz zzz-2">z</span>
-        <span class="zzz zzz-3">Z</span>
+  <!-- Feature bar — full width below the split -->
+  <div class="hero-feature-bar reveal-up" style="--delay:0.5s">
+    <div class="hero-feature-item">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 2C10 2 6 5 4 9c-1.2 2.5-.8 5.5 1.5 7 1.2.8 2.7 1 4 .6 1.3.4 2.8.2 4-.6C15.8 14.5 16.2 11.5 15 9c-2-4-5-7-5-7z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M10 8v5M8 11c.6.8 1.4 1.2 2 1.2s1.4-.4 2-1.2" stroke="#8B6340" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <strong>Premium Materials</strong>
+        <span>Safe, soft &amp; sustainable</span>
       </div>
     </div>
-
-    <!-- Floating label -->
-    <div class="scene-label scene-label--clip">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M4 2h8a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#E8924A"/>
-        <path d="M7 6v8M9 6v8" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+    <div class="hero-feature-item">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <ellipse cx="10" cy="13" rx="4" ry="3" stroke="#8B6340" stroke-width="1.4"/>
+        <ellipse cx="5.8" cy="9" rx="1.3" ry="1.7" stroke="#8B6340" stroke-width="1.3"/>
+        <ellipse cx="8.4" cy="7.2" rx="1.3" ry="1.7" stroke="#8B6340" stroke-width="1.3"/>
+        <ellipse cx="11.6" cy="7.2" rx="1.3" ry="1.7" stroke="#8B6340" stroke-width="1.3"/>
+        <ellipse cx="14.2" cy="9" rx="1.3" ry="1.7" stroke="#8B6340" stroke-width="1.3"/>
       </svg>
-      Universal desk clip
+      <div>
+        <strong>Cat Approved</strong>
+        <span>Loved by cats, trusted by humans</span>
+      </div>
     </div>
-    <div class="scene-label scene-label--size">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <circle cx="8" cy="8" r="6" stroke="#E8924A" stroke-width="1.5"/>
-        <path d="M8 5v3l2 2" stroke="#E8924A" stroke-width="1.5" stroke-linecap="round"/>
+    <div class="hero-feature-item">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 16s-7-4.5-7-8.5C3 5 4.8 3 7 3c1.3 0 2.4.7 3 1.7C10.6 3.7 11.7 3 13 3c2.2 0 4 2 4 4.5C17 11.5 10 16 10 16z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
       </svg>
-      Fits cats up to 12 lbs
+      <div>
+        <strong>Made with Love</strong>
+        <span>Thoughtful designs for happy naps</span>
+      </div>
+    </div>
+    <div class="hero-feature-item">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 2C10 2 6 5 4 9c-1.2 2.5-.8 5.5 1.5 7 1.2.8 2.7 1 4 .6 1.3.4 2.8.2 4-.6C15.8 14.5 16.2 11.5 15 9c-2-4-5-7-5-7z" stroke="#8B6340" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M10 7v4M8.5 9.5h3" stroke="#8B6340" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <strong>Designed for Comfort</strong>
+        <span>Ergonomic, supportive, and cozy</span>
+      </div>
     </div>
   </div>
 
@@ -143,16 +141,7 @@
 </section>
 
 <style>
-  .hero-scene-img-wrap {
-    position: relative;
-    display: inline-block;
-  }
-  .zzz-container {
-    position: absolute;
-    top: 12%;
-    right: 8%;
-    pointer-events: none;
-  }
+  .zzz-container { position: absolute; top: 12%; right: 8%; pointer-events: none; }
   .zzz { position: absolute; font-family: 'Playfair Display', serif; color: #C4956A; opacity: 0; animation: floatZzz 3s ease-in-out infinite; }
   .zzz-1 { font-size: 1rem; animation-delay: 0s; left: 0; top: 0; }
   .zzz-2 { font-size: 1.3rem; animation-delay: 1s; left: 14px; top: -18px; }
