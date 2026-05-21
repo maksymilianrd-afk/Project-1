@@ -450,36 +450,6 @@ body.body--framed {
   66%  { transform: translate(-15px, 20px) scale(0.97); }
 }
 
-/* Particles */
-.particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--amber);
-  opacity: 0;
-  animation: particleDrift var(--dur, 8s) ease-in-out infinite var(--del, 0s);
-}
-
-{% for i in (1..20) %}
-.particle-{{ i }} {
-  left: {{ i | times: 5 }}%;
-  top: {{ i | modulo: 5 | times: 20 }}%;
-  --dur: {{ i | modulo: 4 | plus: 6 }}s;
-  --del: -{{ i | modulo: 7 }}s;
-  width: {{ i | modulo: 3 | plus: 3 }}px;
-  height: {{ i | modulo: 3 | plus: 3 }}px;
-  background: {{ i | modulo: 3 | default: "var(--amber)" }};
-}
-{% endfor %}
-
-@keyframes particleDrift {
-  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
-  20%  { opacity: 0.6; }
-  80%  { opacity: 0.3; }
-  100% { opacity: 0; transform: translate(calc(var(--tx, 30px)), -60px) rotate(360deg); }
-}
 
 .hero-inner {
   position: relative;

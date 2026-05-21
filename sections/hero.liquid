@@ -1,11 +1,4 @@
 <section class="hero" id="hero">
-  <!-- Floating particles -->
-  <div class="particles" id="particles">
-    {% for i in (1..20) %}
-      <div class="particle particle-{{ i }}"></div>
-    {% endfor %}
-  </div>
-
   <!-- Background gradient orbs -->
   <div class="hero-orb hero-orb--1"></div>
   <div class="hero-orb hero-orb--2"></div>
@@ -68,6 +61,11 @@
           <span class="zzz zzz-1">z</span>
           <span class="zzz zzz-2">z</span>
           <span class="zzz zzz-3">Z</span>
+        </div>
+        <div class="heart-container">
+          <span class="heart heart-1">♥</span>
+          <span class="heart heart-2">♥</span>
+          <span class="heart heart-3">♥</span>
         </div>
       </div>
       <div class="scene-label scene-label--clip">
@@ -141,15 +139,44 @@
 </section>
 
 <style>
-  .zzz-container { position: absolute; top: 12%; right: 8%; pointer-events: none; }
-  .zzz { position: absolute; font-family: 'Playfair Display', serif; color: #C4956A; opacity: 0; animation: floatZzz 3s ease-in-out infinite; }
-  .zzz-1 { font-size: 1rem; animation-delay: 0s; left: 0; top: 0; }
-  .zzz-2 { font-size: 1.3rem; animation-delay: 1s; left: 14px; top: -18px; }
-  .zzz-3 { font-size: 1.6rem; animation-delay: 2s; left: 30px; top: -40px; }
+  /* Zzz sleep animation */
+  .zzz-container { position: absolute; top: 10%; right: 10%; pointer-events: none; }
+  .zzz {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #C4956A;
+    opacity: 0;
+    animation: floatZzz 3.5s ease-in-out infinite;
+    text-shadow: 0 1px 4px rgba(196,149,106,0.3);
+  }
+  .zzz-1 { font-size: 1rem;  animation-delay: 0s;    left: 0;    top: 0; }
+  .zzz-2 { font-size: 1.4rem; animation-delay: 1.2s;  left: 18px; top: -22px; }
+  .zzz-3 { font-size: 1.8rem; animation-delay: 2.4s;  left: 38px; top: -50px; }
   @keyframes floatZzz {
-    0% { opacity: 0; transform: translate(0,0) rotate(-10deg); }
-    30% { opacity: 0.8; }
-    100% { opacity: 0; transform: translate(10px,-30px) rotate(10deg); }
+    0%   { opacity: 0; transform: translate(0,0) rotate(-10deg) scale(0.8); }
+    25%  { opacity: 0.9; transform: translate(6px,-10px) rotate(-5deg) scale(1); }
+    75%  { opacity: 0.5; transform: translate(10px,-24px) rotate(5deg) scale(1.05); }
+    100% { opacity: 0; transform: translate(14px,-38px) rotate(12deg) scale(0.9); }
+  }
+
+  /* Heart animation */
+  .heart-container { position: absolute; top: 18%; right: 28%; pointer-events: none; }
+  .heart {
+    position: absolute;
+    font-family: serif;
+    opacity: 0;
+    animation: floatHeart 3s ease-in-out infinite;
+    filter: drop-shadow(0 1px 3px rgba(232,146,74,0.4));
+  }
+  .heart-1 { font-size: 0.85rem; color: #E8924A; animation-delay: 0.4s;  left: 0;    top: 0; }
+  .heart-2 { font-size: 1.15rem; color: #F5B272; animation-delay: 1.6s;  left: -8px; top: -8px; }
+  .heart-3 { font-size: 0.7rem;  color: #E8924A; animation-delay: 2.8s;  left: 14px; top: -4px; }
+  @keyframes floatHeart {
+    0%   { opacity: 0; transform: translate(0,0) scale(0.5) rotate(-5deg); }
+    20%  { opacity: 1; transform: translate(-3px,-10px) scale(1.1) rotate(5deg); }
+    65%  { opacity: 0.7; transform: translate(3px,-26px) scale(0.95) rotate(-3deg); }
+    100% { opacity: 0; transform: translate(-1px,-42px) scale(0.7) rotate(8deg); }
   }
 </style>
 
