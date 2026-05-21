@@ -52,6 +52,7 @@
         {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
       {% endunless %}
       <div class="hero-scene-img-wrap">
+        <div class="bucket-shadow"></div>
         <img
           src="{{ _hero_src }}"
           alt="DeskPaws cat desk bed"
@@ -145,6 +146,25 @@
 </section>
 
 <style>
+  /* Floating shadow beneath the bucket */
+  .bucket-shadow {
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52%;
+    height: 22px;
+    background: radial-gradient(ellipse at center, rgba(45,27,14,0.28) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(8px);
+    pointer-events: none;
+    animation: shadowPulse 3s ease-in-out infinite;
+  }
+  @keyframes shadowPulse {
+    0%, 100% { transform: translateX(-50%) scaleX(1);   opacity: 1; }
+    50%       { transform: translateX(-50%) scaleX(0.88); opacity: 0.7; }
+  }
+
   /* Zzz sleep animation — originates at cat's mouth */
   .zzz-container { position: absolute; top: 40%; left: 33%; pointer-events: none; }
   .zzz {
