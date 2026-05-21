@@ -25,6 +25,17 @@
         "step": 10,
         "unit": "px",
         "default": 140
+      },
+      {
+        "type": "range",
+        "id": "logo_vertical_offset",
+        "label": "Logo vertical position",
+        "info": "Drag left to move up, right to move down.",
+        "min": -30,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 0
       }
     ]
   },

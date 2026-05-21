@@ -37,12 +37,17 @@
     <div class="header-inner">
       <a href="/" class="logo">
         {% if settings.logo %}
-          {% assign logo_url = settings.logo | image_url: width: settings.logo_width %}
-          {% assign logo_alt = settings.logo.alt | default: shop.name %}
+          {% assign logo_url    = settings.logo | image_url: width: settings.logo_width %}
+          {% assign logo_2x_w   = settings.logo_width | times: 2 %}
+          {% assign logo_3x_w   = settings.logo_width | times: 3 %}
+          {% assign logo_url_2x = settings.logo | image_url: width: logo_2x_w %}
+          {% assign logo_url_3x = settings.logo | image_url: width: logo_3x_w %}
+          {% assign logo_alt    = settings.logo.alt | default: shop.name %}
           <img src="{{ logo_url }}"
+               srcset="{{ logo_url }} 1x, {{ logo_url_2x }} 2x, {{ logo_url_3x }} 3x"
                alt="{{ logo_alt }}"
                class="logo-image"
-               style="width: {{ settings.logo_width }}px; height: auto;"
+               style="width: {{ settings.logo_width }}px; height: auto; transform: translateY({{ settings.logo_vertical_offset }}px);"
                loading="eager">
         {% elsif request.design_mode %}
           <span class="logo-placeholder">Upload your logo</span>
