@@ -1,4 +1,29 @@
 <section class="hero" id="hero">
+
+  <!-- Page frame corners -->
+  <div class="page-frame" aria-hidden="true">
+    <svg class="frame-corner frame-corner--tl" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 76 4 L 24 4 Q 4 4 4 24 L 4 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M 76 4 L 60 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M 4 60 L 4 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+    <svg class="frame-corner frame-corner--tr" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 4 4 L 56 4 Q 76 4 76 24 L 76 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M 4 4 L 20 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M 76 60 L 76 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+    <svg class="frame-corner frame-corner--bl" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 76 76 L 24 76 Q 4 76 4 56 L 4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M 76 76 L 60 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M 4 20 L 4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+    <svg class="frame-corner frame-corner--br" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 4 76 L 56 76 Q 76 76 76 56 L 76 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M 4 76 L 20 76" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M 76 20 L 76 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+  </div>
+
   <!-- Floating particles -->
   <div class="particles" id="particles">
     {% for i in (1..20) %}
