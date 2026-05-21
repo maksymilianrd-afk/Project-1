@@ -9,9 +9,9 @@
   --amber:        #E8924A;
   --amber-light:  #F5B272;
   --sand:         #C4956A;
-  --cream:        #EDE3D0;
-  --cream-2:      #E4D7C0;
-  --cream-3:      #DDD0B8;
+  --cream:        #FDF8F3;
+  --cream-2:      #F5E6D3;
+  --cream-3:      #FAE8D0;
   --white:        #ffffff;
   --text-dark:    #1A1209;
   --text-mid:     #4A3020;
@@ -151,7 +151,7 @@ body.body--framed {
 }
 
 .site-header.scrolled {
-  background: rgba(237, 227, 208, 0.92);
+  background: rgba(253, 248, 243, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow-sm);
