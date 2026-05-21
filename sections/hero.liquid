@@ -60,7 +60,10 @@
         <div class="zzz-container">
           <span class="zzz zzz-1">z</span>
           <span class="zzz zzz-2">z</span>
-          <span class="zzz zzz-3">Z</span>
+          <span class="zzz zzz-3">z</span>
+          <span class="zzz zzz-4">z</span>
+          <span class="zzz zzz-5">Z</span>
+          <span class="zzz zzz-6">Z</span>
         </div>
         <div class="heart-container">
           <span class="heart heart-1">♥</span>
@@ -139,29 +142,33 @@
 </section>
 
 <style>
-  /* Zzz sleep animation */
-  .zzz-container { position: absolute; top: 22%; left: 30%; pointer-events: none; }
+  /* Zzz sleep animation — originates at cat's mouth */
+  .zzz-container { position: absolute; top: 40%; left: 33%; pointer-events: none; }
   .zzz {
     position: absolute;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: #C4956A;
     opacity: 0;
-    animation: floatZzz 3.5s ease-in-out infinite;
-    text-shadow: 0 1px 4px rgba(196,149,106,0.3);
+    animation: floatZzz 4s ease-in-out infinite;
+    text-shadow: 0 1px 4px rgba(196,149,106,0.35);
   }
-  .zzz-1 { font-size: 1rem;  animation-delay: 0s;    left: 0;    top: 0; }
-  .zzz-2 { font-size: 1.4rem; animation-delay: 1.2s;  left: 18px; top: -22px; }
-  .zzz-3 { font-size: 1.8rem; animation-delay: 2.4s;  left: 38px; top: -50px; }
+  /* Each z starts at origin and drifts up-right in a staggered chain */
+  .zzz-1 { font-size: 0.75rem; animation-delay: 0s;    left: 0;   top: 0; }
+  .zzz-2 { font-size: 0.9rem;  animation-delay: 0.65s; left: 8px; top: -2px; }
+  .zzz-3 { font-size: 1.1rem;  animation-delay: 1.3s;  left: 18px; top: -4px; }
+  .zzz-4 { font-size: 1.35rem; animation-delay: 1.95s; left: 30px; top: -6px; }
+  .zzz-5 { font-size: 1.65rem; animation-delay: 2.6s;  left: 44px; top: -8px; }
+  .zzz-6 { font-size: 2rem;    animation-delay: 3.25s; left: 60px; top: -10px; }
   @keyframes floatZzz {
-    0%   { opacity: 0; transform: translate(0,0) rotate(-10deg) scale(0.8); }
-    25%  { opacity: 0.9; transform: translate(6px,-10px) rotate(-5deg) scale(1); }
-    75%  { opacity: 0.5; transform: translate(10px,-24px) rotate(5deg) scale(1.05); }
-    100% { opacity: 0; transform: translate(14px,-38px) rotate(12deg) scale(0.9); }
+    0%   { opacity: 0; transform: translate(0,0) rotate(-8deg) scale(0.7); }
+    20%  { opacity: 1; }
+    70%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translate(16px,-52px) rotate(14deg) scale(1.1); }
   }
 
-  /* Heart animation */
-  .heart-container { position: absolute; top: 20%; left: 50%; pointer-events: none; }
+  /* Heart animation — near cat's head */
+  .heart-container { position: absolute; top: 30%; left: 40%; pointer-events: none; }
   .heart {
     position: absolute;
     font-family: serif;
