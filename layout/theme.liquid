@@ -43,8 +43,8 @@
               width: settings.logo_width,
               height: settings.logo_width | divided_by: settings.logo.aspect_ratio | round
           }}
-        {% else %}
-          <span class="logo-text">{{ shop.name }}</span>
+        {% elsif request.design_mode %}
+          <span class="logo-placeholder">Upload your logo</span>
         {% endif %}
       </a>
       <nav class="header-nav">
