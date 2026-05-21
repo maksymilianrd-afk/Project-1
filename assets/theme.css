@@ -134,6 +134,29 @@ ul { list-style: none; }
 .logo:hover { opacity: 0.8; }
 .logo svg { flex-shrink: 0; }
 
+.logo-image {
+  display: block;
+  max-height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-image--footer {
+  max-height: 36px;
+  /* invert footer logo to white if it's a dark image — remove if your logo is already light */
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brown-deep);
+}
+
+.logo--footer .logo-text { color: white; }
+
 .header-nav {
   display: flex;
   align-items: center;

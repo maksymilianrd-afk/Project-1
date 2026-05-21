@@ -8,6 +8,27 @@
     "theme_support_url": "https://deskpaws.com/support"
   },
   {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image",
+        "info": "Upload your logo here. SVG, PNG, or WebP with a transparent background works best."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "default": 140
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
       {
