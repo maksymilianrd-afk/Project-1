@@ -51,19 +51,23 @@
     <!-- Hero Product Scene -->
     <div class="hero-scene reveal-scale" style="--delay:0.2s">
       <div class="scene-glow"></div>
-      {% if section.settings.hero_image %}
-        {% assign hero_img_url    = section.settings.hero_image | image_url: width: 960 %}
-        {% assign hero_img_url_2x = section.settings.hero_image | image_url: width: 1920 %}
+      {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
+      {% unless _hero_src %}
+        {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_tfixSLBmZJ.png?v=1779366409' %}
+      {% endunless %}
+      <div class="hero-scene-img-wrap">
         <img
-          src="{{ hero_img_url }}"
-          srcset="{{ hero_img_url }} 1x, {{ hero_img_url_2x }} 2x"
-          alt="{{ section.settings.hero_image.alt | default: 'DeskPaws cat desk bed' }}"
-          class="cat-svg hero-photo"
-          width="480"
+          src="{{ _hero_src }}"
+          alt="DeskPaws cat desk bed"
+          class="hero-photo"
           loading="eager">
-      {% elsif request.design_mode %}
-        <div class="hero-photo-placeholder">Upload a hero image in the customizer</div>
-      {% endif %}
+        <!-- Zzz sleeping animation -->
+        <div class="zzz-container">
+          <span class="zzz zzz-1">z</span>
+          <span class="zzz zzz-2">z</span>
+          <span class="zzz zzz-3">Z</span>
+        </div>
+      </div>
 
       <!-- Floating label -->
       <div class="scene-label scene-label--clip">
@@ -81,12 +85,6 @@
         Fits cats up to 12 lbs
       </div>
 
-      <!-- Zzz sleeping animation -->
-      <div class="zzz-container">
-        <span class="zzz zzz-1">z</span>
-        <span class="zzz zzz-2">z</span>
-        <span class="zzz zzz-3">Z</span>
-      </div>
     </div>
   </div>
 
@@ -98,7 +96,16 @@
 </section>
 
 <style>
-  .zzz-container { position: absolute; top: 120px; right: 80px; pointer-events: none; }
+  .hero-scene-img-wrap {
+    position: relative;
+    display: inline-block;
+  }
+  .zzz-container {
+    position: absolute;
+    top: 12%;
+    right: 8%;
+    pointer-events: none;
+  }
   .zzz { position: absolute; font-family: 'Playfair Display', serif; color: #C4956A; opacity: 0; animation: floatZzz 3s ease-in-out infinite; }
   .zzz-1 { font-size: 1rem; animation-delay: 0s; left: 0; top: 0; }
   .zzz-2 { font-size: 1.3rem; animation-delay: 1s; left: 14px; top: -18px; }
