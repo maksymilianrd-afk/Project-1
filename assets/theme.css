@@ -714,7 +714,7 @@ body.body--framed {
   white-space: nowrap;
 }
 .scene-label--clip  { top: 16%;          right: 22%;  animation-delay: 0s;   }
-.scene-label--size  { top: 14%;          left: 5%;    animation-delay: 1.5s; }
+.scene-label--size  { top: 21%;          left: 5%;    animation-delay: 1.5s; }
 .scene-label--wash  { bottom: 22%;       right: 16%;  animation-delay: 0.9s; }
 @keyframes labelFloat {
   0%, 100% { transform: translateY(0); }
