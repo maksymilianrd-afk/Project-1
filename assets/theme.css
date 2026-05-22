@@ -686,7 +686,7 @@ body.body--framed {
   animation: labelFloat 3s ease-in-out infinite;
 }
 .scene-label--clip  { top: 90px;  right: -20px; animation-delay: 0s; }
-.scene-label--size  { bottom: 120px; left: -20px; animation-delay: 1.5s; }
+.scene-label--size  { bottom: 80px; left: 18%; animation-delay: 1.5s; }
 @keyframes labelFloat {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-6px); }
