@@ -1877,3 +1877,42 @@ body.body--framed {
   .reviews-summary { flex-direction: column; gap: 20px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
+
+/* ============================================
+   AMBIENT PAGE PARTICLES
+   ============================================ */
+.gp-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.gp { position: absolute; }
+
+.gp--dot {
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,146,74,0.68) 0%, rgba(196,149,106,0.15) 55%, transparent 100%);
+  filter: blur(1px);
+  animation: gpDotPulse 6s ease-in-out infinite;
+}
+
+.gp--heart {
+  font-family: serif;
+  color: rgba(232,146,74,0.52);
+  filter: blur(0.2px);
+  opacity: 0;
+  animation: gpHeartFloat 8s ease-in-out infinite;
+}
+
+@keyframes gpDotPulse {
+  0%, 100% { opacity: 0;    transform: scale(0.3); }
+  40%, 60%  { opacity: 0.44; transform: scale(1);   }
+}
+
+@keyframes gpHeartFloat {
+  0%, 100% { opacity: 0;    transform: translateY(0px)   scale(0.5); }
+  20%, 80%  { opacity: 0.40; transform: translateY(-10px) scale(1);   }
+  50%       { opacity: 0.52; transform: translateY(-24px) scale(1.1); }
+}

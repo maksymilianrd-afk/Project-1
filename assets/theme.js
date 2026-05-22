@@ -515,4 +515,41 @@
     });
   });
 
+  /* ------------------------------------------
+     AMBIENT PAGE PARTICLES
+     Fixed viewport layer — glow dots + hearts
+     visible throughout the whole scroll journey
+  ------------------------------------------ */
+  (function () {
+    const layer = document.createElement('div');
+    layer.className = 'gp-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(layer);
+
+    for (let i = 0; i < 85; i++) {
+      const isHeart = i % 3 === 0;
+      const el      = document.createElement('span');
+      el.className  = isHeart ? 'gp gp--heart' : 'gp gp--dot';
+      if (isHeart) el.textContent = '♥';
+
+      el.style.left = (2  + Math.random() * 96).toFixed(1) + '%';
+      el.style.top  = (0.5 + Math.random() * 99).toFixed(1) + '%';
+
+      const dur = (5  + Math.random() * 9).toFixed(1);
+      const del = (-(Math.random() * 14)).toFixed(1);
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay   = del + 's';
+
+      if (!isHeart) {
+        const sz = (3 + Math.random() * 5).toFixed(1);
+        el.style.width  = sz + 'px';
+        el.style.height = sz + 'px';
+      } else {
+        el.style.fontSize = (0.35 + Math.random() * 0.28).toFixed(2) + 'rem';
+      }
+
+      layer.appendChild(el);
+    }
+  })();
+
 })();
