@@ -21,10 +21,10 @@
         "id": "logo_width",
         "label": "Logo width",
         "min": 60,
-        "max": 300,
+        "max": 500,
         "step": 10,
         "unit": "px",
-        "default": 140
+        "default": 180
       },
       {
         "type": "range",
