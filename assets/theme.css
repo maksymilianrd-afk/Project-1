@@ -492,12 +492,12 @@ body.body--framed {
 .hero-inner {
   position: relative;
   z-index: 2;
-  width: 50%;
+  width: 56%;
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 60px 80px 60px;
+  padding: 120px 48px 80px 60px;
 }
 
 /* Hero Text */
@@ -559,7 +559,7 @@ body.body--framed {
   color: var(--text-mid);
   line-height: 1.7;
   margin-bottom: 36px;
-  max-width: 440px;
+  max-width: 520px;
 }
 
 .hero-actions {
