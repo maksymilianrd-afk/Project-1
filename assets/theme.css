@@ -173,8 +173,7 @@ body.body--framed {
 }
 
 .header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   min-height: var(--header-height, 56px);
   display: flex;
   align-items: center;
