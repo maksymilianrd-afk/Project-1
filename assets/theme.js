@@ -430,4 +430,89 @@
     });
   }, { passive: true });
 
+  /* ------------------------------------------
+     SCROLL PROGRESS BAR
+  ------------------------------------------ */
+  const progressBar = document.getElementById('scroll-progress-bar');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = `${Math.min((window.scrollY / max) * 100, 100)}%`;
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------
+     HERO MOUSE PARALLAX
+  ------------------------------------------ */
+  const heroSection  = document.querySelector('.hero');
+  const heroTextEl   = document.querySelector('.hero-text');
+  let heroParallaxX  = 0, heroParallaxY  = 0;
+  let heroCurrentX   = 0, heroCurrentY   = 0;
+  let heroRafRunning = false;
+
+  function lerpHeroParallax() {
+    heroCurrentX += (heroParallaxX - heroCurrentX) * 0.07;
+    heroCurrentY += (heroParallaxY - heroCurrentY) * 0.07;
+    if (heroTextEl) {
+      heroTextEl.style.transform = `translate(${heroCurrentX}px, ${heroCurrentY}px)`;
+    }
+    requestAnimationFrame(lerpHeroParallax);
+  }
+
+  if (heroSection && heroTextEl) {
+    requestAnimationFrame(lerpHeroParallax);
+    heroSection.addEventListener('mousemove', (e) => {
+      const r = heroSection.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      heroParallaxX = x * -14;
+      heroParallaxY = y * -8;
+    }, { passive: true });
+    heroSection.addEventListener('mouseleave', () => {
+      heroParallaxX = 0;
+      heroParallaxY = 0;
+    });
+  }
+
+  /* ------------------------------------------
+     MAGNETIC BUTTONS
+  ------------------------------------------ */
+  document.querySelectorAll('.btn--primary, .nav-cta').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'transform 0.1s ease, box-shadow 0.2s ease';
+    });
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width  / 2;
+      const y = e.clientY - r.top  - r.height / 2;
+      btn.style.transform = `translate(${x * 0.22}px, ${y * 0.28}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease';
+      btn.style.transform  = '';
+      setTimeout(() => { btn.style.transition = ''; }, 560);
+    });
+  });
+
+  /* ------------------------------------------
+     WHY-CARD 3-D TILT
+  ------------------------------------------ */
+  document.querySelectorAll('.why-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.12s ease, box-shadow 0.3s ease';
+    });
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width  / 2) / r.width;
+      const y = (e.clientY - r.top  - r.height / 2) / r.height;
+      card.style.transform =
+        `perspective(700px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg) translateY(-5px) scale(1.01)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.55s var(--ease-spring), box-shadow 0.3s ease';
+      card.style.transform  = '';
+      setTimeout(() => { card.style.transition = ''; }, 560);
+    });
+  });
+
 })();

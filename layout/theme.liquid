@@ -19,6 +19,7 @@
 {% assign is_index = false %}
 {% if template == 'index' %}{% assign is_index = true %}{% endif %}
 <body class="page-loading{% if is_index %} body--framed{% endif %}">
+  <div id="scroll-progress-bar"></div>
   <div id="page-loader">
     <div class="loader-cat">
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
