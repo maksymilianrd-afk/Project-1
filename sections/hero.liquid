@@ -158,7 +158,11 @@
         {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
       {% endunless %}
       <div class="hero-scene-img-wrap">
-        <div class="bucket-shadow"></div>
+        <div class="bucket-shadow-wrap">
+          <div class="bucket-shadow bucket-shadow--ambient"></div>
+          <div class="bucket-shadow bucket-shadow--mid"></div>
+          <div class="bucket-shadow bucket-shadow--core"></div>
+        </div>
         <img
           src="{{ _hero_src }}"
           alt="DeskPaws cat desk bed"
@@ -259,23 +263,65 @@
 </section>
 
 <style>
-  /* Floating shadow beneath the bucket */
-  .bucket-shadow {
+  /* Layered product shadow — three planes for realism */
+  .bucket-shadow-wrap {
     position: absolute;
-    bottom: 4%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    pointer-events: none;
+  }
+
+  .bucket-shadow { position: absolute; border-radius: 50%; pointer-events: none; }
+
+  /* Ambient — widest, barely-there, right-biased spread */
+  .bucket-shadow--ambient {
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-54%);
+    width: 100%;
+    height: 32px;
+    background: radial-gradient(ellipse at 46% 55%, rgba(28,12,3,0.13) 0%, rgba(28,12,3,0.04) 62%, transparent 80%);
+    filter: blur(28px);
+    animation: shadowAmbient 6s ease-in-out infinite;
+  }
+
+  /* Mid — balanced tone, medium softness */
+  .bucket-shadow--mid {
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    height: 40px;
-    background: radial-gradient(ellipse at center, rgba(45,27,14,0.55) 0%, rgba(45,27,14,0.25) 40%, transparent 68%);
-    border-radius: 50%;
-    filter: blur(14px);
-    pointer-events: none;
-    animation: shadowPulse 6s ease-in-out infinite;
+    width: 66%;
+    height: 22px;
+    background: radial-gradient(ellipse at 47% 55%, rgba(35,17,5,0.40) 0%, rgba(35,17,5,0.12) 55%, transparent 74%);
+    filter: blur(12px);
+    animation: shadowMid 6s ease-in-out infinite;
   }
-  @keyframes shadowPulse {
-    0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 1; }
-    50%       { transform: translateX(-50%) scaleX(0.9);  opacity: 0.75; }
+
+  /* Core contact — tightest, darkest, offset left to break symmetry */
+  .bucket-shadow--core {
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-46%);
+    width: 40%;
+    height: 12px;
+    background: radial-gradient(ellipse at 53% 55%, rgba(18,8,1,0.75) 0%, rgba(18,8,1,0.28) 50%, transparent 68%);
+    filter: blur(4px);
+    animation: shadowCore 6s ease-in-out infinite;
+  }
+
+  @keyframes shadowCore {
+    0%, 100% { transform: translateX(-46%) scaleX(1);    opacity: 0.92; }
+    50%       { transform: translateX(-46%) scaleX(0.78); opacity: 0.52; }
+  }
+  @keyframes shadowMid {
+    0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 1;    }
+    50%       { transform: translateX(-50%) scaleX(0.85); opacity: 0.68; }
+  }
+  @keyframes shadowAmbient {
+    0%, 100% { transform: translateX(-54%) scaleX(1);    opacity: 1;    }
+    50%       { transform: translateX(-54%) scaleX(0.93); opacity: 0.76; }
   }
 
   /* Zzz sleep animation — originates at cat's mouth */
