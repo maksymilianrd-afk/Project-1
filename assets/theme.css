@@ -590,6 +590,16 @@ body.body--framed {
 .proof-stars { color: var(--amber); font-size: 0.8rem; margin-bottom: 2px; }
 
 
+/* Hero cream ribbon */
+.hero-ribbon {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
 /* Hero Feature Bar */
 .hero-feature-bar {
   display: flex;

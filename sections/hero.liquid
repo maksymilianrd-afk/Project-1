@@ -44,6 +44,33 @@
       </div>
     </div>
 
+    <!-- Soft cream ribbon — flows diagonally from text area toward basket underside -->
+    <svg class="hero-ribbon" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <filter id="hero-ribbon-blur" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="34"/>
+        </filter>
+      </defs>
+      <!-- Primary ribbon — wide, warm sand, lower-left to mid-right -->
+      <path
+        d="M-120,455 C60,432 230,406 460,388 C650,373 820,350 1120,330"
+        fill="none"
+        stroke="rgba(196,149,106,0.22)"
+        stroke-width="140"
+        stroke-linecap="round"
+        filter="url(#hero-ribbon-blur)"
+      />
+      <!-- Secondary wisp — slimmer, slightly above, amber tint -->
+      <path
+        d="M-80,388 C80,368 240,346 450,334 C640,323 820,304 1120,288"
+        fill="none"
+        stroke="rgba(232,146,74,0.07)"
+        stroke-width="80"
+        stroke-linecap="round"
+        filter="url(#hero-ribbon-blur)"
+      />
+    </svg>
+
     <!-- Hero image — absolutely fills the right half -->
     <div class="hero-scene" style="--hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
       <div class="scene-glow"></div>
