@@ -197,7 +197,7 @@ body.body--framed {
   display: block;
   height: auto;
   object-fit: contain;
-  transform: translateY(var(--logo-offset, 0px));
+  /* vertical offset applied via inline transform from settings.logo_vertical_offset */
 }
 
 .logo-image--footer {
