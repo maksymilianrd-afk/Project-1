@@ -235,6 +235,7 @@ body.body--framed {
   align-items: center;
   gap: 32px;
   margin-left: auto;
+  transform: translateY(-6px);
 }
 
 .header-nav a {
