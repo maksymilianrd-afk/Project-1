@@ -713,9 +713,9 @@ body.body--framed {
   animation: labelFloat 3s ease-in-out infinite;
   white-space: nowrap;
 }
-.scene-label--clip  { top: 90px;  right: 12px; animation-delay: 0s; }
-.scene-label--size  { bottom: 50px; left: 22%; animation-delay: 1.5s; }
-.scene-label--wash  { top: calc(50% - 22px); right: 12px; animation-delay: 0.9s; }
+.scene-label--clip  { top: 16%;          right: 22%;  animation-delay: 0s;   }
+.scene-label--size  { top: 54%;          left: 6%;    animation-delay: 1.5s; }
+.scene-label--wash  { bottom: 22%;       right: 16%;  animation-delay: 0.9s; }
 @keyframes labelFloat {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-6px); }
