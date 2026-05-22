@@ -550,6 +550,23 @@ body.body--framed {
 .proof-text { font-size: 0.85rem; color: var(--text-mid); }
 .proof-stars { color: var(--amber); font-size: 0.8rem; margin-bottom: 2px; }
 
+/* Hero divider paw trail */
+.hero-divider-paws {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 40px);
+  width: 80px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+.hero-divider-paws svg {
+  display: block;
+  width: 80px;
+  height: 100%;
+}
+
 /* Hero Feature Bar */
 .hero-feature-bar {
   display: flex;
