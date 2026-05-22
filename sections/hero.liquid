@@ -59,6 +59,9 @@
         <filter id="hero-ribbon-blur-deep" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="52"/>
         </filter>
+        <filter id="hero-ribbon-curve" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="18"/>
+        </filter>
       </defs>
       <!-- Deep wash — widest, most diffuse, directional sweep from lower-left -->
       <path
@@ -95,6 +98,15 @@
         stroke-width="55"
         stroke-linecap="round"
         filter="url(#hero-ribbon-blur)"
+      />
+      <!-- Directional S-flow — intentional geometry, the luxury composition curve -->
+      <path
+        d="M-100,540 C80,512 260,448 400,374 C520,308 558,296 602,312 C658,334 820,262 1060,200 C1160,174 1240,162 1360,150"
+        fill="none"
+        stroke="rgba(200,165,120,0.13)"
+        stroke-width="88"
+        stroke-linecap="round"
+        filter="url(#hero-ribbon-curve)"
       />
     </svg>
 
