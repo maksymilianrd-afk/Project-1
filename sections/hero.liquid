@@ -140,14 +140,19 @@
       <span class="sparkle-heart" style="top:91%;left:42%;animation-delay:-2.9s;font-size:0.46rem">♥</span>
     </div>
 
+    <!-- Center-seam blending — melts the column boundary -->
+    <div class="hero-center-seam" aria-hidden="true"></div>
+
+    <!-- Scene glow — outside hero-scene so it isn't clipped at the 50% boundary -->
+    <div class="scene-glow" aria-hidden="true"></div>
+
     <!-- Foreground depth haze — creates front plane illusion -->
     <div class="hero-fore-haze" aria-hidden="true"></div>
 
     <!-- Hero image — absolutely fills the right half -->
     <div class="hero-scene" style="--hero-img-scale: {{ section.settings.hero_image_scale | default: 100 | divided_by: 100.0 }};">
-      <!-- Layered atmosphere behind basket -->
+      <!-- Subtle atmosphere behind basket (kept faint to avoid right-side tinting) -->
       <div class="scene-atmosphere"></div>
-      <div class="scene-glow"></div>
       {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
       {% unless _hero_src %}
         {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
