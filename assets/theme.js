@@ -479,7 +479,8 @@
   ------------------------------------------ */
   document.querySelectorAll('.btn--primary, .nav-cta').forEach(btn => {
     btn.addEventListener('mouseenter', () => {
-      btn.style.transition = 'transform 0.1s ease, box-shadow 0.2s ease';
+      btn.style.willChange  = 'transform';
+      btn.style.transition  = 'box-shadow 0.2s ease'; // no transform transition while tracking
     });
     btn.addEventListener('mousemove', (e) => {
       const r = btn.getBoundingClientRect();
@@ -488,8 +489,9 @@
       btn.style.transform = `translate(${x * 0.22}px, ${y * 0.28}px)`;
     });
     btn.addEventListener('mouseleave', () => {
-      btn.style.transition = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease';
-      btn.style.transform  = '';
+      btn.style.transition  = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease';
+      btn.style.transform   = '';
+      btn.style.willChange  = '';
       setTimeout(() => { btn.style.transition = ''; }, 560);
     });
   });
