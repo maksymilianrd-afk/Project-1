@@ -97,11 +97,16 @@
     <svg viewBox="0 0 80 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
       <defs>
         <g id="hpw">
-          <ellipse cx="0" cy="7" rx="11" ry="9.5"/>
-          <circle cx="-12" cy="-2" r="5"/>
-          <circle cx="-5"  cy="-12" r="4.5"/>
-          <circle cx="5"   cy="-12" r="4.5"/>
-          <circle cx="12"  cy="-2" r="5"/>
+          <!-- Main metacarpal pad: kidney/heart shape with top notch -->
+          <path d="M0,20 C13,20 22,13 22,5 C22,-3 16,-13 7,-13 C3,-13 0,-9 0,-9 C0,-9 -3,-13 -7,-13 C-16,-13 -22,-3 -22,5 C-22,13 -13,20 0,20 Z"/>
+          <!-- Outer left toe — tilted outward -->
+          <ellipse cx="-18" cy="-23" rx="6" ry="8.5" transform="rotate(-28,-18,-23)"/>
+          <!-- Inner left toe -->
+          <ellipse cx="-7"  cy="-29" rx="5.5" ry="8"  transform="rotate(-8,-7,-29)"/>
+          <!-- Inner right toe -->
+          <ellipse cx="7"   cy="-29" rx="5.5" ry="8"  transform="rotate(8,7,-29)"/>
+          <!-- Outer right toe — tilted outward -->
+          <ellipse cx="18"  cy="-23" rx="6"   ry="8.5" transform="rotate(28,18,-23)"/>
         </g>
       </defs>
       <!-- 12 paws alternating left/right, walking downward (rotated 180°) -->
