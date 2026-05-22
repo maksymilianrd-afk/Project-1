@@ -174,9 +174,10 @@ body.body--framed {
 
 .header-inner {
   width: 100%;
-  min-height: var(--header-height, 56px);
+  height: var(--header-height, 56px);
   display: flex;
   align-items: center;
+  overflow: visible;
 }
 
 .logo {
