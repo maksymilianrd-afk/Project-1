@@ -167,7 +167,11 @@
       <div class="scene-atmosphere"></div>
       {% assign _hero_src = section.settings.hero_image | image_url: width: 960 %}
       {% unless _hero_src %}
-        {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/magnific_ONfoiDrynm.png?v=1779386614' %}
+        {% assign _hero_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/1.png?v=1779705403' %}
+      {% endunless %}
+      {% assign _head_src = section.settings.head_image | image_url: width: 960 %}
+      {% unless _head_src %}
+        {% assign _head_src = 'https://cdn.shopify.com/s/files/1/0765/4788/3055/files/2_d31eeda0-676e-4191-b0a1-8f0bb4296821.png?v=1779705403' %}
       {% endunless %}
       <div class="hero-scene-img-wrap">
         <div class="bucket-shadow-wrap">
@@ -175,11 +179,20 @@
           <div class="bucket-shadow bucket-shadow--mid"></div>
           <div class="bucket-shadow bucket-shadow--core"></div>
         </div>
-        <img
-          src="{{ _hero_src }}"
-          alt="DeskPaws cat desk bed"
-          class="hero-photo"
-          loading="eager">
+        <div class="cat-layers" id="cat-layers">
+          <img
+            src="{{ _hero_src }}"
+            alt="DeskPaws cat desk bed"
+            class="hero-photo cat-base"
+            loading="eager">
+          <img
+            src="{{ _head_src }}"
+            alt=""
+            class="cat-head"
+            id="cat-head"
+            loading="eager"
+            aria-hidden="true">
+        </div>
         <div class="zzz-container">
           <span class="zzz zzz-1">z</span>
           <span class="zzz zzz-2">z</span>
@@ -275,6 +288,41 @@
 </section>
 
 <style>
+  /* Cat two-layer system — base stays fixed, head rotates in 3-D */
+  .cat-layers {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 700px;
+    perspective-origin: 50% 35%;
+    transform: scale(var(--hero-img-scale, 1));
+    transform-origin: center;
+  }
+
+  .cat-base {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    /* scale is now on .cat-layers; reset any inherited transform */
+    transform: none !important;
+  }
+
+  .cat-head {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+    /* pivot at the neck — ~63% down from top of full canvas */
+    transform-origin: 50% 63%;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
   /* Layered product shadow — three planes for realism */
   .bucket-shadow-wrap {
     position: absolute;
@@ -390,8 +438,14 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero image",
-      "info": "Recommended: at least 960px wide, transparent or light background."
+      "label": "Cat base image",
+      "info": "Full cat + basket photo (the static base layer)."
+    },
+    {
+      "type": "image_picker",
+      "id": "head_image",
+      "label": "Cat head layer",
+      "info": "Transparent-background PNG of the cat head only, same canvas dimensions as the base image."
     },
     {
       "type": "range",

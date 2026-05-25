@@ -29,145 +29,37 @@
   }
 
   /* ------------------------------------------
-     CAT CURSOR TRACKING
+     CAT HEAD — CSS 3-D CURSOR TRACKING
   ------------------------------------------ */
-  const catScene = document.getElementById('cat-scene');
-  const headGroup = document.getElementById('cat-head-group');
-  const leftPupil = document.getElementById('left-pupil');
-  const rightPupil = document.getElementById('right-pupil');
-  const leftShine1 = document.getElementById('left-shine-1');
-  const leftShine2 = document.getElementById('left-shine-2');
-  const rightShine1 = document.getElementById('right-shine-1');
-  const rightShine2 = document.getElementById('right-shine-2');
-  const blinkOverlay = document.getElementById('blink-overlay');
+  const catHead   = document.getElementById('cat-head');
+  const catLayers = document.getElementById('cat-layers');
 
-  const HEAD_ORIGIN = { x: 236, y: 206 };
-  const LEFT_EYE_CENTER  = { x: 218, y: 188 };
-  const RIGHT_EYE_CENTER = { x: 254, y: 188 };
-  const MAX_PUPIL = 4;
-  const MAX_HEAD_ROT = 6;
+  let catTgtX = 0, catTgtY = 0;
+  let catCurX = 0, catCurY = 0;
 
-  let targetHeadRot = 0;
-  let currentHeadRot = 0;
-  let targetLeftPupil  = { x: 0, y: 0 };
-  let targetRightPupil = { x: 0, y: 0 };
-  let currentLeftPupil  = { x: 0, y: 0 };
-  let currentRightPupil = { x: 0, y: 0 };
-  let blinkTimeout;
-  let isBlinking = false;
-
-  function svgPoint(evt) {
-    if (!catScene) return null;
-    const rect = catScene.getBoundingClientRect();
-    const vb = catScene.viewBox.baseVal;
-    const scaleX = vb.width  / rect.width;
-    const scaleY = vb.height / rect.height;
-    return {
-      x: (evt.clientX - rect.left) * scaleX + vb.x,
-      y: (evt.clientY - rect.top)  * scaleY + vb.y,
-    };
+  function updateCatTarget(clientX, clientY) {
+    if (!catLayers) return;
+    const rect = catLayers.getBoundingClientRect();
+    const cx   = rect.left + rect.width  * 0.50;
+    const cy   = rect.top  + rect.height * 0.35;
+    catTgtX = Math.max(-1, Math.min(1, (clientX - cx) / (rect.width  * 0.85))) * 22;
+    catTgtY = Math.max(-1, Math.min(1, (clientY - cy) / (rect.height * 0.85))) * 12;
   }
 
-  function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+  window.addEventListener('mousemove',  e => updateCatTarget(e.clientX, e.clientY), { passive: true });
+  window.addEventListener('touchmove',  e => { if (e.touches[0]) updateCatTarget(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  document.addEventListener('mouseleave', () => { catTgtX = 0; catTgtY = 0; });
 
-  function lerp(a, b, t) { return a + (b - a) * t; }
-
-  function pupilOffset(eyeCenter, svgMouse, maxOffset) {
-    const dx = svgMouse.x - eyeCenter.x;
-    const dy = svgMouse.y - eyeCenter.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < 1) return { x: 0, y: 0 };
-    const ratio = Math.min(dist, 80) / 80;
-    return {
-      x: clamp((dx / dist) * maxOffset * ratio, -maxOffset, maxOffset),
-      y: clamp((dy / dist) * maxOffset * ratio, -maxOffset, maxOffset),
-    };
-  }
-
-  window.addEventListener('mousemove', (e) => {
-    if (!catScene) return;
-    const pt = svgPoint(e);
-    if (!pt) return;
-
-    const dx = pt.x - HEAD_ORIGIN.x;
-    const dy = pt.y - HEAD_ORIGIN.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    const headTilt = clamp((dx / Math.max(dist, 1)) * MAX_HEAD_ROT, -MAX_HEAD_ROT, MAX_HEAD_ROT);
-    targetHeadRot = headTilt;
-
-    targetLeftPupil  = pupilOffset(LEFT_EYE_CENTER,  pt, MAX_PUPIL);
-    targetRightPupil = pupilOffset(RIGHT_EYE_CENTER, pt, MAX_PUPIL);
-  }, { passive: true });
-
-  function animateCat() {
-    const ease = 0.08;
-
-    currentHeadRot = lerp(currentHeadRot, targetHeadRot, ease);
-    currentLeftPupil.x  = lerp(currentLeftPupil.x,  targetLeftPupil.x,  ease);
-    currentLeftPupil.y  = lerp(currentLeftPupil.y,  targetLeftPupil.y,  ease);
-    currentRightPupil.x = lerp(currentRightPupil.x, targetRightPupil.x, ease);
-    currentRightPupil.y = lerp(currentRightPupil.y, targetRightPupil.y, ease);
-
-    if (headGroup) {
-      headGroup.style.transform = `rotate(${currentHeadRot}deg)`;
+  function animateCatHead() {
+    catCurX += (catTgtX - catCurX) * 0.065;
+    catCurY += (catTgtY - catCurY) * 0.065;
+    if (catHead) {
+      catHead.style.transform =
+        `rotateY(${catCurX}deg) rotateX(${catCurY}deg)`;
     }
-
-    if (leftPupil) {
-      leftPupil.setAttribute('cx', 218 + currentLeftPupil.x);
-      leftPupil.setAttribute('cy', 188 + currentLeftPupil.y);
-      leftShine1.setAttribute('cx', 220 + currentLeftPupil.x * 0.5);
-      leftShine1.setAttribute('cy', 184 + currentLeftPupil.y * 0.5);
-      leftShine2.setAttribute('cx', 215 + currentLeftPupil.x * 0.5);
-      leftShine2.setAttribute('cy', 191 + currentLeftPupil.y * 0.5);
-    }
-    if (rightPupil) {
-      rightPupil.setAttribute('cx', 254 + currentRightPupil.x);
-      rightPupil.setAttribute('cy', 188 + currentRightPupil.y);
-      rightShine1.setAttribute('cx', 256 + currentRightPupil.x * 0.5);
-      rightShine1.setAttribute('cy', 184 + currentRightPupil.y * 0.5);
-      rightShine2.setAttribute('cx', 251 + currentRightPupil.x * 0.5);
-      rightShine2.setAttribute('cy', 191 + currentRightPupil.y * 0.5);
-    }
-
-    requestAnimationFrame(animateCat);
+    requestAnimationFrame(animateCatHead);
   }
-
-  requestAnimationFrame(animateCat);
-
-  /* Random blink */
-  function scheduleBlink() {
-    blinkTimeout = setTimeout(() => {
-      if (!isBlinking && blinkOverlay) {
-        isBlinking = true;
-        blinkOverlay.style.transition = 'opacity 0.06s ease';
-        blinkOverlay.style.opacity = '1';
-        setTimeout(() => {
-          blinkOverlay.style.opacity = '0';
-          isBlinking = false;
-        }, 120);
-      }
-      scheduleBlink();
-    }, 2000 + Math.random() * 4000);
-  }
-  scheduleBlink();
-
-  /* ------------------------------------------
-     TOUCH: move pupils on touch
-  ------------------------------------------ */
-  window.addEventListener('touchmove', (e) => {
-    if (!catScene || !e.touches[0]) return;
-    const t = e.touches[0];
-    const fakeEvt = { clientX: t.clientX, clientY: t.clientY };
-    const pt = svgPoint(fakeEvt);
-    if (!pt) return;
-    const dx = pt.x - HEAD_ORIGIN.x;
-    const dy = pt.y - HEAD_ORIGIN.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    targetHeadRot = clamp((dx / Math.max(dist, 1)) * MAX_HEAD_ROT, -MAX_HEAD_ROT, MAX_HEAD_ROT);
-    targetLeftPupil  = pupilOffset(LEFT_EYE_CENTER,  pt, MAX_PUPIL);
-    targetRightPupil = pupilOffset(RIGHT_EYE_CENTER, pt, MAX_PUPIL);
-  }, { passive: true });
+  requestAnimationFrame(animateCatHead);
 
   /* ------------------------------------------
      PRODUCT 3D CARD TILT

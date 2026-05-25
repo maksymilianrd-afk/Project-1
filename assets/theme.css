@@ -693,9 +693,6 @@ body.body--framed {
   object-fit: contain;
   object-position: center;
   display: block;
-  transform: scale(var(--hero-img-scale, 1));
-  transform-origin: center;
-  transition: transform 0.3s ease;
 }
 
 .scene-label {
