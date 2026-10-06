@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ocean Drive LED Neon Sign</title>
+<meta name="description" content="A 300 mm LED neon sign: a palm-lined night beach printed on acrylic, a white R and a star lit in silicone LED flex. USB powered, four-step dimmer, wall or chain mount.">
+<meta name="theme-color" content="#09080b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#09080b;
+  --bg2:#0f0d12;
+  --ink:240 233 223;
+  --lit:255 76 54;
+  --glow:0;
+  --ink-a:.26;
+  --mx:50vw; --my:50vh;
+  --gut:clamp(16px,4vw,56px);
+  --f-d:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --f-s:'Instrument Serif','Times New Roman',Georgia,serif;
+  --f-m:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{
+  margin:0;background:var(--bg);color:rgb(var(--ink)/var(--ink-a));
+  font-family:var(--f-s);font-size:18px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.locked{overflow:hidden;height:100svh}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+::selection{background:rgb(var(--lit));color:#0b0a0c}
+:focus-visible{outline:1.5px solid rgb(var(--lit));outline-offset:3px}
+.mono{font-family:var(--f-m);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;line-height:1.6}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* stage ------------------------------------------------------------ */
+#stage{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+.no-gl #stage{display:none}
+main{position:relative;z-index:1;overflow-x:clip}
+body::after{
+  content:"";position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite;
+}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* off: the cursor becomes a torch ---------------------------------- */
+.veil{
+  position:fixed;inset:0;z-index:40;pointer-events:none;background:#020203;opacity:0;transition:opacity .5s ease;
+  -webkit-mask-image:radial-gradient(circle at var(--mx) var(--my),transparent 0,transparent 70px,#000 230px);
+          mask-image:radial-gradient(circle at var(--mx) var(--my),transparent 0,transparent 70px,#000 230px);
+}
+.is-off .veil{opacity:.94}
+@media (pointer:coarse){.is-off .veil{opacity:.82}}
+
+/* header ----------------------------------------------------------- */
+.hdr{
+  position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px var(--gut);pointer-events:none;
+  background:linear-gradient(rgb(9 8 11/.75),rgb(9 8 11/0));
+  opacity:0;transform:translateY(-10px);transition:opacity .8s .9s,transform .8s .9s var(--ease);
+}
+.on .hdr{opacity:1;transform:none}
+.hdr>*{pointer-events:auto}
+.mark{display:flex;align-items:baseline;gap:8px;text-decoration:none;font:800 21px/1 var(--f-d);letter-spacing:.02em;text-transform:uppercase;color:rgb(var(--ink))}
+.mark span{font:500 10px/1 var(--f-m);letter-spacing:.1em;color:rgb(var(--ink)/.55)}
+.nav{display:flex;gap:28px}
+.nav a{text-decoration:none;position:relative;color:rgb(var(--ink)/.8)}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:rgb(var(--lit));transition:right .35s var(--ease)}
+.nav a:hover::after{right:0}
+.hdr-r{display:flex;align-items:center;gap:18px;color:rgb(var(--ink)/.85)}
+.wanted{display:flex;gap:3px}
+.wanted i{width:12px;height:12px;display:block;
+  background:rgb(var(--ink)/.22);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  transition:background .3s, transform .4s var(--ease)}
+.wanted i.on{background:rgb(var(--lit));transform:scale(1.2) rotate(-12deg);filter:drop-shadow(0 0 4px rgb(var(--lit)/.8))}
+.tminus b{font-weight:500;color:rgb(var(--ink))}
+.cart-btn{border:1px solid rgb(var(--ink)/.25);border-radius:99px;padding:7px 13px 6px}
+.cart-btn b{font-weight:500;color:rgb(var(--lit))}
+@media (max-width:900px){.nav,.tminus{display:none}.hdr-r{gap:12px}}
+@media (max-width:480px){.mark span{display:none}.wanted i{width:10px;height:10px}.cart-btn{padding:6px 11px 5px}}
+
+/* intro ------------------------------------------------------------ */
+.intro{position:fixed;inset:0;z-index:80;display:grid;place-items:center;align-content:center;gap:40px;background:#030304;
+  transition:opacity 1s .35s ease, visibility 0s 1.4s}
+.intro.gone{opacity:0;visibility:hidden}
+.intro.gone .intro-in{transform:scale(.96);filter:blur(6px);transition:transform 1s var(--ease),filter 1s}
+.intro-in{display:grid;justify-items:center;gap:44px;text-align:center;padding:0 var(--gut)}
+.intro h2{margin:0;font:400 clamp(34px,5vw,64px)/1 var(--f-s);font-style:italic;color:rgb(var(--ink)/.8);letter-spacing:-.01em}
+.intro p{margin:0;color:rgb(var(--ink)/.45)}
+.intro p span{display:block;margin-top:6px;color:rgb(var(--ink)/.28)}
+.intro .remote{--w:min(320px,70vw)}
+.intro .rb-pw::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgb(255 255 255/.35);animation:ping 1.8s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+/* the dimmer, drawn like the real inline one ------------------------ */
+.remote{--w:260px;position:relative;width:var(--w);aspect-ratio:45/19;display:block;user-select:none;-webkit-user-select:none}
+.remote .cord{position:absolute;top:50%;height:calc(var(--w)*.035);margin-top:calc(var(--w)*-.0175);width:60vw;border-radius:99px;
+  background:linear-gradient(#fbfaf7,#d9d4cb)}
+.remote .cord-l{right:96%;-webkit-mask-image:linear-gradient(to left,#000 30%,transparent);mask-image:linear-gradient(to left,#000 30%,transparent)}
+.remote .cord-r{left:96%;-webkit-mask-image:linear-gradient(to right,#000 30%,transparent);mask-image:linear-gradient(to right,#000 30%,transparent)}
+.shell{position:absolute;inset:0;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:9%;
+  background:linear-gradient(176deg,#fdfcf9 0%,#ece8e1 55%,#d3cdc3 100%);
+  box-shadow:inset 0 2px 1px #fff,inset 0 -7px 12px rgb(0 0 0/.13),0 1px 0 #bdb6aa,0 24px 50px -16px rgb(0 0 0/.75),0 0 calc(var(--glow)*60px) rgb(var(--lit)/calc(var(--glow)*.18))}
+.rb{position:relative;width:21%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;color:#8a847a;
+  background:radial-gradient(circle at 50% 32%,#ffffff 0%,#efebe4 58%,#d8d2c8 100%);
+  box-shadow:inset 0 -2px 3px rgb(0 0 0/.14),0 2px 3px rgb(0 0 0/.2),0 0 0 1px rgb(0 0 0/.07);
+  transition:transform .12s,box-shadow .12s}
+.rb svg{width:42%;height:42%}
+.rb:hover{color:#5c574f}
+.rb:active,.rb.press{transform:translateY(1px) scale(.95);box-shadow:inset 0 2px 5px rgb(0 0 0/.22),0 0 0 1px rgb(0 0 0/.08)}
+.rb.press{animation:press .18s}
+@keyframes press{50%{transform:translateY(1px) scale(.93)}}
+.led{position:absolute;top:22%;right:9%;width:5px;height:5px;border-radius:50%;background:#2a5a2a;
+  box-shadow:0 0 calc(var(--glow)*8px) #7dff6a;opacity:calc(.35 + var(--glow)*.65);filter:brightness(calc(.6 + var(--glow)))}
+.dock{position:fixed;right:max(var(--gut),18px);bottom:22px;z-index:55;display:flex;align-items:center;gap:14px;
+  opacity:0;transform:translateY(20px);transition:opacity .8s 1.2s,transform .8s 1.2s var(--ease)}
+.on .dock{opacity:1;transform:none}
+.dock .remote{--w:132px}
+.dock .cord-l{display:none}
+.dock-read{display:grid;justify-items:end;color:rgb(var(--ink)/.7)}
+.levels{display:flex;gap:3px;margin-top:4px}
+.levels i{width:14px;height:3px;background:rgb(var(--ink)/.2)}
+.levels i.on{background:rgb(var(--lit))}
+@media (max-width:640px){.dock{right:12px;bottom:14px}.dock .remote{--w:116px}.dock-read{display:none}}
+
+/* shared section layout ---------------------------------------------- */
+.sec{position:relative;isolation:isolate;min-height:100svh;padding:120px var(--gut) 90px;display:flex;align-items:center}
+.col{position:relative;max-width:540px}
+.col--right{margin-left:auto}
+.eyebrow{margin:0 0 22px;color:rgb(var(--lit)/calc(.45 + var(--glow)*.55));display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.h2{margin:0 0 30px;font:800 clamp(52px,7.2vw,118px)/.84 var(--f-d);text-transform:uppercase;letter-spacing:-.005em;color:rgb(var(--ink)/var(--ink-a))}
+.h2 em{display:block;font:400 italic .78em/1 var(--f-s);text-transform:none;letter-spacing:-.02em;margin-top:.08em;color:rgb(var(--ink)/calc(var(--ink-a)*.8))}
+.h2 .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.h2 .ln>*{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+.h2 .ln:nth-child(2)>*{transition-delay:.1s}
+.h2.in .ln>*{transform:none}
+.body{margin:0 0 22px;font-size:clamp(20px,1.6vw,24px);line-height:1.36;max-width:34ch}
+.foot{color:rgb(var(--ink)/calc(var(--ink-a)*.55));max-width:52ch;margin:0}
+.rv-group>*{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv-group.in>*{opacity:1;transform:none}
+.rv-group.in>*:nth-child(2){transition-delay:.08s}.rv-group.in>*:nth-child(3){transition-delay:.16s}
+.rv-group.in>*:nth-child(4){transition-delay:.24s}.rv-group.in>*:nth-child(5){transition-delay:.32s}.rv-group.in>*:nth-child(6){transition-delay:.4s}
+
+.btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 26px;border-radius:99px;text-decoration:none;
+  font:500 12px/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .3s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn--solid{background:rgb(var(--ink));color:#0b0a0c}
+.btn--solid::before{content:"";position:absolute;inset:0;z-index:-1;background:rgb(var(--lit));transform:translateY(101%);transition:transform .45s var(--ease)}
+.btn--solid:hover::before{transform:none}
+.btn--ghost{border:1px solid rgb(var(--ink)/.3);color:rgb(var(--ink)/.9)}
+.btn--ghost:hover{border-color:rgb(var(--lit))}
+.btn .arr{width:16px;height:10px;transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* scene sections sit over the 3D: a soft shadow behind the text column */
+@media (min-width:901px){
+  .sec[data-scene]::before,.anatomy .stick::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+    background:linear-gradient(90deg,rgb(9 8 11/.72) 0%,rgb(9 8 11/.35) 34%,rgb(9 8 11/0) 52%)}
+  .sec[data-scene]:has(.col--right)::before,.sec.buy[data-scene]::before{background:linear-gradient(270deg,rgb(9 8 11/.72) 0%,rgb(9 8 11/.35) 34%,rgb(9 8 11/0) 52%)}
+  .sec.hero[data-scene]::before{background:linear-gradient(90deg,rgb(9 8 11/.55) 0%,rgb(9 8 11/0) 45%)}
+  .anatomy .stick{position:sticky}
+  .anatomy .stick::before{left:calc(var(--gut)*-1)}
+}
+/* give the text a floor on phones */
+@media (max-width:900px){
+  .sec[data-scene]{align-items:flex-end;padding-top:56svh;padding-bottom:110px}
+  .sec[data-scene] .col{max-width:none;margin-left:0}
+  .sec[data-scene]::before{content:"";position:absolute;left:0;right:0;bottom:0;top:46svh;pointer-events:none;
+    background:linear-gradient(rgb(9 8 11/0),rgb(9 8 11/.82) 22%,rgb(9 8 11/.92))}
+}
+
+/* hero ------------------------------------------------------------- */
+.hero{align-items:flex-end;padding-bottom:56px}
+.hero-in{position:relative;max-width:min(640px,52vw)}
+.kicker{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 22px;color:rgb(var(--ink)/calc(var(--ink-a)*.7))}
+.kicker span:not(:last-child)::after{content:"/";margin-left:18px;color:rgb(var(--lit)/.8)}
+.display{margin:0 0 26px;font:900 clamp(96px,15.5vw,268px)/.8 var(--f-d);text-transform:uppercase;letter-spacing:-.012em;color:rgb(var(--ink)/var(--ink-a))}
+.display .row{display:block;white-space:nowrap}
+.display .ch{display:inline-block;opacity:.1}
+.on .display .ch{animation:lightup .7s steps(1,end) forwards}
+@keyframes lightup{0%{opacity:.1}12%{opacity:.85}22%{opacity:.15}38%{opacity:1}50%{opacity:.4}62%,100%{opacity:1}}
+.display .row:nth-child(2){padding-left:.42em}
+.lead{margin:0 0 30px;font-size:clamp(21px,1.8vw,27px);line-height:1.3;max-width:30ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hint{margin:22px 0 0;color:rgb(var(--ink)/calc(var(--ink-a)*.45))}
+.hint::before{content:"";display:inline-block;width:9px;height:9px;margin-right:9px;vertical-align:-1px;background:rgb(var(--lit)/.85);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.hero-specs{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);list-style:none;margin:0;padding:0;display:grid;gap:18px;text-align:right;color:rgb(var(--ink)/calc(var(--ink-a)*.55))}
+.hero-specs b{display:block;font:800 24px/1 var(--f-d);letter-spacing:.01em;color:rgb(var(--ink)/var(--ink-a))}
+@media (max-width:1180px){.hero-specs{display:none}}
+.scroll-cue{position:absolute;left:50%;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:10px;color:rgb(var(--ink)/.4);transform:translateX(-50%)}
+.scroll-cue i{width:1px;height:42px;background:linear-gradient(rgb(var(--ink)/.6),transparent);transform-origin:top;animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero .rv-group>*{transition-delay:1.1s}
+.on .hero .rv-group>*{opacity:1;transform:none}
+.hero-photo{display:none}
+.no-gl .hero-photo{display:block;position:absolute;right:var(--gut);top:110px;width:min(40vw,520px);border-radius:6px;overflow:hidden}
+@media (max-width:900px){
+  .hero{padding-top:58svh;padding-bottom:110px}
+  .hero-in{max-width:none}
+  .display{font-size:clamp(84px,25vw,170px)}
+  .hero-specs{position:static;display:none}
+  .kicker span:nth-child(3){display:none}
+  .kicker span:nth-child(2)::after{display:none}
+  .scroll-cue{display:none}
+  .no-gl .hero-photo{position:relative;top:auto;right:auto;width:100%;margin-bottom:24px}
+}
+
+/* marquee ------------------------------------------------------------ */
+.marquee{position:relative;z-index:2;overflow:hidden;border-block:1px solid rgb(var(--ink)/.12);background:var(--bg);padding:16px 0}
+.mq-track{display:flex;width:max-content;gap:0;will-change:transform}
+.mq-track span{font:800 clamp(30px,3.6vw,52px)/1 var(--f-d);text-transform:uppercase;letter-spacing:.01em;padding:0 28px;white-space:nowrap;color:rgb(var(--ink)/var(--ink-a))}
+.mq-track span:nth-child(even){font:400 italic clamp(28px,3.3vw,48px)/1 var(--f-s);text-transform:none;color:rgb(var(--lit)/calc(.4 + var(--glow)*.6))}
+
+/* truth -------------------------------------------------------------- */
+.truth .col{padding:34px 0}
+.aside{color:rgb(var(--ink)/calc(var(--ink-a)*.55));max-width:46ch;margin:0;border-left:1px solid rgb(var(--lit)/.6);padding-left:16px}
+
+/* pins following the model -------------------------------------------- */
+.pin{position:fixed;left:0;top:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .4s}
+.pin.show{opacity:1}
+.pin .dot{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;border:1px solid rgb(var(--ink));background:rgb(var(--lit)/.35)}
+.pin .dot::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgb(var(--ink)/.4);animation:ping 2s var(--ease) infinite}
+.pin .tag{position:absolute;left:14px;top:-10px;white-space:nowrap;padding:5px 9px 4px;background:rgb(9 8 11/.78);border:1px solid rgb(var(--ink)/.18);color:rgb(var(--ink)/.9);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pin .tag b{color:rgb(var(--lit));font-weight:500;margin-right:8px}
+.pin--l .tag{left:auto;right:14px}
+@media (max-width:900px){.pin .tag{font-size:10px}}
+
+/* dimmer section ------------------------------------------------------ */
+.dimmer .remote{--w:min(270px,72vw);margin:4px 0 30px 4px}
+.dimmer .cord-l{width:14vw}
+.dimmer .h2{font-size:clamp(48px,6.2vw,100px)}
+.dimmer .readout dd{font-size:26px}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:0 0 26px;background:rgb(var(--ink)/.12);border:1px solid rgb(var(--ink)/.12)}
+.readout div{background:rgb(9 8 11/.6);padding:14px 16px 13px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.readout dt{color:rgb(var(--ink)/calc(var(--ink-a)*.5));margin-bottom:6px}
+.readout dd{margin:0;font:800 30px/1 var(--f-d);letter-spacing:.01em;color:rgb(var(--ink)/var(--ink-a));font-variant-numeric:tabular-nums;text-transform:none}
+
+/* colour -------------------------------------------------------------- */
+.swatches{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 30px}
+.swatches button{position:relative;display:grid;gap:3px;text-align:left;padding:18px 18px 16px;border:1px solid rgb(var(--ink)/.18);border-radius:4px;transition:border-color .3s,background .3s}
+.swatches button i{width:30px;height:30px;border-radius:50%;margin-bottom:14px;box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgb(var(--ink)/.2)}
+.swatches [data-color=red] i{background:#ff4c36;box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgb(var(--ink)/.2),0 0 22px #ff4c36}
+.swatches [data-color=amber] i{background:#ffba60;box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgb(var(--ink)/.2),0 0 22px #ffba60}
+.swatches span{font:800 30px/1 var(--f-d);text-transform:uppercase;color:rgb(var(--ink)/var(--ink-a))}
+.swatches small{font:400 12px/1.4 var(--f-m);letter-spacing:.06em;color:rgb(var(--ink)/calc(var(--ink-a)*.55))}
+.swatches [aria-checked=true]{border-color:rgb(var(--lit));background:rgb(var(--lit)/.08)}
+.swatches [aria-checked=true]::after{content:"Selected";position:absolute;top:16px;right:16px;font:500 10px/1 var(--f-m);letter-spacing:.1em;text-transform:uppercase;color:rgb(var(--lit))}
+
+/* anatomy (pinned) ---------------------------------------------------- */
+.anatomy{min-height:330vh;display:block;padding:0 var(--gut)}
+.anatomy .stick{position:sticky;top:0;height:100svh;display:flex;align-items:center;isolation:isolate}
+.layers{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid rgb(var(--ink)/.14)}
+.layers li{display:grid;grid-template-columns:42px 1fr;gap:4px 10px;padding:14px 0;border-bottom:1px solid rgb(var(--ink)/.14)}
+.layers b{font-weight:500;color:rgb(var(--lit))}
+.layers strong{font:800 22px/1.05 var(--f-d);letter-spacing:.02em;color:rgb(var(--ink)/var(--ink-a))}
+.layers span{grid-column:2;font:400 17px/1.35 var(--f-s);letter-spacing:0;text-transform:none;color:rgb(var(--ink)/calc(var(--ink-a)*.7))}
+@media (max-width:900px){
+  .anatomy .stick{align-items:flex-end;padding-bottom:96px}
+  .anatomy .h2{font-size:clamp(44px,12vw,64px);margin-bottom:16px}
+  .layers li{padding:9px 0}
+  .layers span{display:none}
+  .anatomy .stick::before{content:"";position:absolute;left:calc(var(--gut)*-1);right:calc(var(--gut)*-1);bottom:0;top:52svh;background:linear-gradient(rgb(9 8 11/0),rgb(9 8 11/.9) 25%)}
+}
+
+/* hang ------------------------------------------------------------- */
+.toggle{display:inline-flex;padding:4px;border:1px solid rgb(var(--ink)/.22);border-radius:99px;margin:0 0 26px}
+.toggle button{padding:12px 18px 11px;border-radius:99px;font:500 11.5px/1 var(--f-m);letter-spacing:.09em;text-transform:uppercase;color:rgb(var(--ink)/.7);transition:background .35s,color .35s}
+.toggle [aria-checked=true]{background:rgb(var(--ink));color:#0b0a0c}
+
+/* opaque sections ------------------------------------------------------ */
+.opaque{background-color:var(--bg);
+  background-image:
+    radial-gradient(70% 55% at 50% 0%,rgb(var(--lit)/calc(var(--glow)*.13)),transparent 70%),
+    linear-gradient(rgb(var(--ink)/.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgb(var(--ink)/.045) 1px,transparent 1px);
+  background-size:auto,100px 100px,100px 100px;background-position:0 0,-1px -1px,-1px -1px}
+.sec.opaque{display:block}
+.wrap{max-width:1320px;margin:0 auto}
+.split-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+@media (max-width:900px){.split-head{grid-template-columns:1fr;gap:0;margin-bottom:34px}}
+
+/* size ------------------------------------------------------------- */
+.size-stage{position:relative;border:1px solid rgb(var(--ink)/.14);background:#0c0b0f;padding:20px;touch-action:pan-y}
+.cmp.on{touch-action:none}
+.size-svg{width:100%;height:auto;overflow:visible}
+.size-svg text{font:500 11px var(--f-m);letter-spacing:.08em;fill:rgb(var(--ink)/.55)}
+.size-svg #rulerTop line,.size-svg #rulerLeft line{stroke:rgb(var(--ink)/.45);stroke-width:1;stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .5s var(--d) var(--ease)}
+.size-stage.in #rulerTop line,.size-stage.in #rulerLeft line{stroke-dashoffset:0}
+.size-svg #rulerTop text,.size-svg #rulerLeft text{text-anchor:middle}
+.size-svg #rulerLeft text{text-anchor:end}
+.shelf{stroke:rgb(var(--ink)/.25);stroke-width:1;stroke-dasharray:4 6}
+.sgn-plate{fill:rgb(255 255 255/.02);stroke:rgb(var(--ink)/.35);stroke-width:1}
+.sgn-frame{fill:none;stroke:rgb(var(--lit));stroke-width:10;filter:url(#glowF);opacity:calc(.35 + var(--glow)*.65)}
+.sgn-print{fill:url(#printG)}
+.sgn-label{font:800 30px var(--f-d)!important;letter-spacing:.02em!important;fill:rgb(var(--ink))!important;text-anchor:middle}
+.cmp{opacity:0;transition:opacity .5s var(--ease);pointer-events:none;cursor:grab}
+.cmp.on{opacity:1;pointer-events:auto}
+.cmp.dragging{cursor:grabbing}
+.cmp .ol{fill:rgb(var(--ink)/.05);stroke:rgb(var(--ink)/.85);stroke-width:1.5}
+.cmp .fl{fill:none;stroke:rgb(var(--ink)/.35);stroke-width:1}
+.cmp text{fill:rgb(var(--ink)/.85)}
+.size-svg .cmp{transition:opacity .5s var(--ease)}
+.ovl .cmp rect.ol,.ovl .cmp path.ol,.ovl .cmp circle.ol{fill:rgb(15 13 19/.5)!important}
+.ovl .cmp text{font-size:13px}
+.size-pick{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 14px}
+.size-pick button{padding:11px 16px 10px;border:1px solid rgb(var(--ink)/.22);border-radius:99px;font:500 11.5px/1 var(--f-m);letter-spacing:.09em;text-transform:uppercase;color:rgb(var(--ink)/.75)}
+.size-pick [aria-checked=true]{background:rgb(var(--ink));color:#0b0a0c;border-color:transparent}
+.size-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 30px;align-items:baseline}
+.size-row .foot{max-width:none}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgb(var(--ink)/.14);margin-top:56px}
+.facts div{padding:22px 18px 0 0}
+.facts b{display:block;font:800 clamp(44px,5vw,80px)/.9 var(--f-d);color:rgb(var(--ink)/var(--ink-a));font-variant-numeric:tabular-nums}
+.facts b small{font:400 italic .42em var(--f-s);margin-left:4px;color:rgb(var(--ink)/calc(var(--ink-a)*.6))}
+@media (max-width:900px){.facts{grid-template-columns:1fr 1fr}.facts div{padding-bottom:20px}}
+
+/* photos ------------------------------------------------------------- */
+.ph-grid{display:grid;grid-template-columns:1.1fr 1fr .9fr;gap:28px;align-items:start}
+.ph{position:relative;margin:0;perspective:900px;cursor:zoom-in;touch-action:pan-y}
+.ph .frame{position:relative;overflow:hidden;border-radius:3px;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--ease);
+  box-shadow:0 40px 80px -30px rgb(0 0 0/.9)}
+.ph img{width:100%;height:auto;filter:saturate(calc(.6 + var(--glow)*.4)) brightness(calc(.45 + var(--glow)*.55))}
+.ph figcaption{display:flex;justify-content:space-between;padding-top:12px;color:rgb(var(--ink)/calc(var(--ink-a)*.6))}
+.ph--b{margin-top:120px}
+.loupe{position:absolute;left:-80px;top:-80px;width:160px;height:160px;border-radius:50%;pointer-events:none;opacity:0;
+  border:1px solid rgb(var(--ink)/.6);box-shadow:0 20px 40px rgb(0 0 0/.6),inset 0 0 0 6px rgb(0 0 0/.25);background-repeat:no-repeat;transition:opacity .2s;z-index:3}
+.ph.looking .loupe{opacity:1}
+.ph-note{align-self:end}
+@media (max-width:900px){.ph-grid{grid-template-columns:1fr 1fr;gap:14px}.ph--b{margin-top:60px}.ph-note{grid-column:1/-1}.loupe{width:120px;height:120px;left:-60px;top:-60px}}
+
+/* before you buy ------------------------------------------------------ */
+.notes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgb(var(--ink)/.14);counter-reset:n}
+.notes li{position:relative;padding:28px 28px 34px 0;border-bottom:1px solid rgb(var(--ink)/.14);counter-increment:n}
+.notes li::before{content:counter(n,decimal-leading-zero);display:block;margin-bottom:22px;font:500 11.5px/1 var(--f-m);letter-spacing:.1em;color:rgb(var(--lit))}
+.notes strong{display:block;margin-bottom:8px;font:800 30px/1 var(--f-d);text-transform:uppercase;color:rgb(var(--ink)/var(--ink-a))}
+.notes span{display:block;font-size:19px;line-height:1.4;max-width:32ch}
+@media (max-width:900px){.notes{grid-template-columns:1fr}.notes li{padding-right:0}}
+
+/* buy ---------------------------------------------------------------- */
+.buy-card{position:relative;margin-left:auto;width:min(480px,100%);padding:34px;border:1px solid rgb(var(--ink)/.16);background:rgb(9 8 11/.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:6px}
+.buy-card .h2{font-size:clamp(46px,5vw,76px);margin-bottom:22px}
+.price{display:flex;align-items:flex-start;margin:0 0 26px;font:900 96px/.8 var(--f-d);color:rgb(var(--ink)/var(--ink-a))}
+.price .cur{font-size:.42em;margin:.08em .06em 0 0}
+.price .cents{font-size:.36em;margin-top:.1em}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid rgb(var(--ink)/.12)}
+.opt .mono{color:rgb(var(--ink)/.6)}
+.mini-sw{display:flex;gap:8px}
+.mini-sw button{display:flex;align-items:center;gap:8px;padding:8px 12px 7px 9px;border:1px solid rgb(var(--ink)/.2);border-radius:99px;font:500 11px/1 var(--f-m);letter-spacing:.08em;text-transform:uppercase}
+.mini-sw button i{width:12px;height:12px;border-radius:50%}
+.mini-sw [data-color=red] i{background:#ff4c36}.mini-sw [data-color=amber] i{background:#ffba60}
+.mini-sw [aria-checked=true]{border-color:rgb(var(--lit));background:rgb(var(--lit)/.12)}
+.qty{display:flex;align-items:center;border:1px solid rgb(var(--ink)/.2);border-radius:99px}
+.qty button{width:38px;height:34px;font:400 18px/1 var(--f-m)}
+.qty output{min-width:22px;text-align:center;font:500 14px var(--f-m)}
+.btn--wide{width:100%;justify-content:center;height:60px;margin:18px 0 22px;font-size:13px}
+.btn--wide.added{background:rgb(var(--lit))}
+.box{list-style:none;margin:0;padding:0;color:rgb(var(--ink)/.6);display:grid;gap:6px}
+.box li::before{content:"+";margin-right:10px;color:rgb(var(--lit))}
+@media (max-width:900px){.buy{align-items:flex-end}.buy-card{padding:24px}}
+
+/* footer ------------------------------------------------------------- */
+.ftr{position:relative;z-index:1;padding:90px var(--gut) 40px;overflow:hidden}
+.ft-line{margin:0 0 50px;font:400 italic clamp(26px,3vw,44px)/1.1 var(--f-s);max-width:22ch}
+.ft-mark{font:900 clamp(90px,21vw,360px)/.78 var(--f-d);text-transform:uppercase;letter-spacing:-.015em;white-space:nowrap;margin:0 0 40px -.04em;
+  color:transparent;-webkit-text-stroke:1px rgb(var(--ink)/.25);
+  background:radial-gradient(40% 120% at var(--fx,50%) 50%,rgb(var(--lit)/calc(var(--glow)*.9)),transparent 70%);-webkit-background-clip:text;background-clip:text}
+.ft-row{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;color:rgb(var(--ink)/.45)}
+.ft-row p{margin:0;max-width:70ch}
+
+/* toast ------------------------------------------------------------- */
+#toast{position:fixed;left:50%;bottom:26px;z-index:90;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+  padding:12px 18px 11px;background:rgb(var(--ink));color:#0b0a0c;border-radius:99px;transition:opacity .35s,transform .45s var(--ease);max-width:calc(100vw - 32px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:640px){#toast{bottom:90px}}
+
+.over-star{cursor:pointer}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important;transition-delay:0s!important}
+  body::after{display:none}
+}
+</style>
+<noscript><style>.intro{display:none}body.locked{overflow:auto;height:auto}:root{--glow:1;--ink-a:1}</style></noscript>
+</head>
+<body class="locked">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v8M7.2 6.4a7 7 0 1 0 9.6 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 10"><path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+</svg>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+
+<div class="intro" id="intro">
+  <div class="intro-in">
+    <h2>It’s dark in here.</h2>
+    <div class="remote" aria-label="Inline dimmer">
+      <span class="cord cord-l"></span><span class="cord cord-r"></span>
+      <div class="shell">
+        <button class="rb" data-act="down" aria-label="Dimmer down"><svg><use href="#i-minus"/></svg></button>
+        <button class="rb rb-pw" data-act="power" aria-label="Switch the sign on"><svg><use href="#i-power"/></svg></button>
+        <button class="rb" data-act="up" aria-label="Dimmer up"><svg><use href="#i-plus"/></svg></button>
+        <span class="led"></span>
+      </div>
+    </div>
+    <p class="mono">Press the middle button <span>or just scroll</span></p>
+  </div>
+</div>
+
+<header class="hdr">
+  <a class="mark" href="#hero">Ocean Drive<span>N°300</span></a>
+  <nav class="nav mono" aria-label="Sections">
+    <a href="#truth">The light</a><a href="#anatomy">The build</a><a href="#size">The size</a><a href="#buy">Buy</a>
+  </nav>
+  <div class="hdr-r mono">
+    <span class="wanted" role="img" aria-label="Stars: 0 of 5" title="Click the star on the sign"><i></i><i></i><i></i><i></i><i></i></span>
+    <span class="tminus" title="Days until Thursday 19 November">T–<b id="tdays">44</b> days</span>
+    <a class="cart-btn" href="#buy">Cart <b id="cartCount">0</b></a>
+  </div>
+</header>
+
+<div class="dock">
+  <div class="dock-read mono"><span><b data-pct>0</b>%</span><span class="levels"><i></i><i></i><i></i></span></div>
+  <div class="remote" role="group" aria-label="Sign dimmer">
+    <span class="cord cord-l"></span><span class="cord cord-r"></span>
+    <div class="shell">
+      <button class="rb" data-act="down" aria-label="Dimmer down"><svg><use href="#i-minus"/></svg></button>
+      <button class="rb" data-act="power" aria-label="Sign on or off"><svg><use href="#i-power"/></svg></button>
+      <button class="rb" data-act="up" aria-label="Dimmer up"><svg><use href="#i-plus"/></svg></button>
+      <span class="led"></span>
+    </div>
+  </div>
+</div>
+
+<div class="pin" data-pin="tube" data-sec="truth"><span class="dot"></span><span class="tag mono"><b>A</b>Ø8 mm silicone sleeve</span></div>
+<div class="pin" data-pin="dots" data-sec="truth"><span class="dot"></span><span class="tag mono"><b>B</b>LED chips under the edge</span></div>
+<div class="pin" data-pin="glyph" data-sec="anatomy"><span class="dot"></span><span class="tag mono"><b>04</b>R + star</span></div>
+<div class="pin" data-pin="frame" data-sec="anatomy"><span class="dot"></span><span class="tag mono"><b>03</b>Lit frame</span></div>
+<div class="pin" data-pin="print" data-sec="anatomy"><span class="dot"></span><span class="tag mono"><b>02</b>Printed panel</span></div>
+<div class="pin" data-pin="plate" data-sec="anatomy"><span class="dot"></span><span class="tag mono"><b>01</b>Clear back</span></div>
+
+<main>
+
+<section class="sec hero" id="hero" data-scene>
+  <img class="hero-photo" src="{{img:photo-red.webp}}" alt="The sign lit up with a red frame" width="604" height="678">
+  <div class="hero-in">
+    <p class="kicker mono"><span>LED neon sign</span><span>300 × 300 mm</span><span>USB powered</span></p>
+    <h1 class="display split">Ocean<br>Drive</h1>
+    <div class="rv-group">
+      <p class="lead">Palm trees, a skyline and a wet road at night, with a white R and a star lit on top. Printed acrylic, 30 cm square, and it runs off a USB port.</p>
+      <div class="hero-cta">
+        <a class="btn btn--solid" href="#buy">Buy it, $69 <svg class="arr"><use href="#i-arrow"/></svg></a>
+        <button class="btn btn--ghost" data-act="power">Switch it off</button>
+      </div>
+      <p class="hint mono">The star is clickable.</p>
+    </div>
+  </div>
+  <ul class="hero-specs mono">
+    <li><b>300×300×35</b>millimetres</li>
+    <li><b>0.8 kg</b>about</li>
+    <li><b>5 V · 6 W</b>maximum</li>
+    <li><b>4 steps</b>of brightness</li>
+  </ul>
+  <div class="scroll-cue mono"><span>Scroll</span><i></i></div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track">
+    <span>5 V USB</span><span>no hum</span><span>6 W max</span><span>no glass</span><span>300 × 300 × 35</span><span>wall or chain</span><span>Ø8 mm LED flex</span><span>four steps</span>
+    <span>5 V USB</span><span>no hum</span><span>6 W max</span><span>no glass</span><span>300 × 300 × 35</span><span>wall or chain</span><span>Ø8 mm LED flex</span><span>four steps</span>
+  </div>
+</div>
+
+<section class="sec truth" id="truth" data-scene>
+  <div class="col">
+    <p class="eyebrow mono">01 · What it is</p>
+    <h2 class="h2"><span class="ln"><span>It’s not gas neon.</span></span><span class="ln"><em>That’s the good news.</em></span></h2>
+    <div class="rv-group">
+      <p class="body">Glass neon is a tube of gas and a transformer that hums. This is a strip of LEDs sealed in an 8 mm silicone sleeve, running on 5 volts from a USB port. No hum, no glass, and it gets warm rather than hot.</p>
+      <p class="aside mono">LED doesn’t stutter when it comes on, either. The flicker at the top of the page was us showing off.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec dimmer" id="dimmer" data-scene>
+  <div class="col col--right">
+    <p class="eyebrow mono">02 · Brightness</p>
+    <h2 class="h2"><span class="ln"><span>100, 66, 33, off.</span></span><span class="ln"><em>That’s the whole menu.</em></span></h2>
+    <div class="rv-group">
+      <div class="remote" role="group" aria-label="Dimmer, try it">
+        <span class="cord cord-l"></span><span class="cord cord-r"></span>
+        <div class="shell">
+          <button class="rb" data-act="down" aria-label="Dimmer down"><svg><use href="#i-minus"/></svg></button>
+          <button class="rb" data-act="power" aria-label="Sign on or off"><svg><use href="#i-power"/></svg></button>
+          <button class="rb" data-act="up" aria-label="Dimmer up"><svg><use href="#i-plus"/></svg></button>
+          <span class="led"></span>
+        </div>
+      </div>
+      <dl class="readout mono">
+        <div><dt>Brightness</dt><dd id="roPct">100%</dd></div>
+        <div><dt>Draw</dt><dd id="roW">≈ 6.0 W</dd></div>
+        <div><dt>On a 10,000 mAh bank</dt><dd id="roBank">≈ 5 h 15 m</dd></div>
+        <div><dt>A year of evenings*</dt><dd id="roYear">≈ $2.23</dd></div>
+      </dl>
+      <p class="body">The dimmer sits on the cable, 1.2 m from the USB end and 0.8 m from the sign, so it ends up on the desk, not behind the frame.</p>
+      <p class="foot mono">*Six hours a night at $0.17/kWh. Worked out from the supplier’s 6 W maximum, assuming draw falls with brightness. Estimates, not lab results.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec colour" id="colour" data-scene>
+  <div class="col">
+    <p class="eyebrow mono">03 · Frame colour</p>
+    <h2 class="h2"><span class="ln"><span>Red or amber.</span></span><span class="ln"><em>Same night.</em></span></h2>
+    <div class="rv-group">
+      <div class="swatches" role="radiogroup" aria-label="Frame colour">
+        <button role="radio" aria-checked="true" data-color="red"><i></i><span>Red</span><small>Club door, 2 a.m.</small></button>
+        <button role="radio" aria-checked="false" data-color="amber"><i></i><span>Amber</span><small>Sodium streetlight</small></button>
+      </div>
+      <p class="body">The edge light tints everything near it. Red pushes the print towards hot pink; amber warms it towards a late sunset. Watch the page while you switch. It takes the colour too.</p>
+    </div>
+  </div>
+</section>
+
+<section class="anatomy" id="anatomy" data-scene>
+  <div class="stick">
+    <div class="col">
+      <p class="eyebrow mono">04 · The build</p>
+      <h2 class="h2"><span class="ln"><span>Four layers,</span></span><span class="ln"><em>35 mm deep.</em></span></h2>
+      <ol class="layers mono rv-group">
+        <li><b>01</b><strong>Clear back</strong><span>Acrylic, with two hanging holes drilled along the top edge.</span></li>
+        <li><b>02</b><strong>Printed panel</strong><span>The night beach, printed flat. The depth is all in the drawing.</span></li>
+        <li><b>03</b><strong>Lit frame</strong><span>LED flex around the whole edge, in a 25 mm ABS frame.</span></li>
+        <li><b>04</b><strong>R + star</strong><span>White channels outlined in Ø8 mm silicone LED flex. Power comes in through a 5.5 × 2.1 mm DC socket.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec hang" id="hang" data-scene>
+  <div class="col col--right">
+    <p class="eyebrow mono">05 · Mounting</p>
+    <h2 class="h2"><span class="ln"><span>Wall,</span></span><span class="ln"><em>or a chain.</em></span></h2>
+    <div class="rv-group">
+      <p class="body">It’s listed as double-sided, so it doesn’t have to sit flat on a wall. Screw it up, hang it on the hook, or let it swing on the chain from a ceiling hook, a shelf or a window frame.</p>
+      <div class="toggle" role="radiogroup" aria-label="Mounting">
+        <button role="radio" aria-checked="false" data-hang="0">On the wall</button>
+        <button role="radio" aria-checked="true" data-hang="1">On the chain</button>
+      </div>
+      <p class="foot mono">Screws, hook and chain are in the box. Planning to hang it in a window? Ask us for a photo of the back first.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec size opaque" id="size">
+  <div class="wrap">
+    <div class="split-head">
+      <div>
+        <p class="eyebrow mono">06 · True size</p>
+        <h2 class="h2"><span class="ln"><span>About the size</span></span><span class="ln"><em>of a record sleeve.</em></span></h2>
+      </div>
+      <p class="body">Photos make neon look huge. It’s 30 cm square. Hold something next to it below; you can drag it around.</p>
+    </div>
+    <div class="size-stage count-wrap" id="sizeStage">
+      <svg class="size-svg" id="sizeSvg" viewBox="-100 -90 800 420" role="img" aria-label="The sign drawn to scale beside a comparison object">
+        <defs>
+          <filter id="glowF" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="printG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140d3a"/><stop offset=".55" stop-color="#4a1f7e"/><stop offset=".62" stop-color="#c94a8c"/><stop offset=".64" stop-color="#2a154f"/><stop offset="1" stop-color="#130a26"/></linearGradient>
+        </defs>
+        <line class="shelf" x1="-190" x2="690" y1="300" y2="300"/>
+        <g class="cmp" data-cmp="monitor" data-note="27-inch 16:9 monitor, screen about 598 × 336 mm. The sign is half its width.">
+          <rect class="ol" x="-160" y="-110" width="620" height="356" rx="8"/>
+          <rect class="fl" x="-149" y="-100" width="598" height="336"/>
+          <path class="ol" d="M130 246h40l8 50h-56z"/>
+          <rect class="ol" x="80" y="294" width="140" height="6" rx="3"/>
+          <text x="-149" y="-120">27″ monitor · 598 × 336</text>
+        </g>
+        <g class="sgn">
+          <rect class="sgn-plate" x="0" y="0" width="300" height="300" rx="42"/>
+          <rect class="sgn-print" x="37" y="37" width="226" height="226" rx="16"/>
+          <rect class="sgn-frame" x="24.5" y="24.5" width="251" height="251" rx="27"/>
+          <text class="sgn-label" x="150" y="160">300 mm</text>
+        </g>
+        <g class="cmp" data-cmp="lp" data-mx="-330" data-note="A 12-inch LP sleeve is 314 mm square. The sign is 14 mm smaller each way.">
+          <circle class="ol" cx="526" cy="143" r="148"/>
+          <circle class="fl" cx="526" cy="143" r="50"/>
+          <circle class="fl" cx="526" cy="143" r="4"/>
+          <rect class="ol" x="330" y="-14" width="314" height="314" style="fill:#0f0d13"/>
+          <path class="fl" d="M350 6h120M350 22h80"/>
+          <text x="330" y="-26">12″ LP sleeve · 314 mm</text>
+        </g>
+        <g class="cmp" data-cmp="a4" data-mx="-295" data-note="A4 paper is 297 mm tall, 3 mm shorter than the sign.">
+          <rect class="ol" x="340" y="3" width="210" height="297"/>
+          <path class="fl" d="M362 40h140M362 56h166M362 72h120M362 88h150M362 104h90M362 140h166M362 156h130M362 172h150"/>
+          <text x="340" y="-9">A4 sheet · 210 × 297</text>
+        </g>
+        <g class="cmp" data-cmp="pad" data-mx="-310" data-note="A typical console gamepad is about 160 mm across.">
+          <path class="ol" d="M370 228c10-22 30-28 52-28h76c22 0 42 6 52 28l18 50c6 18-4 26-16 26-12 0-20-8-30-22l-10-14h-104l-10 14c-10 14-18 22-30 22-12 0-22-8-16-26z"/>
+          <circle class="fl" cx="408" cy="236" r="13"/><circle class="fl" cx="512" cy="236" r="4"/><circle class="fl" cx="526" cy="250" r="4"/><circle class="fl" cx="498" cy="250" r="4"/>
+          <path class="fl" d="M436 262h14M443 255v14"/>
+          <text x="370" y="186">Gamepad · ≈160 mm</text>
+        </g>
+        <g id="rulerTop"></g>
+        <g id="rulerLeft"></g>
+      </svg>
+    </div>
+    <div class="size-row">
+      <div class="size-pick" role="radiogroup" aria-label="Compare with">
+        <button role="radio" data-pick="lp" aria-checked="true">LP sleeve</button>
+        <button role="radio" data-pick="a4" aria-checked="false">A4 sheet</button>
+        <button role="radio" data-pick="pad" aria-checked="false">Gamepad</button>
+        <button role="radio" data-pick="monitor" aria-checked="false">27″ monitor</button>
+      </div>
+      <p class="foot mono" id="sizeNote"></p>
+    </div>
+    <div class="facts rv-group">
+      <div><b><span data-count="300">0</span><small>mm</small></b><p class="foot mono">Wide and tall</p></div>
+      <div><b><span data-count="35">0</span><small>mm</small></b><p class="foot mono">Deep, frame included</p></div>
+      <div><b><span data-count="0.8">0</span><small>kg</small></b><p class="foot mono">Roughly</p></div>
+      <div><b><span data-count="2">0</span><small>m</small></b><p class="foot mono">Of cable, dimmer on it</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec photos opaque" id="photos">
+  <div class="wrap">
+    <div class="split-head">
+      <div>
+        <p class="eyebrow mono">07 · Unedited</p>
+        <h2 class="h2"><span class="ln"><span>The factory’s photos.</span></span><span class="ln"><em>Not renders.</em></span></h2>
+      </div>
+      <p class="body">Everything above is drawn. These two aren’t. Move over them to look closer.</p>
+    </div>
+    <div class="ph-grid">
+      <figure class="ph ph--a">
+        <div class="frame"><img src="{{img:photo-red.webp}}" alt="The sign with a red-lit frame, hanging on a black wire grid above a white fluffy rug" width="604" height="678" loading="lazy"></div>
+        <span class="loupe" aria-hidden="true"></span>
+        <figcaption class="mono"><span>Red frame</span><span>Supplier photo</span></figcaption>
+      </figure>
+      <figure class="ph ph--b">
+        <div class="frame"><img src="{{img:photo-amber.webp}}" alt="The same sign with an amber-lit frame on the wire grid" width="550" height="680" loading="lazy"></div>
+        <span class="loupe" aria-hidden="true"></span>
+        <figcaption class="mono"><span>Amber frame</span><span>Supplier photo</span></figcaption>
+      </figure>
+      <p class="body ph-note">Look closely at the red frame and you can pick out the separate LEDs. Neon flex at this price shows them a little. Better you see that here than when you open the box.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec before opaque" id="before">
+  <div class="wrap">
+    <p class="eyebrow mono">08 · Before you buy</p>
+    <h2 class="h2"><span class="ln"><span>Read this</span></span><span class="ln"><em>first.</em></span></h2>
+    <ol class="notes rv-group">
+      <li><strong>Unofficial</strong><span>Fan-made decor. It isn’t made, licensed or endorsed by Rockstar Games or Take-Two Interactive.</span></li>
+      <li><strong>No plug in the box</strong><span>The lead ends in USB-A. A 5 V phone charger rated 1.2 A or more will run it, and so will most laptops and power banks.</span></li>
+      <li><strong>Indoors only</strong><span>Keep it dry and out of direct sun. Sunlight fades printed colour and yellows plastic over time.</span></li>
+      <li><strong>Hands off the neon</strong><span>The flex is fixed to the panel. Don’t bend the panel, and don’t lift the sign by its cable.</span></li>
+      <li><strong>Supplier figures</strong><span>Size, weight and power come from the supplier’s spec sheet. If a unit measures differently, we’ll fix this page.</span></li>
+      <li><strong>Neon photographs badly</strong><span>Every camera gets it slightly wrong, ours included. Colours on your screen won’t match the room exactly.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec buy" id="buy" data-scene>
+  <div class="buy-card rv-group">
+    <p class="eyebrow mono">Ocean Drive · N°300</p>
+    <h2 class="h2"><span class="ln"><span>Put the night</span></span><span class="ln"><em>on the wall.</em></span></h2>
+    <p class="price"><span class="cur">$</span>69<span class="cents">.00</span></p>
+    <div>
+      <div class="opt"><span class="mono">Frame · <span data-colorname>Red</span></span>
+        <div class="mini-sw" role="radiogroup" aria-label="Frame colour">
+          <button role="radio" aria-checked="true" data-color="red"><i></i>Red</button>
+          <button role="radio" aria-checked="false" data-color="amber"><i></i>Amber</button>
+        </div>
+      </div>
+      <div class="opt"><span class="mono">Quantity</span>
+        <div class="qty"><button id="qtyMinus" aria-label="One fewer">−</button><output id="qty">1</output><button id="qtyPlus" aria-label="One more">+</button></div>
+      </div>
+      <button class="btn btn--solid btn--wide" id="addCart"><span>Add to cart</span></button>
+      <ul class="box mono">
+        <li>Sign, 300 × 300 × 35 mm</li>
+        <li>2 m USB-A lead with inline dimmer</li>
+        <li>Screws, hook and chain</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr opaque">
+  <p class="ft-line">Everything on this page is lit by the sign. Try the dimmer.</p>
+  <div class="ft-mark" aria-hidden="true">Ocean Drive</div>
+  <div class="ft-row mono">
+    <p>Unofficial fan decor. Rockstar Games and Grand Theft Auto are trademarks of Take-Two Interactive Software, Inc. This product isn’t affiliated with or endorsed by them.</p>
+    <p>© 2026</p>
+  </div>
+</footer>
+
+<div id="toast" class="mono" role="status" aria-live="polite"></div>
+
+<!--APP-->
+</body>
+</html>
