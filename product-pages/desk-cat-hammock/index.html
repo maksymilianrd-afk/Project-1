@@ -1,0 +1,2524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Overhang</title>
+<meta name="description" content="The Overhang is a 40 cm cat hammock that clamps to the edge of your desk. Steel ring, swivel pin, grey mesh cover and a feather toy. No drilling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Martian+Mono:wdth,wght@75..112.5,300..700&family=Schibsted+Grotesk:ital,wght@0,400..800;1,400..800&display=swap">
+<style>
+/* Layout: a desk seen side-on. Copy sits on the work surface; every interactive prop overhangs the right-hand edge, the way the hammock does. */
+:root{
+  --bg:#E2E4E3;        /* grey laminate */
+  --surface:#ECEEED;   /* panels on the desk */
+  --raise:#F6F7F6;
+  --ink:#141517;
+  --ink-2:#565A5F;
+  --line:#C3C7C7;
+  --edge:#1C1E21;      /* the desk edge the title hangs from */
+  --mesh:#8D9196;
+  --mesh-hole:#6F7378;
+  --note:#FFD43B;      /* sticky-note yellow, the one loud colour */
+  --note-side:#C9A21E;
+  --note-ink:#1B1600;
+  --cat:#D07A2E;
+  --cat-dark:#A65A1D;
+  --bean:#E9A0A6;
+  --alert:#C33A22;
+  --ok:#2B7749;
+  --key:#F8F9F8;
+  --key-side:#B7BCBC;
+  --photo:#F1F1EF;
+  --shadow:rgba(20,22,25,.16);
+
+  --display:"Anybody","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"Martian Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  --t-hero:clamp(2.6rem,9.2vw,8.1rem);
+  --t-h2:clamp(2.1rem,5vw,4.25rem);
+  --t-h3:1.3rem;
+  --t-body:1.0625rem;
+  --t-small:.875rem;
+  --t-label:.7rem;
+
+  --gutter:clamp(16px,4vw,48px);
+  --head-h:60px;
+  --r:6px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121315;--surface:#1A1C1F;--raise:#23262A;--ink:#ECEEEC;--ink-2:#A0A5AA;--line:#2F3337;--edge:#3A3E43;
+    --mesh:#7B7F85;--mesh-hole:#5C6066;--note:#FFD43B;--note-side:#A88512;--note-ink:#1B1600;--cat:#E08A3C;--cat-dark:#B4652A;
+    --bean:#E9A0A6;--alert:#FF6A4D;--ok:#5CC08B;--key:#2A2D31;--key-side:#0D0E10;--photo:#E8E9E6;--shadow:rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121315;--surface:#1A1C1F;--raise:#23262A;--ink:#ECEEEC;--ink-2:#A0A5AA;--line:#2F3337;--edge:#3A3E43;
+  --mesh:#7B7F85;--mesh-hole:#5C6066;--note:#FFD43B;--note-side:#A88512;--note-ink:#1B1600;--cat:#E08A3C;--cat-dark:#B4652A;
+  --bean:#E9A0A6;--alert:#FF6A4D;--ok:#5CC08B;--key:#2A2D31;--key-side:#0D0E10;--photo:#E8E9E6;--shadow:rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--t-body)/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.page{overflow-x:clip}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--note);outline-offset:3px;border-radius:4px}
+h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance;font-weight:780;letter-spacing:-.01em}
+h2{font-size:var(--t-h2);line-height:.95;font-stretch:84%}
+h3{font-size:var(--t-h3);line-height:1.15;font-stretch:90%}
+p{margin:0}
+.wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--gutter)}
+.label{font:500 var(--t-label)/1.3 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-2)}
+.muted{color:var(--ink-2)}
+.small{font-size:var(--t-small);color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+.skip{position:absolute;left:-999px;top:8px;z-index:100;background:var(--note);color:var(--note-ink);padding:8px 12px;border-radius:4px}
+.skip:focus{left:12px}
+
+/* ---------- header ---------- */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line)}
+.head-in{height:var(--head-h);display:flex;align-items:center;gap:24px}
+.brand{font:800 1.25rem/1 var(--display);font-stretch:76%;letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand svg{width:22px;height:22px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{font:500 var(--t-label)/1 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-2);text-decoration:none;padding:6px 0;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{transform:scaleX(1)}
+.cart-btn{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--raise);cursor:pointer;transition:transform .2s}
+.cart-btn:hover{transform:translateY(-1px)}
+.cart-btn svg{width:20px;height:20px}
+.cart-btn.bump{animation:bump .5s cubic-bezier(.3,1.6,.4,1)}
+@keyframes bump{30%{transform:scale(1.18) rotate(-6deg)}60%{transform:scale(.95) rotate(3deg)}}
+.cart-count{position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--note);color:var(--note-ink);font:600 .66rem/19px var(--mono);text-align:center;font-variant-numeric:tabular-nums;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.4,1)}
+.cart-count.has{transform:scale(1)}
+@media (max-width:760px){.nav{display:none}.cart-btn{margin-left:auto}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(18px,3vw,36px) clamp(48px,7vw,96px)}
+.edge{position:relative;height:16px;border-radius:3px 3px 2px 2px;background:var(--edge);box-shadow:inset 0 3px 0 color-mix(in srgb,var(--edge) 70%,white)}
+.edge-label{position:absolute;right:0;bottom:calc(100% + 7px);font:500 .62rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.hang{font-size:var(--t-hero);line-height:.84;font-weight:860;font-stretch:116%;letter-spacing:-.02em;text-transform:uppercase;margin:0;padding-top:.3em;user-select:none;-webkit-user-select:none}
+.hang-inner{display:flex;flex-wrap:wrap;column-gap:.26em}
+.hang .w{display:inline-flex;white-space:nowrap}
+.hang .ch{--cord:.3em;display:inline-block;position:relative;transform-origin:50% calc(-1 * var(--cord));will-change:transform}
+.hang .ch::before{content:"";position:absolute;left:50%;top:calc(-1 * var(--cord) + .03em);height:calc(var(--cord) + .11em);width:max(2px,.016em);margin-left:min(-1px,-.008em);background:var(--ink-2);opacity:.75}
+@media (max-width:640px){.hang{font-size:13.4vw}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);margin-top:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:960px){.hero-grid{grid-template-columns:minmax(0,1fr)}}
+
+.stage{position:relative;aspect-ratio:5/4;max-width:100%;border-radius:var(--r);overflow:hidden;background:radial-gradient(120% 90% at 70% 30%,var(--raise),var(--surface) 60%);border:1px solid var(--line);touch-action:pan-y}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+.stage canvas:active{cursor:grabbing}
+.stage-fallback{position:absolute;inset:12%;width:76%;height:76%;object-fit:contain;transition:opacity .5s}
+.stage.has-3d .stage-fallback{opacity:0}
+.stage-photo{position:absolute;inset:0;background:var(--photo);display:grid;place-items:center;padding:6%}
+.stage-photo img{max-height:100%;width:auto;object-fit:contain}
+.hud{position:absolute;font:500 .64rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);pointer-events:none;display:flex;gap:8px;align-items:center}
+.hud output{color:var(--ink);font-variant-numeric:tabular-nums;min-width:4ch}
+.hud-tl{top:14px;left:14px}.hud-bl{bottom:14px;left:14px}.hud-br{bottom:14px;right:14px}
+@media (max-width:560px){.hud-br{display:none}}
+.stage-photo:not([hidden]) ~ .hud,.stage:not(.has-3d) .hud{display:none}
+.hud-bl::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--note);box-shadow:0 0 0 3px color-mix(in srgb,var(--note) 35%,transparent);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--note) 0%,transparent)}}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumbs button{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);cursor:pointer;font:500 var(--t-label)/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2);transition:border-color .2s,background .2s,color .2s}
+.thumbs button[aria-selected="true"]{border-color:var(--ink);color:var(--ink);background:var(--raise)}
+.thumbs .tb-img{width:38px;height:38px;border-radius:4px;background:var(--photo);display:grid;place-items:center;overflow:hidden}
+.thumbs .tb-img img{width:100%;height:100%;object-fit:contain}
+.thumbs .tb-img svg{width:26px;height:26px}
+@media (max-width:480px){.thumbs button{padding-right:8px;flex:1;justify-content:center}.thumbs .tb-txt{display:none}}
+
+.buy{display:grid;gap:22px;position:sticky;top:calc(var(--head-h) + 24px)}
+@media (max-width:960px){.buy{position:static}}
+.eyebrow{font:500 var(--t-label)/1.3 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-2)}
+.lede{font-size:clamp(1.2rem,1.9vw,1.5rem);line-height:1.38;max-width:30ch;text-wrap:pretty}
+.typo{font-family:var(--mono);font-size:.8em;color:var(--alert);word-break:break-all}
+.caret{display:inline-block;width:2px;height:1.05em;vertical-align:-.15em;background:var(--ink);margin-left:1px;opacity:0}
+.caret.on{opacity:1;animation:blink .9s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sorry{display:block;margin-top:6px;font:500 .7rem/1.3 var(--mono);color:var(--ink-2);opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s}
+.sorry.show{opacity:1;transform:none}
+.price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.price{font:800 2.2rem/1 var(--display);font-stretch:90%;font-variant-numeric:tabular-nums}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+.opts div{border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;background:var(--surface)}
+.opts dt{font:500 .62rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.opts dd{margin:0;display:flex;align-items:center;gap:8px;font-weight:600}
+.sw{width:18px;height:18px;border-radius:50%;flex:none;border:1px solid var(--line)}
+.sw-mesh{background:radial-gradient(circle,var(--mesh-hole) 28%,transparent 32%) 0 0/4px 4px,var(--mesh)}
+.sw-steel{background:#1d1f22}
+.atc-row{display:flex;gap:12px;align-items:stretch}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.qty button{width:40px;height:100%;min-height:52px;border:0;background:none;cursor:pointer;font-size:1.2rem;color:var(--ink-2)}
+.qty button:hover{color:var(--ink)}
+.qty input{width:34px;border:0;background:none;text-align:center;font:600 1rem var(--mono);color:var(--ink);-moz-appearance:textfield;appearance:textfield}
+.qty input::-webkit-inner-spin-button,.qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.btn-key{--lift:5px;flex:1;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:0 22px;border:0;border-radius:10px;background:var(--note);color:var(--note-ink);font:700 1.05rem/1 var(--body);cursor:pointer;box-shadow:0 var(--lift) 0 var(--note-side),0 calc(var(--lift) + 6px) 14px -6px var(--shadow);transform:translateY(0);transition:transform .08s,box-shadow .08s}
+.btn-key:hover{--lift:6px;transform:translateY(-1px)}
+.btn-key:active,.btn-key.pressed{transform:translateY(4px);box-shadow:0 1px 0 var(--note-side),0 2px 6px -4px var(--shadow)}
+.btn-key .btn-price{font:600 .8rem/1 var(--mono);padding:6px 8px;border-radius:5px;background:color-mix(in srgb,var(--note-ink) 10%,transparent);font-variant-numeric:tabular-nums}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.perks li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;font-size:.98rem}
+.perks svg{width:22px;height:22px;margin-top:1px}
+.inbox{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:10px}
+.inbox ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.inbox li{font-size:.86rem;padding:5px 10px;border:1px dashed var(--line);border-radius:999px;color:var(--ink-2)}
+.fit-link{display:inline-flex;gap:10px;align-items:center;font:500 var(--t-label)/1 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--ink);text-decoration:none;width:max-content;padding-bottom:4px;border-bottom:2px solid var(--note)}
+.fit-link span{transition:transform .25s}
+.fit-link:hover span{transform:translateX(4px)}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--edge);color:var(--bg);overflow:hidden;padding-block:14px;border-block:1px solid var(--edge)}
+:root .ticker{color:color-mix(in srgb,var(--bg) 92%,var(--note))}
+.ticker-track{display:flex;width:max-content;gap:0;animation:tick 48s linear infinite}
+.ticker-track span{font:500 .78rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center}
+.ticker-track span::after{content:"";width:9px;height:9px;border-radius:50%;border:2px solid var(--note);margin-inline:22px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- shared section scaffolding ---------- */
+.sec{padding-block:clamp(72px,10vw,140px)}
+.sec + .sec{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:16px;margin-bottom:clamp(32px,5vw,56px);max-width:62ch}
+.sec-head.split{max-width:none;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end;column-gap:48px}
+.sec-head.split .label{grid-column:1/-1}
+@media (max-width:860px){.sec-head.split{grid-template-columns:minmax(0,1fr)}}
+.stretch{transition:font-stretch 1.2s cubic-bezier(.2,1.5,.35,1)}
+.js .stretch:not(.in){font-stretch:66%}
+.link-btn{justify-self:start;background:none;border:0;padding:0 0 4px;border-bottom:2px solid var(--note);cursor:pointer;font:500 var(--t-label)/1 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:var(--ink)}
+
+/* ---------- keyboard ---------- */
+.kbd-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,72px);align-items:center}
+@media (max-width:960px){.kbd-grid{grid-template-columns:minmax(0,1fr)}}
+.kbd-copy{display:grid;gap:20px;max-width:44ch}
+.switch{display:inline-flex;align-items:center;gap:14px;border:0;background:none;padding:0;cursor:pointer;font-weight:600;text-align:left;justify-self:start}
+.switch-track{position:relative;width:64px;height:34px;border-radius:999px;background:var(--line);transition:background .3s;flex:none;box-shadow:inset 0 2px 4px var(--shadow)}
+.switch-knob{position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;background:var(--raise);box-shadow:0 2px 4px var(--shadow);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.switch[aria-checked="true"] .switch-track{background:var(--note)}
+.switch[aria-checked="true"] .switch-knob{transform:translateX(30px)}
+.tally{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.tally div{border-top:2px solid var(--ink);padding-top:10px}
+.tally dt{font:500 .62rem/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.tally dd{margin:6px 0 0;font:800 2.4rem/1 var(--display);font-stretch:80%;font-variant-numeric:tabular-nums}
+.kbd-status{font:500 .78rem/1.4 var(--mono);color:var(--ink-2);min-height:2.8em}
+.workstation{display:grid;gap:18px;min-width:0}
+.mail{background:var(--raise);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 18px 40px -24px var(--shadow)}
+.mail-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font:500 .66rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.mail-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.mail-bar i:first-child{background:var(--alert);opacity:.7}
+.mail-bar b{margin-left:8px;font-weight:500}
+.mail-row{display:flex;gap:12px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:.92rem}
+.mail-row span{color:var(--ink-2);width:58px;flex:none}
+.mail textarea{display:block;width:100%;height:190px;border:0;resize:none;padding:14px;background:transparent;color:var(--ink);font:400 .98rem/1.55 var(--body);outline:none}
+.mail textarea:focus-visible{box-shadow:inset 0 0 0 2px var(--note)}
+.kb-zone{display:grid;grid-template-columns:minmax(0,1fr) clamp(150px,30%,240px);gap:14px;align-items:end}
+@media (max-width:560px){.kb-zone{grid-template-columns:minmax(0,1fr)}.kb-hammock{justify-self:end;width:55%}}
+.kb-wrap{position:relative;overflow:hidden;padding:18px 14px 16px;border-radius:12px;background:color-mix(in srgb,var(--edge) 92%,var(--bg));box-shadow:0 20px 40px -26px var(--shadow)}
+.kb{display:grid;gap:7px}
+.kb-row{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px}
+.kb-row.r1{padding-left:3%}.kb-row.r2{padding-left:7%;padding-right:4%}
+.kb-row.r3{grid-template-columns:repeat(10,minmax(0,1fr))}
+.kb-row.r3 .key{grid-column:3/9;aspect-ratio:6.6/1}
+.key{position:relative;display:grid;place-items:center;aspect-ratio:1.05;border-radius:7px;background:var(--key);color:var(--ink-2);font:500 clamp(.55rem,1.05vw,.78rem)/1 var(--mono);box-shadow:0 4px 0 var(--key-side),0 6px 8px -4px var(--shadow);transition:transform .05s,box-shadow .05s,background .2s;user-select:none}
+.key.down{transform:translateY(3px);box-shadow:0 1px 0 var(--key-side),0 2px 3px -2px var(--shadow);background:color-mix(in srgb,var(--key) 85%,var(--note))}
+.paw{position:absolute;left:0;top:0;width:clamp(46px,7.4%,64px);aspect-ratio:60/160;pointer-events:none;transform:translate(40%,-110%);z-index:3;filter:drop-shadow(0 8px 6px var(--shadow))}
+.paw svg{width:100%;height:100%}
+.kb-hammock svg{width:100%;height:auto;overflow:visible}
+.kb-hammock .sleeper-cat{transform:translateY(-34px);opacity:0;transition:transform .7s cubic-bezier(.3,1.6,.45,1),opacity .3s}
+.kb-hammock.occupied .sleeper-cat{transform:none;opacity:1}
+.kb-hammock .zz{opacity:0}
+.kb-hammock.occupied .zz{opacity:1}
+.zz text{font:600 11px var(--mono);fill:var(--ink-2);animation:zz 3.2s ease-in-out infinite}
+.zz text:nth-child(2){animation-delay:1.05s}.zz text:nth-child(3){animation-delay:2.1s}
+@keyframes zz{0%{opacity:0;transform:translate(0,0)}25%{opacity:1}100%{opacity:0;transform:translate(10px,-22px)}}
+.kb-hammock figcaption{font:500 .6rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-align:center;margin-top:6px}
+
+/* ---------- exploded parts ---------- */
+.parts-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,64px)}
+.parts-stage{position:sticky;top:calc(var(--head-h) + 20px);height:min(calc(100vh - var(--head-h) - 40px),760px);border-radius:var(--r);background:radial-gradient(90% 80% at 50% 40%,var(--raise),var(--surface));border:1px solid var(--line);overflow:hidden}
+.parts-stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.parts-stage .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:40px 40px;opacity:.45;mask-image:radial-gradient(closest-side,black,transparent)}
+.tags{position:absolute;inset:0;pointer-events:none}
+.tag{position:absolute;left:0;top:0;display:flex;align-items:center;gap:8px;transform:translate(-50%,-50%);transition:opacity .3s}
+.tag b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--raise);border:1.5px solid var(--ink);font:600 .7rem/1 var(--mono);transition:background .3s,transform .3s}
+.tag span{font:500 .64rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:5px 7px;border-radius:3px;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s;white-space:nowrap}
+.tag.active b{background:var(--note);color:var(--note-ink);border-color:var(--note-ink);transform:scale(1.15)}
+.tag.active span{opacity:1;transform:none}
+.part-list{list-style:none;margin:0;padding:0}
+.part{min-height:62vh;display:grid;align-content:center;gap:10px;padding-block:24px;opacity:.38;transition:opacity .4s}
+.part:first-child{min-height:48vh;align-content:start;padding-top:8px}
+.part.active{opacity:1}
+.part-n{font:600 .72rem/1 var(--mono);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink)}
+.part.active .part-n{background:var(--note);border-color:var(--note-ink);color:var(--note-ink)}
+.dim{font:500 clamp(1.4rem,2.6vw,2.1rem)/1.1 var(--mono);font-stretch:85%;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.part p:last-child{max-width:38ch;color:var(--ink-2)}
+@media (max-width:860px){
+  .parts-grid{grid-template-columns:minmax(0,1fr)}
+  .parts-stage{height:44vh;top:calc(var(--head-h) + 8px);z-index:2}
+  .part{min-height:56vh;opacity:.5}
+  .part:first-child{min-height:40vh;padding-top:24px}
+}
+
+/* ---------- to scale ---------- */
+.planner{margin:0;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);overflow:hidden;position:relative}
+.planner svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.planner figcaption{padding:10px 14px;border-top:1px solid var(--line);font:500 .62rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.pl-ring{cursor:grab;outline:none;touch-action:none}
+.pl-ring:active{cursor:grabbing}
+.pl-ring:focus-visible .pl-ring-wire{stroke:var(--note);stroke-width:1.4}
+.planner-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:clamp(24px,3vw,40px);align-items:center}
+@media (max-width:960px){.planner-grid{grid-template-columns:minmax(0,1fr)}}
+.planner-controls{display:grid;gap:24px;align-content:center}
+.slider-field{display:grid;gap:10px}
+.slider-field label{font:500 var(--t-label)/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);display:flex;justify-content:space-between;gap:12px}
+.slider-field output{color:var(--ink);font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ink) var(--fill,50%),var(--line) var(--fill,50%))}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--line)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--note);border:2px solid var(--note-ink);box-shadow:0 2px 6px var(--shadow)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--note);border:2px solid var(--note-ink)}
+.verdict{font-size:1.05rem;line-height:1.45;min-height:3em}
+.verdict b{font-family:var(--display);font-stretch:88%;font-weight:780;font-size:1.25rem;display:block}
+.units{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);justify-self:start}
+.units button{border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;font:500 .7rem/1 var(--mono);letter-spacing:.06em;color:var(--ink-2)}
+.units button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.note{margin-top:22px;max-width:70ch;color:var(--ink-2);font-size:.95rem}
+.pl-label{font-family:var(--mono);font-size:2.3px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink-2)}
+
+/* ---------- cover ---------- */
+.cover-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,80px);align-items:center}
+@media (max-width:900px){.cover-grid{grid-template-columns:minmax(0,1fr)}}
+.loupe-card{position:relative;aspect-ratio:1;max-width:100%;background:var(--photo);border-radius:var(--r);overflow:hidden;cursor:none;touch-action:pan-y}
+.loupe-card img{position:absolute;inset:7%;width:86%;height:86%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.lens{position:absolute;left:0;top:0;width:clamp(130px,30%,210px);aspect-ratio:1;border-radius:50%;border:2px solid #141517;box-shadow:0 14px 30px -8px rgba(20,22,25,.45),inset 0 0 0 4px rgba(255,255,255,.55);background-color:var(--photo);background-repeat:no-repeat;pointer-events:none;transform:translate(-50%,-50%);will-change:left,top}
+.lens::after{content:attr(data-zoom);position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);font:600 .6rem/1 var(--mono);letter-spacing:.08em;color:#141517;background:rgba(255,255,255,.8);padding:4px 6px;border-radius:3px}
+.pin{position:absolute;left:var(--x);top:var(--y);width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:2px solid #141517;background:var(--note);color:#1B1600;font:700 .72rem/1 var(--mono);cursor:pointer;z-index:2;box-shadow:0 0 0 0 rgba(255,212,59,.6);animation:ping 2.4s infinite}
+.pin.lit{transform:scale(1.25);animation:none}
+@keyframes ping{60%,100%{box-shadow:0 0 0 12px rgba(255,212,59,0)}}
+.cover-copy{display:grid;gap:22px}
+.notes-list{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:n}
+.notes-list li{counter-increment:n;display:grid;grid-template-columns:30px 1fr;gap:14px;padding:14px 12px;border-radius:var(--r);transition:background .25s;cursor:default}
+.notes-list li::before{content:counter(n);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);font:600 .7rem/1 var(--mono)}
+.notes-list li.lit{background:var(--surface)}
+.notes-list li.lit::before{background:var(--note);border-color:var(--note-ink);color:var(--note-ink)}
+.care{border:1px dashed var(--line);border-radius:var(--r);padding:16px;display:grid;gap:8px}
+
+/* ---------- feather game ---------- */
+.game{position:relative;height:clamp(340px,38vw,460px);border-radius:var(--r);background:linear-gradient(var(--raise),var(--surface));border:1px solid var(--line);overflow:hidden;touch-action:pan-y;cursor:crosshair}
+.game.playing{touch-action:none;cursor:none}
+.game canvas{position:absolute;inset:0;display:block}
+.game-hud{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;font:500 .66rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);pointer-events:none}
+.game-hud output{color:var(--ink);font-variant-numeric:tabular-nums;margin-left:6px}
+.game-msg{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;display:grid;gap:12px;justify-items:center;pointer-events:none;transition:opacity .3s}
+.game-msg b{font:800 clamp(1.6rem,3.4vw,2.6rem)/1 var(--display);font-stretch:88%}
+.game-msg span{font:500 .7rem/1.4 var(--mono);letter-spacing:.06em;color:var(--ink-2)}
+.game-msg button{pointer-events:auto;--lift:4px;min-height:46px;flex:none;padding:0 22px}
+.game.playing .game-msg{opacity:0}
+.safety{margin-top:20px;display:flex;gap:14px;align-items:flex-start;max-width:72ch;font-size:.95rem;color:var(--ink-2)}
+.safety b{color:var(--ink)}
+.safety svg{flex:none;width:22px;height:22px;margin-top:2px}
+
+/* ---------- fit check ---------- */
+.fit-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:center}
+@media (max-width:960px){.fit-grid{grid-template-columns:minmax(0,1fr)}}
+.fit-copy{display:grid;gap:22px}
+.checks{border:0;margin:0;padding:0;display:grid;gap:10px}
+.checks legend{font:500 var(--t-label)/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;padding:0}
+.checks label{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;cursor:pointer;padding:10px 12px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);font-size:.95rem;line-height:1.45}
+.checks input{appearance:none;-webkit-appearance:none;width:22px;height:22px;margin:1px 0 0;border-radius:5px;border:2px solid var(--ink);display:grid;place-items:center;cursor:pointer;background:var(--raise)}
+.checks input::after{content:"";width:10px;height:6px;border:solid var(--note-ink);border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px) scale(0);transition:transform .2s cubic-bezier(.3,1.6,.4,1)}
+.checks input:checked{background:var(--note);border-color:var(--note-ink)}
+.checks input:checked::after{transform:rotate(-45deg) translate(1px,-1px) scale(1)}
+.fit-verdict{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:var(--r);border:2px solid var(--ok);min-height:72px}
+.fit-verdict.bad{border-color:var(--alert)}
+.fit-verdict .pill{font:600 .66rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:var(--ok);color:var(--bg);flex:none}
+.fit-verdict.bad .pill{background:var(--alert)}
+.fit-fig{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(12px,2vw,24px);overflow:hidden}
+.fit-fig svg{width:100%;height:auto;display:block;overflow:visible}
+.fit-fig figcaption{font:500 .62rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-top:10px}
+.fit-svg-label{font-family:var(--mono);font-size:10px;letter-spacing:.06em;fill:var(--ink-2);text-transform:uppercase}
+.fit-svg-big{font-family:var(--mono);font-size:13px;font-weight:600;fill:var(--ink)}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-3px)}50%{transform:translateX(3px)}75%{transform:translateX(-2px)}}
+
+/* ---------- moving in ---------- */
+.stickies{list-style:none;margin:0;padding:12px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+@media (max-width:960px){.stickies{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.stickies{grid-template-columns:minmax(0,1fr)}}
+.sticky{position:relative;background:var(--note);color:var(--note-ink);padding:26px 22px 30px;min-height:220px;transform:rotate(var(--r,0deg));transform-origin:50% 0;box-shadow:0 18px 22px -16px rgba(20,22,25,.35);transition:transform .45s cubic-bezier(.25,1.4,.4,1);display:grid;align-content:start;gap:14px}
+.sticky::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:linear-gradient(rgba(0,0,0,.06),transparent)}
+.sticky:hover{transform:rotate(calc(var(--r,0deg) * -1)) translateY(-6px)}
+.sticky-n{font:800 3.2rem/.8 var(--display);font-stretch:70%}
+.sticky p{font-size:1.02rem;line-height:1.45}
+.sticky:nth-child(2){margin-top:22px}.sticky:nth-child(4){margin-top:12px}
+
+/* ---------- faq + spec ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,80px);align-items:start}
+@media (max-width:960px){.faq-grid{grid-template-columns:minmax(0,1fr)}}
+.faq-col{display:grid;gap:28px}
+.faq{border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line);interpolate-size:allow-keywords}
+.faq summary{list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;cursor:pointer;font-weight:600;font-size:1.08rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);position:relative;transition:transform .35s cubic-bezier(.3,1.5,.5,1),background .2s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.6px;background:var(--ink);transform:translate(-50%,-50%)}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--note);border-color:var(--note-ink)}
+.faq details[open] summary i::before,.faq details[open] summary i::after{background:var(--note-ink)}
+.faq details::details-content{block-size:0;overflow:hidden;transition:block-size .35s ease,content-visibility .35s allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+.faq .a{padding:0 44px 22px 0;color:var(--ink-2);max-width:62ch}
+.spec{position:sticky;top:calc(var(--head-h) + 24px);border:1px solid var(--ink);border-radius:var(--r);padding:22px;background:var(--raise);display:grid;gap:16px}
+@media (max-width:960px){.spec{position:static}}
+.spec table{width:100%;border-collapse:collapse;font-size:.92rem}
+.spec th,.spec td{text-align:left;padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.spec th{font:500 .64rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);width:42%;padding-right:12px}
+.spec td{font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+.spec tr:last-child th,.spec tr:last-child td{border-bottom:0}
+.spec .src{font-size:.78rem;color:var(--ink-2)}
+
+/* ---------- last call ---------- */
+.last-sec{background:var(--surface)}
+.last-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}
+@media (max-width:860px){.last-grid{grid-template-columns:minmax(0,1fr)}}
+.sleeper{width:100%;max-width:440px;height:auto;justify-self:center;overflow:visible}
+.breathe{transform-box:fill-box;transform-origin:center;animation:breathe 3.8s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.035)}}
+.sleeper .zz text{font-size:7px}
+.last-copy{display:grid;gap:22px;justify-items:start}
+.last-copy h2{font-size:clamp(2.6rem,7vw,6rem)}
+.last-copy .btn-key{flex:none;min-width:min(100%,340px)}
+
+/* ---------- footer ---------- */
+.foot{padding-block:40px calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.foot-in{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--ink-2)}
+.foot a{color:var(--ink-2)}
+
+/* ---------- sticky buy bar ---------- */
+.sticky-buy{position:fixed;left:0;right:0;bottom:0;z-index:55;padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--raise) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.9,.25,1)}
+.sticky-buy.show{transform:none}
+.sb-in{max-width:1320px;margin-inline:auto;display:flex;align-items:center;gap:14px}
+.sb-in img{width:44px;height:44px;border-radius:5px;background:var(--photo);object-fit:contain;padding:3px}
+.sb-t{display:grid;line-height:1.2;min-width:0}
+.sb-t b{font-family:var(--display);font-stretch:88%;font-size:1.05rem}
+.sb-t span{font:500 .66rem/1.3 var(--mono);color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-buy .btn-key{flex:none;margin-left:auto;min-height:46px;--lift:4px;padding:0 18px;gap:12px}
+@media (max-width:420px){.sticky-buy .btn-price{display:none}}
+
+/* ---------- cart drawer ---------- */
+.drawer-back{position:fixed;inset:0;z-index:80;background:rgba(10,11,12,.4);opacity:0;transition:opacity .3s}
+.drawer-back.show{opacity:1}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:81;width:min(420px,100%);background:var(--raise);border-left:1px solid var(--line);display:grid;grid-template-rows:auto 1fr auto;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.9,.25,1);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.show{transform:none}
+.dr-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:1.5rem;font-stretch:88%}
+.dr-x{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer;font-size:1.1rem}
+.dr-body{padding:22px;overflow:auto;display:grid;align-content:start;gap:18px}
+.dr-item{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center}
+.dr-item img{width:72px;height:72px;border-radius:6px;background:var(--photo);object-fit:contain;padding:6px}
+.dr-item b{font-family:var(--display);font-stretch:88%;font-size:1.1rem;display:block}
+.dr-item span{font-size:.82rem;color:var(--ink-2)}
+.dr-empty{color:var(--ink-2)}
+.dr-foot{padding:18px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.dr-sub{display:flex;justify-content:space-between;font-weight:600}
+.dr-sub span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.dr-note{font:500 .68rem/1.5 var(--mono);color:var(--ink-2)}
+.fly{position:fixed;left:0;top:0;z-index:90;width:64px;height:64px;border-radius:50%;background:var(--photo);padding:6px;object-fit:contain;pointer-events:none;box-shadow:0 10px 20px -6px var(--shadow)}
+
+/* ---------- drawing dialog ---------- */
+.drawing-dialog{border:0;padding:0;border-radius:var(--r);max-width:min(860px,calc(100% - 32px));background:var(--photo);color:#141517;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.drawing-dialog::backdrop{background:rgba(10,11,12,.6)}
+.drawing-dialog img{width:100%;height:auto}
+.dd-bar{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px 16px;font:500 .66rem/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#4c5055}
+.dd-bar button{border:1.5px solid #141517;background:none;border-radius:999px;padding:6px 12px;cursor:pointer;font:600 .66rem/1 var(--mono);letter-spacing:.06em;color:#141517}
+
+/* ---------- idle paw ---------- */
+.idle{position:fixed;left:clamp(12px,4vw,40px);bottom:0;z-index:70;display:flex;align-items:flex-end;gap:10px;transform:translateY(105%);transition:transform .6s cubic-bezier(.3,1.3,.5,1);pointer-events:none}
+.idle.show{transform:translateY(calc(-1 * env(safe-area-inset-bottom,0px)))}
+.idle .paw-up{width:46px;height:110px;transform:rotate(180deg);margin-bottom:-18px}
+.idle .toast{margin-bottom:22px;background:var(--raise);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;font:500 .72rem/1.45 var(--mono);box-shadow:0 12px 30px -12px var(--shadow);max-width:min(280px,64vw);word-break:break-all}
+.idle .toast small{display:block;color:var(--ink-2);word-break:normal}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .stretch:not(.in){font-stretch:84%}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="mesh-dots" width="1.6" height="1.6" patternUnits="userSpaceOnUse">
+      <rect width="1.6" height="1.6" style="fill:var(--mesh)"/>
+      <circle cx=".4" cy=".4" r=".36" style="fill:var(--mesh-hole)"/>
+      <circle cx="1.2" cy="1.2" r=".36" style="fill:var(--mesh-hole)"/>
+    </pattern>
+    <!-- top-down curled cat, drawn in a 100-unit box centred on 0,0 -->
+    <symbol id="cat-curl" viewBox="-50 -50 100 100" overflow="visible">
+      <path d="M36 16 C33 37 9 49 -13 45 C-27 42 -36 32 -37 19" style="fill:none;stroke:var(--cat-dark);stroke-width:9.5;stroke-linecap:round"/>
+      <path d="M-31 8 C-33 -19 -9 -38 15 -35 C38 -32 47 -9 43 12 C39 32 18 43 -3 41 C-21 39 -30 25 -31 8 Z" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.2"/>
+      <g style="fill:none;stroke:var(--cat-dark);stroke-width:3.4;stroke-linecap:round;opacity:.6">
+        <path d="M2 -33 C9 -27 11 -20 9 -13"/>
+        <path d="M17 -32 C21 -25 22 -18 19 -11"/>
+        <path d="M31 -24 C31 -17 29 -11 25 -6"/>
+        <path d="M40 -8 C36 -4 32 -1 27 0"/>
+        <path d="M40 12 C35 12 31 11 27 9"/>
+      </g>
+      <ellipse cx="-1" cy="32" rx="7.5" ry="5" transform="rotate(-20 -1 32)" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1"/>
+      <ellipse cx="10" cy="32.5" rx="7" ry="4.8" transform="rotate(-8 10 32.5)" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1"/>
+      <g transform="translate(-16 15)">
+        <path d="M-3.15 13.64 L-11.41 24.47 L-8.43 11.18 Z" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.1;stroke-linejoin:round"/>
+        <path d="M-13.83 2.19 L-26.96 -1.41 L-13.52 -3.62 Z" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.1;stroke-linejoin:round"/>
+        <path d="M-4.64 14.27 L-9.72 20.85 L-7.95 12.72 Z" style="fill:var(--bean)"/>
+        <path d="M-14.96 1.05 L-22.97 -1.2 L-14.77 -2.6 Z" style="fill:var(--bean)"/>
+        <circle r="15" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.2"/>
+        <ellipse cx="-7.4" cy="4.4" rx="6.4" ry="4.6" transform="rotate(149 -7.4 4.4)" style="fill:#F7DDBB"/>
+        <path d="M-2.6 0 Q0 2 2.6 0" transform="translate(-2.4 5.6) rotate(27)" style="fill:none;stroke:#5a3212;stroke-width:1.5;stroke-linecap:round"/>
+        <path d="M-2.6 0 Q0 2 2.6 0" transform="translate(-6.6 -.6) rotate(91)" style="fill:none;stroke:#5a3212;stroke-width:1.5;stroke-linecap:round"/>
+        <path d="M-10.2 7.6 L-12.4 7.4 L-11 5.6 Z" style="fill:var(--bean)"/>
+        <path d="M4 -6 C8 -4 10 0 10 4 M1 -10 C5 -9 8 -7 10 -4" style="fill:none;stroke:var(--cat-dark);stroke-width:2.4;stroke-linecap:round;opacity:.5"/>
+      </g>
+    </symbol>
+    <!-- foreleg seen from above, contact point at 30,150 -->
+    <symbol id="paw-top" viewBox="0 0 60 160">
+      <path d="M15 0 L45 0 C47 40 49 92 47.5 120 C46.5 139 39 153 30 153 C21 153 13.5 139 12.5 120 C11 92 13 40 15 0 Z" style="fill:var(--cat)"/>
+      <path d="M14 34 C24 39 36 39 46 34 M13.5 62 C24 67 36 67 46.5 62 M13 90 C24 95 36 95 47 90" style="fill:none;stroke:var(--cat-dark);stroke-width:4.5;stroke-linecap:round;opacity:.5"/>
+      <path d="M21.5 138 L22.5 149 M30 140 L30 152 M38.5 138 L37.5 149" style="fill:none;stroke:var(--cat-dark);stroke-width:2.4;stroke-linecap:round;opacity:.75"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+<a class="skip" href="#buy">Skip to buying</a>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="DeskPaws, back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="8.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M5 4 L12 7 L19 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      DeskPaws
+    </a>
+    <nav class="nav" aria-label="On this page">
+      <a href="#parts">Parts</a>
+      <a href="#scale">To scale</a>
+      <a href="#fit">Fit check</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <button class="cart-btn" id="cart-btn" type="button" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ PRODUCT ============ -->
+<section class="hero" id="product" aria-labelledby="pname">
+  <div class="wrap">
+    <div class="edge" aria-hidden="true"><span class="edge-label">Desk edge</span></div>
+    <h1 class="hang" id="pname" aria-label="The Overhang"><span class="hang-inner" aria-hidden="true">The Overhang</span></h1>
+
+    <div class="hero-grid">
+      <div class="stage-col">
+        <div class="stage" id="stage">
+          <img class="stage-fallback" src="photos/mesh-cover-cutout.webp" alt="The grey mesh cover of the Overhang, laid flat" width="677" height="648">
+          <canvas id="hero-canvas" role="img" aria-label="3D model of the Overhang clamped to a desk edge. Drag sideways to swivel the ring. Tap the mesh to press it."></canvas>
+          <div class="stage-photo" id="stage-photo" hidden><img id="stage-photo-img" src="photos/mesh-cover-cutout.webp" alt=""></div>
+          <div class="hud hud-tl"><span>Swivel</span><output id="swivel-out">+0°</output></div>
+          <div class="hud hud-bl">Drag to swivel · Tap the mesh</div>
+          <div class="hud hud-br">Model in cm</div>
+        </div>
+        <div class="thumbs" role="tablist" aria-label="Product views">
+          <button type="button" role="tab" aria-selected="true" data-view="model">
+            <span class="tb-img"><svg viewBox="0 0 26 26" aria-hidden="true"><ellipse cx="15" cy="15" rx="9.5" ry="4" fill="none" stroke="#141517" stroke-width="1.8"/><path d="M5.5 15 L2 15 L2 5" fill="none" stroke="#141517" stroke-width="1.8" stroke-linecap="round"/><path d="M15 6 v5" stroke="#141517" stroke-width="1.4" stroke-dasharray="1.5 1.5"/></svg></span>
+            <span class="tb-txt">3D model</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" data-view="cover">
+            <span class="tb-img"><img src="photos/mesh-cover-cutout.webp" alt=""></span>
+            <span class="tb-txt">Cover</span>
+          </button>
+          <button type="button" role="tab" aria-selected="false" data-view="drawing">
+            <span class="tb-img"><img src="photos/factory-drawing.webp" alt=""></span>
+            <span class="tb-txt">Drawing</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="buy" id="buy">
+        <p class="eyebrow">Desk hammock for cats · Ø 40 cm</p>
+        <div>
+          <p class="lede" id="lede">A hammock that clamps to the edge of your desk, so your cat sleeps beside you instead of on the keyboard<span class="typo" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>.</p>
+          <span class="sorry" id="lede-sorry" aria-hidden="true">↑ Sorry. That was Pickle.</span>
+        </div>
+        <div class="price-row">
+          <span class="price">$49.00</span>
+          <span class="small">Taxes included. Shipping calculated at checkout.</span>
+        </div>
+        <dl class="opts">
+          <div><dt>Cover</dt><dd><span class="sw sw-mesh"></span>Grey mesh</dd></div>
+          <div><dt>Frame</dt><dd><span class="sw sw-steel"></span>Black steel</dd></div>
+        </dl>
+        <div class="atc-row">
+          <div class="qty">
+            <button type="button" data-qty="-1" aria-label="One fewer">−</button>
+            <input id="qty" type="number" min="1" max="9" value="1" inputmode="numeric" aria-label="Quantity">
+            <button type="button" data-qty="1" aria-label="One more">+</button>
+          </div>
+          <button class="btn-key" id="atc" type="button" data-atc>Add to cart <span class="btn-price" id="atc-price">$49.00</span></button>
+        </div>
+        <ul class="perks">
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 6h10v4H8v6H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 13h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Clamps on. No drilling, no sticky pads.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-dasharray="3 2.4"/><path d="M11 3.5 l2.5 -1.5 M11 3.5 l2.5 1.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Turns on its pin, so you can swing it out of your way.</span></li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M3 15c3-3 5 0 8-3s5 0 8-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M3 19c3-3 5 0 8-3s5 0 8-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity=".5"/></svg><span>The mesh cover comes off for washing.</span></li>
+        </ul>
+        <div class="inbox">
+          <span class="label">In the box</span>
+          <ul>
+            <li>Steel ring with swivel pin</li>
+            <li>Desk clamp</li>
+            <li>Grey mesh cover</li>
+            <li>Feather toy</li>
+          </ul>
+        </div>
+        <a class="fit-link" href="#fit">Check your desk in 20 seconds <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <span>Ø 40 cm ring</span><span>0.8 cm steel wire</span><span>8 × 3 cm head plate</span><span>Ø 1.0 × 4.5 cm swivel pin</span><span>Clamp-on, no drilling</span><span>Removable mesh cover</span><span>Feather toy included</span>
+    <span>Ø 40 cm ring</span><span>0.8 cm steel wire</span><span>8 × 3 cm head plate</span><span>Ø 1.0 × 4.5 cm swivel pin</span><span>Clamp-on, no drilling</span><span>Removable mesh cover</span><span>Feather toy included</span>
+  </div>
+</div>
+
+<!-- ============ KEYBOARD ============ -->
+<section class="sec" id="keyboard" aria-labelledby="kbd-h">
+  <div class="wrap kbd-grid">
+    <div class="kbd-copy">
+      <p class="label">The problem, reproduced</p>
+      <h2 class="stretch" id="kbd-h">Try writing an email.</h2>
+      <p>Click into the message and type anything. Your co-worker will help.</p>
+      <p class="muted">Cats sit on keyboards because that's where your attention is. The Overhang gives them a spot about a forearm away from it.</p>
+      <button class="switch" id="clamp-switch" type="button" role="switch" aria-checked="false">
+        <span class="switch-track"><span class="switch-knob"></span></span>
+        <span class="switch-label">Clamp the Overhang on</span>
+      </button>
+      <dl class="tally">
+        <div><dt>Paw interruptions</dt><dd id="t-int">0</dd></div>
+        <div><dt>Letters typed by the cat</dt><dd id="t-chars">0</dd></div>
+      </dl>
+      <p class="kbd-status" id="kbd-status" aria-live="polite">Pickle is on the keyboard.</p>
+    </div>
+    <div class="workstation">
+      <div class="mail">
+        <div class="mail-bar"><i></i><i></i><i></i><b>New message</b></div>
+        <div class="mail-row"><span>To</span>dana@yourcompany.com</div>
+        <div class="mail-row"><span>Subject</span>Q3 numbers</div>
+        <label class="skip" for="mail-body">Message</label>
+        <textarea id="mail-body" spellcheck="false" placeholder="Write something…"></textarea>
+      </div>
+      <div class="kb-zone">
+        <div class="kb-wrap">
+          <div class="kb" id="kb" aria-hidden="true"></div>
+          <div class="paw" id="paw" aria-hidden="true"><svg viewBox="0 0 60 160"><use href="#paw-top"/></svg></div>
+        </div>
+        <figure class="kb-hammock" id="kb-hammock" aria-hidden="true" style="margin:0">
+          <svg viewBox="0 0 220 132">
+            <rect x="0" y="30" width="78" height="12" rx="1.5" style="fill:#CDB28C"/>
+            <rect x="74" y="30" width="4" height="12" style="fill:#B39570"/>
+            <rect x="58" y="24" width="28" height="6" rx="1.5" style="fill:#1d1f22"/>
+            <rect x="80" y="24" width="6" height="36" rx="1.5" style="fill:#1d1f22"/>
+            <rect x="56" y="54" width="46" height="6" rx="1.5" style="fill:#1d1f22"/>
+            <rect x="66" y="42" width="4" height="12" style="fill:#6a6e74"/>
+            <rect x="95" y="60" width="7" height="10" rx="1.5" style="fill:#1d1f22"/>
+            <path d="M99 71 L112 76" style="stroke:#1d1f22;stroke-width:4;stroke-linecap:round"/>
+            <path d="M110 76 A54 9 0 0 1 218 76" style="fill:none;stroke:var(--mesh);stroke-width:5"/>
+            <g class="sleeper-cat">
+              <path d="M192 70 C206 72 213 84 210 102" style="fill:none;stroke:var(--cat-dark);stroke-width:6.5;stroke-linecap:round"/>
+              <ellipse cx="166" cy="71" rx="32" ry="14" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.2"/>
+              <path d="M158 59 C162 63 162 67 160 70 M170 58 C174 62 174 66 172 69 M182 60 C185 63 185 67 183 70" style="fill:none;stroke:var(--cat-dark);stroke-width:2.6;stroke-linecap:round;opacity:.55"/>
+              <path d="M128 58 L126 44 L136 52 Z M141 52 L149 42 L150 56 Z" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.1;stroke-linejoin:round"/>
+              <circle cx="139" cy="64" r="12.5" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1.2"/>
+              <ellipse cx="136" cy="69" rx="6.5" ry="4.2" style="fill:#F7DDBB"/>
+              <path d="M130 64 q2.6 2 5.2 0 M140 64 q2.6 2 5.2 0" style="fill:none;stroke:#5a3212;stroke-width:1.5;stroke-linecap:round"/>
+              <path d="M136.2 67.4 l1.8 1.5 l1.8 -1.5 Z" style="fill:var(--bean)"/>
+              <ellipse cx="146" cy="78" rx="7" ry="3.4" style="fill:var(--cat);stroke:var(--cat-dark);stroke-width:1"/>
+            </g>
+            <path d="M110 76 Q164 112 218 76 A54 9 0 0 1 110 76 Z" style="fill:url(#mesh-dots)"/>
+            <path d="M110 76 A54 9 0 0 0 218 76" style="fill:none;stroke:var(--mesh);stroke-width:5"/>
+            <g class="zz"><text x="120" y="40">z</text><text x="113" y="31">z</text><text x="105" y="22">Z</text></g>
+          </svg>
+          <figcaption id="kb-ham-cap">Empty</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTS ============ -->
+<section class="sec" id="parts" aria-labelledby="parts-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">From the factory drawing</p>
+      <h2 class="stretch" id="parts-h">Six parts. One of them is a feather.</h2>
+      <button class="link-btn" type="button" data-open-drawing>Open the original drawing</button>
+    </div>
+    <div class="parts-grid">
+      <div class="parts-stage" id="parts-stage">
+        <div class="grid-bg" aria-hidden="true"></div>
+        <canvas id="parts-canvas" role="img" aria-label="Exploded 3D view of the Overhang's six parts"></canvas>
+        <div class="tags" id="tags" aria-hidden="true"></div>
+      </div>
+      <ol class="part-list" id="part-list">
+        <li class="part active" data-part="ring">
+          <span class="part-n">1</span>
+          <h3>Ring</h3>
+          <p class="dim">Ø 40 cm · 0.8 cm wire</p>
+          <p>Bent from solid steel wire. It sets the size of the bed: roughly the width of a curled-up house cat, with a little to spare.</p>
+        </li>
+        <li class="part" data-part="plate">
+          <span class="part-n">2</span>
+          <h3>Head plate</h3>
+          <p class="dim">8 × 3 cm · 0.4 cm thick</p>
+          <p>Welded flat onto the ring. It carries the whole bed, and the cat in it, across to the pin.</p>
+        </li>
+        <li class="part" data-part="pin">
+          <span class="part-n">3</span>
+          <h3>Swivel pin</h3>
+          <p class="dim">Ø 1.0 × 4.5 cm</p>
+          <p>Drops into the clamp's sleeve. The ring turns on it, so the bed swings out of the way when you need elbow room.</p>
+        </li>
+        <li class="part" data-part="clamp">
+          <span class="part-n">4</span>
+          <h3>Clamp</h3>
+          <p class="dim">Opens to 5 cm</p>
+          <p>Screws tight onto the desk edge. Nothing to drill, and no adhesive pads to let go after a week.</p>
+        </li>
+        <li class="part" data-part="cover">
+          <span class="part-n">5</span>
+          <h3>Mesh cover</h3>
+          <p class="dim">Elastic edge</p>
+          <p>Hooks over the ring and sags into a shallow bowl under the cat's weight. Unhook it to wash.</p>
+        </li>
+        <li class="part" data-part="feather">
+          <span class="part-n">6</span>
+          <h3>Feather toy</h3>
+          <p class="dim">On a cord</p>
+          <p>Hangs off the rim for batting practice. Unhook it when you leave the room.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TO SCALE ============ -->
+<section class="sec" id="scale" aria-labelledby="scale-h">
+  <div class="wrap">
+    <div class="sec-head split">
+      <p class="label">To scale</p>
+      <h2 class="stretch" id="scale-h">40 cm, next to the things on your desk.</h2>
+      <p class="muted">Top view, drawn to scale. Drag the ring to swing it on its pin, then set your cat's size to see how they'd fit.</p>
+    </div>
+    <div class="planner-grid">
+    <figure class="planner">
+      <svg id="planner" viewBox="-104 -44 166 88" role="img" aria-labelledby="planner-title">
+        <title id="planner-title">Top view of a desk with a keyboard, mouse, mug and monitor, and the 40 cm Overhang clamped to its right edge</title>
+        <g id="pl-static"></g>
+        <g class="pl-ring" id="pl-ring" tabindex="0" role="slider" aria-label="Swing the ring" aria-valuemin="-50" aria-valuemax="50" aria-valuenow="0" aria-valuetext="0 degrees">
+          <g id="pl-ring-rot">
+            <path id="pl-plate" style="fill:#1d1f22"/>
+            <circle id="pl-fabric" r="19.6" style="fill:url(#mesh-dots)"/>
+            <use id="pl-cat" href="#cat-curl" x="-50" y="-50" width="100" height="100"/>
+            <circle class="pl-ring-wire" id="pl-wire" r="20" style="fill:none;stroke:#1d1f22;stroke-width:.8"/>
+            <g id="pl-dim"></g>
+          </g>
+        </g>
+        <circle id="pl-pin" r=".5" style="fill:var(--note);stroke:#1d1f22;stroke-width:.25"/>
+      </svg>
+      <figcaption>Top view · 1 square = 10 cm</figcaption>
+    </figure>
+    <div class="planner-controls">
+      <div class="slider-field">
+        <label for="cat-size"><span>Your cat, curled up</span><output id="cat-size-out" for="cat-size">34 cm</output></label>
+        <input type="range" id="cat-size" min="24" max="50" step="1" value="34">
+      </div>
+      <div class="verdict" id="cat-verdict" aria-live="polite"><b>Just right.</b>Room to turn around twice before settling.</div>
+      <div class="units" role="group" aria-label="Units">
+        <button type="button" aria-pressed="true" data-unit="cm">cm</button>
+        <button type="button" aria-pressed="false" data-unit="in">in</button>
+      </div>
+    </div>
+    </div>
+    <p class="note">Measure your cat asleep, across the widest part of the curl. Big breeds like Maine Coons and Ragdolls often curl wider than 40 cm, and owners of big cats say standard desk hammocks can be tight for turning around.</p>
+  </div>
+</section>
+
+<!-- ============ COVER ============ -->
+<section class="sec" id="cover" aria-labelledby="cover-h">
+  <div class="wrap cover-grid">
+    <div class="loupe-card" id="loupe-card">
+      <img id="cover-img" src="photos/mesh-cover-cutout.webp" alt="The grey mesh cover photographed from above, with a gathered elastic edge and a stitched opening on one side" width="677" height="648">
+      <div class="lens" id="lens" data-zoom="×2.5" aria-hidden="true"></div>
+      <button class="pin" type="button" style="--x:9%;--y:52%" data-note="0" aria-label="Note 1: gathered elastic edge">1</button>
+      <button class="pin" type="button" style="--x:81%;--y:58%" data-note="1" aria-label="Note 2: stitched opening">2</button>
+      <button class="pin" type="button" style="--x:43%;--y:36%" data-note="2" aria-label="Note 3: open mesh">3</button>
+    </div>
+    <div class="cover-copy">
+      <p class="label">The cover, up close</p>
+      <h2 class="stretch" id="cover-h">Hold it up to the light.</h2>
+      <p class="muted">Move over the photo to look closer. This is a photo of the actual cover.</p>
+      <ol class="notes-list" id="notes-list">
+        <li data-note="0"><span><b>Gathered elastic edge.</b> Hooks under the ring and stays put while your cat turns around.</span></li>
+        <li data-note="1"><span><b>Stitched opening.</b> Lets the cover pass the head plate, so it sits flat on the ring.</span></li>
+        <li data-note="2"><span><b>Open mesh.</b> Air moves straight through. Good for cats who sleep hot, or a desk near a radiator.</span></li>
+      </ol>
+      <div class="care">
+        <span class="label">Washing</span>
+        <p>Unhook the cover, hand-wash it cool and hang it to dry. Hooking it back on takes about a minute.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATHER ============ -->
+<section class="sec" id="feather" aria-labelledby="feather-h">
+  <div class="wrap">
+    <div class="sec-head split">
+      <p class="label">Included, for better or worse</p>
+      <h2 class="stretch" id="feather-h">Keep the feather away from Pickle.</h2>
+      <p class="muted">Move your pointer over the box to dangle it. On a phone, tap to start, then drag. Pickle swats when it gets close.</p>
+    </div>
+    <div class="game" id="game">
+      <canvas id="game-canvas" role="img" aria-label="Mini game: dangle a feather while a cartoon cat tries to swat it"></canvas>
+      <div class="game-hud"><span>Time<output id="g-time">0.0 s</output></span><span>Best<output id="g-best">–</output></span></div>
+      <div class="game-msg" id="g-msg"><b id="g-title">Move here to start</b><span id="g-sub">Pickle is watching.</span></div>
+    </div>
+    <p class="safety">
+      <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2 L21 19 H1 Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M11 8v5M11 15.5v.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span><b>One rule for the real one:</b> unhook the feather toy when you leave the room. Cats can swallow string, so it's a toy for when you're there.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ FIT CHECK ============ -->
+<section class="sec" id="fit" aria-labelledby="fit-h">
+  <div class="wrap fit-grid">
+    <div class="fit-copy">
+      <p class="label">Fit check</p>
+      <h2 class="stretch" id="fit-h">Will it grip your desk?</h2>
+      <p class="muted">Measure the thickness of your desk top at the edge, then answer three quick questions.</p>
+      <div class="slider-field">
+        <label for="thick"><span>Desk top thickness</span><output id="thick-out" for="thick">25 mm · 1.0 in</output></label>
+        <input type="range" id="thick" min="5" max="80" step="1" value="25">
+      </div>
+      <fieldset class="checks">
+        <legend>Three quick checks</legend>
+        <label><input type="checkbox" id="c1" checked><span>The underside of the edge is clear. No drawer or frame rail where the clamp goes.</span></label>
+        <label><input type="checkbox" id="c2" checked><span>The top is wood, MDF or laminate. Not glass.</span></label>
+        <label><input type="checkbox" id="c3" checked><span>The desk doesn't rock when you lean on its corner.</span></label>
+      </fieldset>
+      <div class="fit-verdict" id="fit-verdict" aria-live="polite"><span class="pill">Fits</span><span>It'll grip. Clamp it next to your chair.</span></div>
+    </div>
+    <figure class="fit-fig">
+      <svg id="fit-svg" viewBox="0 0 520 300" role="img" aria-label="Side view of the clamp gripping a desk top of the thickness you chose">
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--surface)"/><line x1="0" y1="0" x2="0" y2="6" style="stroke:var(--alert);stroke-width:2.5"/></pattern>
+        </defs>
+        <g id="fit-desk">
+          <rect id="fit-slab" x="0" y="70" width="262" height="50" rx="2" style="fill:#C9AE88"/>
+          <rect id="fit-slab-edge" x="256" y="70" width="6" height="50" style="fill:#B39570"/>
+          <rect id="fit-clash" x="196" y="170" width="66" height="0" style="fill:url(#hatch)"/>
+        </g>
+        <g id="fit-dimline" style="stroke:var(--ink-2);stroke-width:1.2">
+          <line id="fd-l" x1="150" y1="70" x2="150" y2="120"/>
+          <line id="fd-t" x1="143" y1="70" x2="157" y2="70"/>
+          <line id="fd-b" x1="143" y1="120" x2="157" y2="120"/>
+        </g>
+        <text id="fd-txt" class="fit-svg-big" x="164" y="100">25 mm</text>
+        <g id="fit-clamp" style="fill:#1d1f22">
+          <rect x="196" y="56" width="92" height="14" rx="2"/>
+          <rect x="274" y="56" width="14" height="128" rx="2"/>
+          <rect x="196" y="170" width="138" height="14" rx="2"/>
+          <rect x="318" y="184" width="14" height="30" rx="2"/>
+          <g id="fit-screw">
+            <rect id="fit-rod" x="223" y="128" width="10" height="42" style="fill:#3a3d42"/>
+            <rect id="fit-pad" x="214" y="120" width="28" height="8" rx="2" style="fill:#2a2c30"/>
+            <rect id="fit-handle" x="208" y="190" width="40" height="7" rx="3.5"/>
+            <rect x="225" y="184" width="6" height="8"/>
+          </g>
+        </g>
+        <path d="M325 214 L338 226" style="stroke:#1d1f22;stroke-width:6;stroke-linecap:round"/>
+        <path d="M338 226 Q420 262 506 226" style="fill:none;stroke:var(--mesh-hole);stroke-width:6"/>
+        <path d="M344 222 Q424 254 506 222 L506 230 Q424 262 344 230 Z" style="fill:url(#mesh-dots)"/>
+        <path d="M398 222 L404 204 L414 219 Z M424 219 L434 203 L438 221 Z" style="fill:var(--cat)"/>
+        <ellipse cx="422" cy="226" rx="84" ry="9" style="fill:none;stroke:var(--mesh);stroke-width:6"/>
+        <text class="fit-svg-label" x="0" y="54">Desk top</text>
+        <text class="fit-svg-label" x="296" y="72">Clamp</text>
+        <text id="fit-max" class="fit-svg-label" x="296" y="166">Opens to 50 mm</text>
+        <text class="fit-svg-label" x="400" y="290">Ring, side on</text>
+        <text id="fit-clash-txt" class="fit-svg-label" x="196" y="206" style="fill:var(--alert);opacity:0">Too thick</text>
+      </svg>
+      <figcaption>Side view, to scale. The clamp opens to 5 cm (2 in).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ MOVING IN ============ -->
+<section class="sec" id="moving-in" aria-labelledby="move-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">Moving in</p>
+      <h2 class="stretch" id="move-h">Some cats move in within the hour. Some take a week.</h2>
+      <p class="muted">Owners of desk hammocks report both. These four steps are how to tip the odds.</p>
+    </div>
+    <ol class="stickies">
+      <li class="sticky" style="--r:-2deg"><span class="sticky-n">1</span><p>Clamp it next to your chair, on the side your cat usually comes from.</p></li>
+      <li class="sticky" style="--r:1.6deg"><span class="sticky-n">2</span><p>Put in something that smells like you. A T-shirt you've worn works well.</p></li>
+      <li class="sticky" style="--r:-1deg"><span class="sticky-n">3</span><p>Drop a treat on the mesh, then ignore them. Cats prefer ideas they think were theirs.</p></li>
+      <li class="sticky" style="--r:2.2deg"><span class="sticky-n">4</span><p>Leave it up for a week before you judge it. Plenty of cats spend a few days being suspicious first.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ QUESTIONS ============ -->
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-grid">
+    <div class="faq-col">
+      <div class="sec-head" style="margin:0">
+        <p class="label">Questions</p>
+        <h2 class="stretch" id="faq-h">Before you clamp it on.</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>How big a cat does it suit?<i aria-hidden="true"></i></summary><p class="a">The ring is 40 cm across, which suits most adult house cats curled up. Very large breeds may find it snug. Use the to-scale view above with your cat's measurement.</p></details>
+        <details><summary>Will the clamp mark my desk?<i aria-hidden="true"></i></summary><p class="a">The jaws press on the surface they grip. On soft veneer or a painted top, put a folded cloth or a felt pad under each jaw before you tighten it.</p></details>
+        <details><summary>Does it really swivel?<i aria-hidden="true"></i></summary><p class="a">Yes. The ring turns on a 1 cm steel pin that sits in the clamp's sleeve. Swing it alongside the desk when you need room, and back out when your cat wants the view.</p></details>
+        <details><summary>Can I use it on a glass desk?<i aria-hidden="true"></i></summary><p class="a">No. A clamp puts a lot of pressure on a small area, and glass doesn't take that well.</p></details>
+        <details><summary>How do I wash the cover?<i aria-hidden="true"></i></summary><p class="a">Unhook the elastic edge from the ring, hand-wash the cover in cool water and hang it to dry. Wipe the ring and clamp with a damp cloth.</p></details>
+        <details><summary>Is it OK for kittens?<i aria-hidden="true"></i></summary><p class="a">Yes, while you're nearby. Take the feather toy off when you're not, and keep an eye on very small kittens until they're confident getting in and out.</p></details>
+        <details><summary>What if my cat ignores it?<i aria-hidden="true"></i></summary><p class="a">Give it a week. Move it closer to your chair, add something that smells like you, and leave a treat on the mesh. Some cats are in within the hour; others need a few days of suspicion first.</p></details>
+      </div>
+    </div>
+    <aside class="spec" aria-labelledby="spec-h">
+      <p class="label" id="spec-h">Spec sheet</p>
+      <table>
+        <tr><th scope="row">Ring diameter</th><td>40 cm (15.7 in)</td></tr>
+        <tr><th scope="row">Ring wire</th><td>0.8 cm steel</td></tr>
+        <tr><th scope="row">Head plate</th><td>8 × 3 cm, 0.4 cm thick</td></tr>
+        <tr><th scope="row">Swivel pin</th><td>Ø 1.0 cm × 4.5 cm</td></tr>
+        <tr><th scope="row">Clamp opening</th><td>Up to 5 cm (2 in)</td></tr>
+        <tr><th scope="row">Cover</th><td>Grey mesh, elastic edge, removable</td></tr>
+        <tr><th scope="row">Toy</th><td>Feather on a cord</td></tr>
+        <tr><th scope="row">Fixing</th><td>Clamp. No drilling, no adhesive</td></tr>
+      </table>
+      <p class="src">Ring, wire, plate and pin sizes are from the factory drawing.</p>
+      <button class="link-btn" type="button" data-open-drawing>See the drawing</button>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ LAST CALL ============ -->
+<section class="sec last-sec" id="last" aria-labelledby="last-h">
+  <div class="wrap last-grid">
+    <svg class="sleeper" viewBox="-62 -62 124 124" role="img" aria-label="A ginger cat asleep in the Overhang, seen from above">
+      <path d="M-30 -36 L-44 -50 L-49 -45 L-35 -31" style="fill:#1d1f22"/>
+      <circle r="47" style="fill:url(#mesh-dots)"/>
+      <circle r="47" style="fill:none;stroke:var(--mesh);stroke-width:4.5"/>
+      <circle r="49.4" style="fill:none;stroke:#1d1f22;stroke-width:1.2;opacity:.5"/>
+      <g class="breathe"><use href="#cat-curl" x="-41" y="-41" width="82" height="82"/></g>
+      <g class="zz"><text x="-38" y="22">z</text><text x="-45" y="14">z</text><text x="-53" y="5">Z</text></g>
+    </svg>
+    <div class="last-copy">
+      <p class="label">The Overhang · Grey mesh · Black steel</p>
+      <h2 class="stretch" id="last-h">Get your keyboard back.</h2>
+      <div class="price-row"><span class="price">$49.00</span><span class="small">Ring, clamp, mesh cover and feather toy.</span></div>
+      <button class="btn-key" type="button" data-atc id="atc-last">Add to cart <span class="btn-price">$49.00</span></button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span><b style="color:var(--ink)">DeskPaws</b> · Furniture for cats who work from home</span>
+    <span>© 2026 DeskPaws · <a href="#top">Back to top</a></span>
+  </div>
+</footer>
+</div>
+
+<div class="sticky-buy" id="sticky-buy" aria-hidden="true">
+  <div class="sb-in">
+    <img src="photos/mesh-cover-cutout.webp" alt="">
+    <div class="sb-t"><b>The Overhang</b><span>Grey mesh · Black steel · $49.00</span></div>
+    <button class="btn-key" type="button" data-atc tabindex="-1">Add to cart <span class="btn-price">$49.00</span></button>
+  </div>
+</div>
+
+<div class="drawer-back" id="drawer-back" hidden></div>
+<aside class="drawer" id="cart" hidden aria-labelledby="cart-h" role="dialog" aria-modal="true">
+  <div class="dr-head"><h2 id="cart-h">Your cart</h2><button class="dr-x" id="cart-x" type="button" aria-label="Close cart">✕</button></div>
+  <div class="dr-body" id="cart-body"></div>
+  <div class="dr-foot">
+    <div class="dr-sub"><span>Subtotal</span><span id="cart-sub">$0.00</span></div>
+    <button class="btn-key" type="button" id="checkout">Check out</button>
+    <p class="dr-note" id="checkout-note" hidden>This is a page preview. Checkout starts working once the page is linked to the product in your store.</p>
+  </div>
+</aside>
+
+<dialog class="drawing-dialog" id="drawing-dialog" aria-label="Factory drawing">
+  <div class="dd-bar"><span>Factory drawing · supplied by the maker</span><button type="button" id="drawing-close">Close</button></div>
+  <img src="photos/factory-drawing.webp" alt="Factory drawing: ring diameter 40 cm, wire diameter 0.8 cm, head plate 8 by 3 cm at 0.4 cm thick, pin 1.0 cm diameter and 4.5 cm long" width="796" height="778" loading="lazy">
+</dialog>
+
+<div class="idle" id="idle" aria-hidden="true">
+  <svg class="paw-up" viewBox="0 0 60 160"><use href="#paw-top"/></svg>
+  <div class="toast"><span id="idle-typed"></span><small id="idle-note"></small></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script>
+(() => {
+'use strict';
+document.documentElement.classList.add('js');
+
+/* ---------- small helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const rand = (a, b) => a + Math.random() * (b - a);
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const easeInOut = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
+let reduced = motionQuery.matches;
+if (motionQuery.addEventListener) motionQuery.addEventListener('change', e => { reduced = e.matches; });
+
+/* Edit these to match the live product. */
+const PRODUCT = { name: 'The Overhang', variant: 'Grey mesh · Black steel', price: 49, currency: 'USD', clampMaxMm: 50 };
+const money = v => new Intl.NumberFormat('en-US', { style: 'currency', currency: PRODUCT.currency }).format(v);
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked */ } }
+};
+const watch = (el, cb, opts) => {
+  const io = new IntersectionObserver(es => es.forEach(e => cb(e.isIntersecting, e)), opts || { threshold: 0 });
+  io.observe(el);
+  return io;
+};
+function tokens() {
+  const cs = getComputedStyle(document.documentElement);
+  const g = n => cs.getPropertyValue(n).trim();
+  return { ink: g('--ink'), ink2: g('--ink-2'), line: g('--line'), cat: g('--cat'), catDark: g('--cat-dark'), bean: g('--bean'),
+    mesh: g('--mesh'), meshHole: g('--mesh-hole'), note: g('--note'), surface: g('--surface'), raise: g('--raise'), alert: g('--alert') };
+}
+const themeFns = [];
+const onTheme = fn => themeFns.push(fn);
+const fireTheme = () => themeFns.forEach(f => f());
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+if (darkQuery.addEventListener) darkQuery.addEventListener('change', fireTheme);
+new MutationObserver(fireTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+/* ---------- headings stretch like a cat when they arrive ---------- */
+function initStretch() {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .35 });
+  $$('.stretch').forEach(h => io.observe(h));
+}
+
+/* ---------- the title hangs from the desk edge and swings ---------- */
+function initHang() {
+  const host = $('.hang-inner');
+  if (!host) return;
+  const words = host.textContent.trim().split(/\s+/);
+  host.textContent = '';
+  const letters = [];
+  words.forEach(word => {
+    const w = document.createElement('span');
+    w.className = 'w';
+    for (const ch of word) {
+      const s = document.createElement('span');
+      s.className = 'ch';
+      s.textContent = ch;
+      s.style.setProperty('--cord', (0.26 + Math.random() * 0.08).toFixed(3) + 'em');
+      w.appendChild(s);
+      letters.push({ el: s, a: 0, v: 0 });
+    }
+    host.appendChild(w);
+  });
+  const K = 34, C = 2.2, H = 1 / 120;
+  let running = false, last = 0, acc = 0, prev = null;
+  function step(t) {
+    acc += clamp((t - last) / 1000, 0, .25);
+    last = t;
+    while (acc >= H) {
+      for (const L of letters) { L.v += (-K * L.a - C * L.v) * H; L.a = clamp(L.a + L.v * H, -.6, .6); }
+      acc -= H;
+    }
+    let energy = 0;
+    for (const L of letters) {
+      energy += Math.abs(L.a) + Math.abs(L.v);
+      L.el.style.transform = 'rotate(' + L.a.toFixed(4) + 'rad)';
+    }
+    if (energy > .002) requestAnimationFrame(step);
+    else { running = false; letters.forEach(L => { L.a = L.v = 0; L.el.style.transform = ''; }); }
+  }
+  const kick = () => { if (!running) { running = true; last = performance.now(); requestAnimationFrame(step); } };
+  const hang = $('.hang');
+  hang.addEventListener('pointermove', e => {
+    if (reduced) return;
+    if (prev) {
+      const dt = Math.max(8, e.timeStamp - prev.t);
+      const vx = (e.clientX - prev.x) / dt;
+      for (const L of letters) {
+        const r = L.el.getBoundingClientRect();
+        if (e.clientX > r.left - 6 && e.clientX < r.right + 6 && e.clientY > r.top - r.height * .4 && e.clientY < r.bottom) {
+          L.v += clamp(vx * 1.6, -3.2, 3.2);
+        }
+      }
+      kick();
+    }
+    prev = { x: e.clientX, t: e.timeStamp };
+  });
+  hang.addEventListener('pointerleave', () => { prev = null; });
+  if (!reduced) {
+    letters.forEach((L, i) => setTimeout(() => { L.v += (i % 2 ? -1 : 1) * (1.5 - i / letters.length * .7); kick(); }, 450 + i * 70));
+  }
+}
+
+/* ---------- the cat walks across the product summary ---------- */
+function initLede() {
+  const lede = $('#lede');
+  const typo = $('#lede .typo'), caret = $('#lede .caret'), sorry = $('#lede-sorry');
+  if (!lede || reduced) return;
+  let lastRun = -Infinity, running = false;
+  watch(lede, v => { if (v && !running && performance.now() - lastRun > 45000) run(); });
+  async function run() {
+    running = true;
+    lastRun = performance.now();
+    await wait(1500);
+    caret.classList.add('on');
+    await wait(450);
+    const add = c => { typo.textContent += c; };
+    add('d');
+    await wait(420);
+    for (let i = 0; i < 11; i++) { add('d'); await wait(36); }
+    await wait(180);
+    for (const c of "fgf;;;;;'") { add(c); await wait(75); }
+    await wait(1000);
+    while (typo.textContent) { typo.textContent = typo.textContent.slice(0, -1); await wait(26); }
+    await wait(200);
+    caret.classList.remove('on');
+    sorry.classList.add('show');
+    await wait(2800);
+    sorry.classList.remove('show');
+    running = false;
+  }
+}
+
+/* ---------- product views ---------- */
+function initGallery() {
+  const tabs = $$('.thumbs [role=tab]');
+  const photo = $('#stage-photo'), img = $('#stage-photo-img');
+  const views = {
+    cover: ['photos/mesh-cover-cutout.webp', 'The grey mesh cover, photographed flat from above'],
+    drawing: ['photos/factory-drawing.webp', 'Factory drawing with ring, plate and pin dimensions']
+  };
+  const select = t => {
+    tabs.forEach(o => { o.setAttribute('aria-selected', String(o === t)); o.tabIndex = o === t ? 0 : -1; });
+    const v = t.dataset.view;
+    if (v === 'model') { photo.hidden = true; return; }
+    img.src = views[v][0];
+    img.alt = views[v][1];
+    photo.hidden = false;
+  };
+  tabs.forEach((t, i) => {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      n.focus();
+      select(n);
+    });
+  });
+}
+
+/* =====================================================================
+   3D — built to the factory drawing. 1 unit = 1 cm. Desk top at y = 0.
+   ===================================================================== */
+const HAS3D = (() => {
+  if (!window.THREE) return false;
+  try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; }
+})();
+const RING_R = 20;     // Ø 40 cm
+const ARM = 23;        // pin to ring centre: 3 cm plate + 20 cm radius
+const PIVOT_Y = -9.8;  // plate hangs below the desk top
+
+function setupRenderer(T, r, shadows) {
+  r.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  r.outputEncoding = T.sRGBEncoding;
+  r.toneMapping = T.ACESFilmicToneMapping;
+  r.toneMappingExposure = 1;
+  r.setClearColor(0x000000, 0);
+  r.shadowMap.enabled = !!shadows;
+  r.shadowMap.type = T.PCFSoftShadowMap;
+}
+function addLights(T, scene, shadows) {
+  scene.add(new T.HemisphereLight(0xffffff, 0x8b8f95, .5));
+  const key = new T.DirectionalLight(0xffffff, 1.15);
+  key.position.set(30, 90, 60);
+  key.target.position.set(0, -10, 0);
+  if (shadows) {
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    const s = key.shadow.camera;
+    s.left = -70; s.right = 70; s.top = 70; s.bottom = -70; s.near = 10; s.far = 260;
+    key.shadow.bias = -.0004;
+    key.shadow.normalBias = .03;
+  }
+  scene.add(key, key.target);
+  const fill = new T.DirectionalLight(0xffe2bd, .3);
+  fill.position.set(-80, 30, 40);
+  const back = new T.DirectionalLight(0xdfe8ff, .4);
+  back.position.set(20, 20, -90);
+  scene.add(fill, back);
+}
+function canvasTex(T, renderer, c, repeat) {
+  const t = new T.CanvasTexture(c);
+  t.encoding = T.sRGBEncoding;
+  t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  if (repeat) { t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
+  return t;
+}
+function meshCanvas() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const g = c.getContext('2d');
+  g.fillStyle = '#979ba0';
+  g.fillRect(0, 0, 64, 64);
+  g.fillStyle = 'rgba(0,0,0,.06)';
+  for (let i = 0; i < 64; i += 8) g.fillRect(i, 0, 2, 64);
+  g.fillStyle = '#45484d';
+  [[16, 16], [48, 48]].forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 9.5, 0, Math.PI * 2); g.fill(); });
+  return c;
+}
+function woodCanvas() {
+  const c = document.createElement('canvas');
+  c.width = 1024; c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#cdb28c';
+  g.fillRect(0, 0, 1024, 256);
+  for (let i = 0; i < 90; i++) {
+    const y = Math.random() * 256;
+    g.strokeStyle = 'rgba(' + (115 + Math.random() * 30 | 0) + ',' + (82 + Math.random() * 20 | 0) + ',50,' + (.04 + Math.random() * .08).toFixed(3) + ')';
+    g.lineWidth = .6 + Math.random() * 2.2;
+    g.beginPath();
+    g.moveTo(0, y);
+    for (let x = 0; x <= 1024; x += 64) g.lineTo(x, y + Math.sin(x * .004 + i) * 6 + (Math.random() - .5) * 2);
+    g.stroke();
+  }
+  return c;
+}
+function featherCanvas() {
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 352;
+  const g = c.getContext('2d');
+  g.lineCap = 'round';
+  for (let y = 18; y < 340; y += 2) {
+    const t = y / 352;
+    const w = Math.max(0, 54 * Math.sin(Math.PI * clamp((t - .03) * 1.08, 0, 1)) * (t < .15 ? t / .15 : 1));
+    g.strokeStyle = t < .22 ? '#2a2a2c' : t < .78 ? '#ffd43b' : '#fff1b8';
+    g.globalAlpha = .9;
+    g.lineWidth = 1.7;
+    for (const sd of [-1, 1]) {
+      g.beginPath();
+      g.moveTo(64, y);
+      g.quadraticCurveTo(64 + sd * w * .55, y + 5, 64 + sd * w * (.9 + Math.random() * .12), y + 16 + Math.random() * 5);
+      g.stroke();
+    }
+  }
+  g.globalAlpha = 1;
+  g.strokeStyle = '#efe6cc';
+  g.lineWidth = 3.2;
+  g.beginPath(); g.moveTo(64, 0); g.lineTo(64, 344); g.stroke();
+  return c;
+}
+function fabricGeometry(T, R, sag) {
+  const NR = 26, NS = 128, pos = [], uv = [], idx = [];
+  pos.push(0, -sag, 0); uv.push(.5, .5);
+  for (let i = 1; i <= NR; i++) {
+    const r = R * i / NR;
+    for (let j = 0; j < NS; j++) {
+      const a = j / NS * Math.PI * 2;
+      const x = Math.cos(a) * r, z = Math.sin(a) * r;
+      pos.push(x, -sag * (1 - (r / R) * (r / R)), z);
+      uv.push(x / (2 * R) + .5, z / (2 * R) + .5);
+    }
+  }
+  for (let j = 0; j < NS; j++) idx.push(0, 1 + (j + 1) % NS, 1 + j);
+  for (let i = 1; i < NR; i++) {
+    const r0 = 1 + (i - 1) * NS, r1 = 1 + i * NS;
+    for (let j = 0; j < NS; j++) {
+      const a = r0 + j, b = r0 + (j + 1) % NS, c = r1 + j, d = r1 + (j + 1) % NS;
+      idx.push(a, b, d, a, d, c);
+    }
+  }
+  const geo = new T.BufferGeometry();
+  geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+  geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  geo.userData.base = Float32Array.from(pos);
+  geo.userData.R = R;
+  return geo;
+}
+function buildDesk(T, renderer) {
+  const g = new T.Group();
+  const wood = new T.MeshStandardMaterial({ map: canvasTex(T, renderer, woodCanvas()), roughness: .62 });
+  const band = new T.MeshStandardMaterial({ color: 0xb39570, roughness: .7 });
+  const top = new T.Mesh(new T.BoxGeometry(150, 2.5, 76), [band, band, wood, band, band, band]);
+  top.position.set(-80, -1.25, -14);
+  top.receiveShadow = top.castShadow = true;
+  g.add(top);
+  const base = new T.Mesh(new T.BoxGeometry(36, 1.2, 12.5), new T.MeshStandardMaterial({ color: 0x2a2c30, roughness: .55 }));
+  base.position.set(-38, .6, 9);
+  base.rotation.y = .06;
+  base.castShadow = base.receiveShadow = true;
+  g.add(base);
+  const keys = new T.InstancedMesh(new T.BoxGeometry(1.9, .7, 1.9), new T.MeshStandardMaterial({ color: 0xe9eaea, roughness: .45 }), 75);
+  const m = new T.Matrix4();
+  let n = 0;
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 15; c++) { m.makeTranslation(-16.1 + c * 2.3, .95, -4.6 + r * 2.3); keys.setMatrixAt(n++, m); }
+  keys.castShadow = true;
+  base.add(keys);
+  const mugMat = new T.MeshStandardMaterial({ color: 0xffd43b, roughness: .32 });
+  const mug = new T.Mesh(new T.CylinderGeometry(4.1, 3.8, 9.5, 40), mugMat);
+  mug.position.set(-20, 4.75, -17);
+  mug.castShadow = mug.receiveShadow = true;
+  const coffee = new T.Mesh(new T.CircleGeometry(3.75, 32), new T.MeshStandardMaterial({ color: 0x3b2618, roughness: .2 }));
+  coffee.rotation.x = -Math.PI / 2;
+  coffee.position.y = 4.78;
+  mug.add(coffee);
+  const handle = new T.Mesh(new T.TorusGeometry(2.3, .55, 12, 24, Math.PI), mugMat);
+  handle.position.set(-4, 0, 0);
+  handle.rotation.z = Math.PI / 2;
+  handle.castShadow = true;
+  mug.add(handle);
+  g.add(mug);
+  const note = new T.Mesh(new T.PlaneGeometry(7.6, 7.6), new T.MeshStandardMaterial({ color: 0xffe066, roughness: .9 }));
+  note.rotation.x = -Math.PI / 2;
+  note.rotation.z = .22;
+  note.position.set(-66, .03, 18);
+  note.receiveShadow = true;
+  g.add(note);
+  return g;
+}
+function buildClamp(T) {
+  const g = new T.Group();
+  const coat = new T.MeshStandardMaterial({ color: 0x1b1d20, roughness: .48, metalness: .35 });
+  const zinc = new T.MeshStandardMaterial({ color: 0x8d9298, roughness: .3, metalness: .85 });
+  const rubber = new T.MeshStandardMaterial({ color: 0x2a2b2d, roughness: .9 });
+  const add = (geo, mat, x, y, z) => { const o = new T.Mesh(geo, mat); o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; g.add(o); return o; };
+  add(new T.BoxGeometry(9.6, .7, 4.6), coat, -8.2, .35, 0);      // top jaw resting on the desk
+  add(new T.BoxGeometry(1.4, 7.3, 4.6), coat, -4.1, -2.95, 0);   // spine, just past the desk edge
+  add(new T.BoxGeometry(14.6, 1, 4.6), coat, -5.7, -6.1, 0);     // lower bar, carries the sleeve
+  add(new T.CylinderGeometry(1, 1, 3, 28), coat, 0, -8.1, 0);    // sleeve the pin drops into
+  const knob = add(new T.CylinderGeometry(.32, .32, 1.8, 12), zinc, 0, -7.9, 1.6);
+  knob.rotation.x = Math.PI / 2;
+  add(new T.SphereGeometry(.5, 14, 10), coat, 0, -7.9, 2.5);
+  add(new T.CylinderGeometry(.45, .45, 6.6, 16), zinc, -9.2, -6.3, 0); // screw
+  add(new T.CylinderGeometry(1.5, 1.5, .5, 24), rubber, -9.2, -2.75, 0); // pad under the desk
+  const t = add(new T.CylinderGeometry(.35, .35, 6, 12), zinc, -9.2, -9.6, 0); // T-handle
+  t.rotation.x = Math.PI / 2;
+  g.userData.mats = [coat, zinc, rubber];
+  return g;
+}
+function buildHammock(T, renderer, opt) {
+  opt = opt || {};
+  const pivot = new T.Group();
+  const steel = new T.MeshStandardMaterial({ color: 0x1d1f22, roughness: .36, metalness: .55 });
+  const frame = new T.Group();
+  pivot.add(frame);
+  const ring = new T.Mesh(new T.TorusGeometry(RING_R, .4, 14, 200), steel.clone());
+  ring.rotation.x = Math.PI / 2;
+  ring.position.x = ARM;
+  ring.castShadow = true;
+  frame.add(ring);
+  const a0 = Math.asin(4 / 19.8);
+  const sh = new T.Shape();
+  sh.moveTo(-.4, -1.15);
+  sh.quadraticCurveTo(-1.9, 0, -.4, 1.15);
+  sh.lineTo(ARM - 19.8 * Math.cos(a0), 19.8 * Math.sin(a0));
+  sh.absarc(ARM, 0, 19.8, Math.PI - a0, Math.PI + a0, false);
+  sh.lineTo(-.4, -1.15);
+  const pg = new T.ExtrudeGeometry(sh, { depth: .4, bevelEnabled: true, bevelThickness: .06, bevelSize: .06, bevelSegments: 2, curveSegments: 32 });
+  pg.rotateX(-Math.PI / 2);
+  pg.translate(0, -.2, 0);
+  const plate = new T.Mesh(pg, steel.clone());
+  plate.castShadow = true;
+  frame.add(plate);
+  const pin = new T.Mesh(new T.CylinderGeometry(.5, .5, 4.5, 24), steel.clone());
+  pin.position.y = .2 + 2.25;
+  pin.castShadow = true;
+  frame.add(pin);
+  const cover = new T.Group();
+  cover.position.x = ARM;
+  pivot.add(cover);
+  const mc = meshCanvas();
+  const fabric = new T.Mesh(
+    fabricGeometry(T, RING_R - .2, opt.sag == null ? 4.2 : opt.sag),
+    new T.MeshStandardMaterial({ map: canvasTex(T, renderer, mc, [44, 44]), side: T.DoubleSide, roughness: .92 })
+  );
+  fabric.castShadow = fabric.receiveShadow = true;
+  cover.add(fabric);
+  const rim = new T.Mesh(new T.TorusGeometry(RING_R, 1.05, 12, 200), new T.MeshStandardMaterial({ map: canvasTex(T, renderer, mc, [200, 4]), color: 0xb4b7bb, roughness: .95 }));
+  rim.rotation.x = Math.PI / 2;
+  rim.scale.z = .8;
+  rim.castShadow = true;
+  cover.add(rim);
+  return { pivot, frame, ring, plate, pin, cover, fabric, rim };
+}
+function buildFeather(T, renderer, seg) {
+  const g = new T.Group();
+  const N = 12, SEG = seg || 1.9, P = [], O = [];
+  for (let i = 0; i < N; i++) { P.push(new T.Vector3(0, -i * SEG, 0)); O.push(new T.Vector3(0, -i * SEG, 0)); }
+  const cordGeo = new T.CylinderGeometry(.08, .08, 1, 6);
+  cordGeo.translate(0, .5, 0);
+  const cords = new T.InstancedMesh(cordGeo, new T.MeshStandardMaterial({ color: 0x26272a, roughness: .8 }), N - 1);
+  cords.castShadow = true;
+  cords.frustumCulled = false;
+  g.add(cords);
+  const bead = new T.Mesh(new T.SphereGeometry(.6, 18, 12), new T.MeshStandardMaterial({ color: 0x1d1f22, roughness: .3, metalness: .4 }));
+  bead.castShadow = true;
+  g.add(bead);
+  const fGeo = new T.PlaneGeometry(4.4, 12, 2, 8);
+  fGeo.translate(0, -6, 0);
+  const pa = fGeo.attributes.position;
+  for (let i = 0; i < pa.count; i++) { const x = pa.getX(i), y = pa.getY(i); pa.setZ(i, x * x * .06 + y * y * .004); }
+  fGeo.computeVertexNormals();
+  const feather = new T.Mesh(fGeo, new T.MeshStandardMaterial({ map: canvasTex(T, renderer, featherCanvas()), alphaTest: .35, side: T.DoubleSide, roughness: .85 }));
+  feather.castShadow = true;
+  g.add(feather);
+  const m = new T.Matrix4(), q = new T.Quaternion(), up = new T.Vector3(0, 1, 0), down = new T.Vector3(0, -1, 0), d = new T.Vector3(), s = new T.Vector3(), tmp = new T.Vector3();
+  let spin = Math.random() * 6;
+  return {
+    group: g, P, parts: [cords, bead, feather],
+    settle(a) { for (let i = 0; i < N; i++) { P[i].set(a.x, a.y - i * SEG, a.z); O[i].copy(P[i]); } },
+    step(a, dt, wind) {
+      P[0].copy(a); O[0].copy(a);
+      const gy = -980 * dt * dt, wx = (wind ? wind.x : 0) * dt * dt, wz = (wind ? wind.z : 0) * dt * dt;
+      for (let i = 1; i < N; i++) {
+        const p = P[i], o = O[i];
+        tmp.subVectors(p, o).multiplyScalar(.992);
+        o.copy(p);
+        p.add(tmp);
+        p.y += gy;
+        p.x += wx * i / N;
+        p.z += wz * i / N;
+      }
+      for (let it = 0; it < 14; it++) {
+        for (let i = 1; i < N; i++) {
+          const a2 = P[i - 1], b = P[i];
+          d.subVectors(b, a2);
+          const len = d.length() || 1e-6, diff = (len - SEG) / len;
+          if (i === 1) b.addScaledVector(d, -diff);
+          else { a2.addScaledVector(d, diff * .5); b.addScaledVector(d, -diff * .5); }
+        }
+      }
+      spin += dt * .7;
+    },
+    sync() {
+      for (let i = 0; i < N - 1; i++) {
+        d.subVectors(P[i + 1], P[i]);
+        const len = d.length();
+        q.setFromUnitVectors(up, d.normalize());
+        s.set(1, len, 1);
+        m.compose(P[i], q, s);
+        cords.setMatrixAt(i, m);
+      }
+      cords.instanceMatrix.needsUpdate = true;
+      const e = P[N - 1];
+      bead.position.copy(e);
+      d.subVectors(P[N - 1], P[N - 2]).normalize();
+      q.setFromUnitVectors(down, d);
+      feather.position.copy(e);
+      feather.quaternion.copy(q);
+      feather.rotateY(Math.sin(spin) * 1.1 + spin * .3);
+    }
+  };
+}
+
+function initHero3D() {
+  const stage = $('#stage'), canvas = $('#hero-canvas'), out = $('#swivel-out');
+  if (!HAS3D) return;
+  const T = THREE;
+  let renderer;
+  try { renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { return; }
+  setupRenderer(T, renderer, true);
+  const scene = new T.Scene();
+  const cam = new T.PerspectiveCamera(28, 1, 1, 2000);
+  addLights(T, scene, true);
+  scene.add(buildDesk(T, renderer));
+  scene.add(buildClamp(T));
+  const ham = buildHammock(T, renderer);
+  ham.pivot.position.set(0, PIVOT_Y, 0);
+  scene.add(ham.pivot);
+  const toy = buildFeather(T, renderer, 1.15);
+  scene.add(toy.group);
+  const rimLocal = new T.Vector3(ARM + RING_R * Math.cos(1.2), .4, RING_R * Math.sin(1.2));
+  const anchor = new T.Vector3();
+  const target = new T.Vector3(6, -15, 0);
+  let swivel = -.22, swivelVel = 0;
+  ham.pivot.rotation.y = swivel;
+  ham.pivot.updateMatrixWorld();
+  toy.settle(ham.pivot.localToWorld(anchor.copy(rimLocal)));
+  stage.classList.add('has-3d');
+
+  let W = 1, H = 1;
+  const resize = () => {
+    const r = stage.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    renderer.setSize(W, H, false);
+    cam.aspect = W / H;
+    cam.updateProjectionMatrix();
+  };
+  new ResizeObserver(resize).observe(stage);
+  resize();
+
+  const dip = { amp: 0, vel: 0, x: 0, z: 0 };
+  function applyDip() {
+    const geo = ham.fabric.geometry, pos = geo.attributes.position, base = geo.userData.base, R = geo.userData.R, arr = pos.array;
+    for (let i = 0; i < pos.count; i++) {
+      const x = base[i * 3], z = base[i * 3 + 2];
+      const r2 = (x * x + z * z) / (R * R);
+      const d2 = (x - dip.x) * (x - dip.x) + (z - dip.z) * (z - dip.z);
+      arr[i * 3 + 1] = base[i * 3 + 1] - dip.amp * Math.exp(-d2 / 90) * Math.max(0, 1 - r2);
+    }
+    pos.needsUpdate = true;
+    geo.computeVertexNormals();
+  }
+
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0, ptx: 0 };
+  const wind = new T.Vector3();
+  const ray = new T.Raycaster(), ndc = new T.Vector2();
+  let dragging = false, moved = false, downX = 0, lastX = 0, lastT = 0;
+  canvas.addEventListener('pointerdown', e => {
+    dragging = true; moved = false;
+    downX = lastX = e.clientX; lastT = e.timeStamp;
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+  });
+  canvas.addEventListener('pointermove', e => {
+    const r = stage.getBoundingClientRect();
+    pointer.tx = (e.clientX - r.left) / r.width * 2 - 1;
+    pointer.ty = (e.clientY - r.top) / r.height * 2 - 1;
+    wind.x += (pointer.tx - pointer.ptx) * 5200;
+    pointer.ptx = pointer.tx;
+    if (!dragging) return;
+    const dx = e.clientX - lastX;
+    if (Math.abs(e.clientX - downX) > 5) moved = true;
+    if (moved) {
+      const dt = Math.max(8, e.timeStamp - lastT) / 1000;
+      swivel = clamp(swivel - dx * .0075, -1, 1);
+      swivelVel = -dx * .0075 / dt;
+    }
+    lastX = e.clientX; lastT = e.timeStamp;
+  });
+  const endDrag = e => {
+    if (!dragging) return;
+    dragging = false;
+    if (!moved) poke(e);
+  };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', () => { dragging = false; });
+  canvas.addEventListener('pointerleave', () => { pointer.tx = 0; pointer.ty = 0; });
+  function poke(e) {
+    const r = stage.getBoundingClientRect();
+    ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height * 2 - 1));
+    ray.setFromCamera(ndc, cam);
+    const hit = ray.intersectObject(ham.fabric, false)[0] || ray.intersectObject(ham.rim, false)[0];
+    if (!hit) return;
+    const p = ham.cover.worldToLocal(hit.point.clone());
+    dip.x = p.x; dip.z = p.z;
+    dip.vel += 70;
+    wind.x += rand(-900, 900);
+  }
+
+  let running = false, raf = 0, prevT = 0, acc = 0, t = 0;
+  const frame = now => {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(.05, (now - prevT) / 1000 || .016);
+    prevT = now;
+    t += dt;
+    if (!dragging) {
+      swivel += swivelVel * dt;
+      swivelVel *= Math.pow(.02, dt);
+      if (swivel > 1 || swivel < -1) { swivel = clamp(swivel, -1, 1); swivelVel *= -.3; }
+    }
+    ham.pivot.rotation.y = swivel + (reduced ? 0 : Math.sin(t * .6) * .012);
+    out.textContent = (swivel <= 0 ? '+' : '−') + Math.round(Math.abs(swivel) * 180 / Math.PI) + '°';
+    if (Math.abs(dip.amp) > .002 || Math.abs(dip.vel) > .002) {
+      dip.vel += (-90 * dip.amp - 7 * dip.vel) * dt;
+      dip.amp += dip.vel * dt;
+      applyDip();
+    }
+    pointer.x = lerp(pointer.x, pointer.tx, .05);
+    pointer.y = lerp(pointer.y, pointer.ty, .05);
+    const az = .68 + pointer.x * .1 + (reduced ? 0 : Math.sin(t * .15) * .04);
+    const el = .4 - pointer.y * .05;
+    const dist = W / H < 1.1 ? 150 : 128;
+    cam.position.set(
+      target.x + Math.sin(az) * Math.cos(el) * dist,
+      target.y + Math.sin(el) * dist,
+      target.z + Math.cos(az) * Math.cos(el) * dist
+    );
+    cam.lookAt(target);
+    ham.pivot.updateMatrixWorld();
+    ham.pivot.localToWorld(anchor.copy(rimLocal));
+    wind.multiplyScalar(Math.pow(.08, dt));
+    acc += dt;
+    while (acc > 1 / 90) { toy.step(anchor, 1 / 90, wind); acc -= 1 / 90; }
+    toy.sync();
+    renderer.render(scene, cam);
+  };
+  watch(stage, v => {
+    if (v && !running) { running = true; prevT = performance.now(); raf = requestAnimationFrame(frame); }
+    else if (!v && running) { running = false; cancelAnimationFrame(raf); }
+  });
+}
+
+function initParts() {
+  const stage = $('#parts-stage'), canvas = $('#parts-canvas'), tagsEl = $('#tags'), list = $('#part-list');
+  const items = $$('.part', list);
+  const keys = items.map(li => li.dataset.part);
+  const names = items.map(li => li.querySelector('h3').textContent);
+  const tagEls = keys.map((k, i) => {
+    const d = document.createElement('div');
+    d.className = 'tag';
+    d.innerHTML = '<b>' + (i + 1) + '</b><span>' + names[i] + '</span>';
+    tagsEl.appendChild(d);
+    return d;
+  });
+  let active = 0;
+  const setActive = i => {
+    active = i;
+    items.forEach((el, j) => el.classList.toggle('active', j === i));
+    tagEls.forEach((el, j) => el.classList.toggle('active', j === i));
+  };
+  setActive(0);
+  const narrow = matchMedia('(max-width: 860px)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setActive(items.indexOf(e.target)); }),
+    { rootMargin: narrow ? '-62% 0px -30% 0px' : '-45% 0px -45% 0px' });
+  items.forEach(el => io.observe(el));
+  if (!HAS3D) { stage.hidden = true; return; }
+
+  const T = THREE;
+  let renderer;
+  try { renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { stage.hidden = true; return; }
+  setupRenderer(T, renderer, false);
+  const scene = new T.Scene();
+  addLights(T, scene, false);
+  const cam = new T.PerspectiveCamera(30, 1, 1, 2000);
+  const root = new T.Group();
+  scene.add(root);
+  const clampG = buildClamp(T);
+  root.add(clampG);
+  const ham = buildHammock(T, renderer, { sag: 2.6 });
+  ham.pivot.position.set(0, PIVOT_Y, 0);
+  root.add(ham.pivot);
+  const toy = buildFeather(T, renderer, 1.5);
+  root.add(toy.group);
+  const rimLocal = new T.Vector3(ARM + RING_R * Math.cos(1.2), .4, RING_R * Math.sin(1.2));
+  const anchor = new T.Vector3();
+  ham.pivot.updateMatrix();
+  toy.settle(anchor.copy(rimLocal).applyMatrix4(ham.pivot.matrix));
+
+  const glow = new T.Color(0xffc21a);
+  const groups = {
+    ring: [ham.ring.material],
+    plate: [ham.plate.material],
+    pin: [ham.pin.material],
+    clamp: clampG.userData.mats,
+    cover: [ham.fabric.material, ham.rim.material],
+    feather: toy.parts.map(p => p.material)
+  };
+  Object.values(groups).flat().forEach(m => { m.emissive = glow.clone(); m.emissiveIntensity = 0; });
+  const anchors = {
+    ring: [ham.frame, new T.Vector3(ARM + RING_R * Math.cos(.6), 0, RING_R * Math.sin(.6))],
+    plate: [ham.frame, new T.Vector3(3, .3, 3.6)],
+    pin: [ham.frame, new T.Vector3(0, 4.9, 0)],
+    clamp: [clampG, new T.Vector3(-9, 1, 0)],
+    cover: [ham.cover, new T.Vector3(RING_R * Math.cos(-.9), 1.2, RING_R * Math.sin(-.9))],
+    feather: [toy.group, null]
+  };
+
+  let W = 1, H = 1;
+  const resize = () => {
+    const r = stage.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    renderer.setSize(W, H, false);
+    cam.aspect = W / H;
+    cam.updateProjectionMatrix();
+  };
+  new ResizeObserver(resize).observe(stage);
+  resize();
+
+  const v = new T.Vector3();
+  let running = false, raf = 0, prevT = 0, t = 0, acc = 0, prog = 0;
+  const frame = now => {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min(.05, (now - prevT) / 1000 || .016);
+    prevT = now;
+    t += dt;
+    const lr = list.getBoundingClientRect();
+    const p = clamp((innerHeight * .55 - lr.top) / Math.max(1, lr.height - innerHeight * .3), 0, 1);
+    prog = lerp(prog, p, .12);
+    const e = easeInOut(clamp((prog - .01) / .16, 0, 1));
+    clampG.position.set(-11 * e, 8 * e, 0);
+    ham.cover.position.y = 12 * e;
+    root.rotation.y = -.55 + prog * .9 + (reduced ? 0 : Math.sin(t * .4) * .05);
+    root.position.y = 2;
+    const target = new T.Vector3(14, -3 + 3 * e, 0);
+    const dist = 104 / clamp(W / H, .72, 1.15);
+    cam.position.set(target.x + Math.sin(.42) * Math.cos(.55) * dist, target.y + Math.sin(.55) * dist, target.z + Math.cos(.42) * Math.cos(.55) * dist);
+    cam.lookAt(target);
+    keys.forEach((k, i) => {
+      const on = i === active;
+      groups[k].forEach(m => { m.emissiveIntensity = lerp(m.emissiveIntensity, on ? .38 + Math.sin(t * 4) * .14 : 0, .15); });
+    });
+    ham.pivot.updateMatrix();
+    anchor.copy(rimLocal).applyMatrix4(ham.pivot.matrix);
+    anchor.x += 4 * e; anchor.y -= 5 * e; anchor.z += 3 * e;
+    acc += dt;
+    while (acc > 1 / 90) { toy.step(anchor, 1 / 90, null); acc -= 1 / 90; }
+    toy.sync();
+    root.updateMatrixWorld(true);
+    keys.forEach((k, i) => {
+      const [obj, local] = anchors[k];
+      if (local) v.copy(local).applyMatrix4(obj.matrixWorld);
+      else v.copy(toy.P[toy.P.length - 1]).applyMatrix4(root.matrixWorld);
+      v.project(cam);
+      const x = (v.x + 1) / 2 * W, y = (1 - v.y) / 2 * H;
+      tagEls[i].style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-12px,-12px)';
+    });
+    renderer.render(scene, cam);
+  };
+  watch(stage, vis => {
+    if (vis && !running) { running = true; prevT = performance.now(); raf = requestAnimationFrame(frame); }
+    else if (!vis && running) { running = false; cancelAnimationFrame(raf); }
+  });
+}
+
+/* ---------- ticker reacts to scroll speed and direction ---------- */
+function initTicker() {
+  const track = $('#ticker');
+  if (!track || reduced || !track.getAnimations) return;
+  const anim = track.getAnimations()[0];
+  if (!anim) return;
+  let lastY = scrollY, v = 0, rate = 1, on = false;
+  addEventListener('scroll', () => { v += scrollY - lastY; lastY = scrollY; }, { passive: true });
+  const loop = () => {
+    if (!on) return;
+    rate = lerp(rate, 1 + clamp(v * .06, -7, 7), .12);
+    v *= .82;
+    anim.playbackRate = Math.abs(rate) < .25 ? (rate < 0 ? -.25 : .25) : rate;
+    requestAnimationFrame(loop);
+  };
+  watch(track, vis => { on = vis; if (vis) requestAnimationFrame(loop); });
+}
+
+/* ---------- keyboard: the cat helps you type ---------- */
+function initKeyboard() {
+  const kb = $('#kb'), ta = $('#mail-body'), paw = $('#paw'), sw = $('#clamp-switch'), status = $('#kbd-status');
+  const tInt = $('#t-int'), tCh = $('#t-chars'), ham = $('#kb-hammock'), cap = $('#kb-ham-cap');
+  const wrap = kb.parentElement, sec = $('#keyboard');
+  const keys = {};
+  ['qwertyuiop', 'asdfghjkl;', 'zxcvbnm,./'].forEach((r, i) => {
+    const row = document.createElement('div');
+    row.className = 'kb-row r' + i;
+    for (const ch of r) {
+      const k = document.createElement('span');
+      k.className = 'key';
+      k.textContent = ch;
+      keys[ch] = k;
+      row.appendChild(k);
+    }
+    kb.appendChild(row);
+  });
+  const spaceRow = document.createElement('div');
+  spaceRow.className = 'kb-row r3';
+  const space = document.createElement('span');
+  space.className = 'key';
+  space.innerHTML = '&nbsp;';
+  keys[' '] = space;
+  spaceRow.appendChild(space);
+  kb.appendChild(spaceRow);
+
+  const DEMO = "Hi Dana,\n\nThe Q3 numbers are attached. Revenue is up on last quarter, and I've flagged two items for Thursday.\n\nThanks,\nSam";
+  const RUNS = [{ hold: 'j', n: 13 }, { walk: 'asdfghjkl' }, { hold: ';', n: 10 }, { walk: 'mnbvcxz' }, { hold: ' ', n: 16 }, { walk: 'gyhujn' }, { hold: 'k', n: 15 }, { walk: 'qwerty' }, { hold: 'f', n: 12 }];
+  let clamped = false, busy = false, ints = 0, chars = 0, since = 0, nextAt = 12, runI = 0;
+  let userTyped = false, inView = false, demoI = 0, demoStarted = false;
+  let pawX = 0;
+  const say = s => { status.textContent = s; };
+  const keyPoint = k => {
+    const a = k.getBoundingClientRect(), b = wrap.getBoundingClientRect();
+    return { x: a.left - b.left + a.width / 2, y: a.top - b.top + a.height * .62 };
+  };
+  const pawTo = (x, y, ms, ease) => {
+    paw.style.transition = ms ? 'transform ' + ms + 'ms ' + (ease || 'cubic-bezier(.3,.7,.3,1)') : 'none';
+    paw.style.transform = 'translate(' + (x - paw.offsetWidth / 2) + 'px,' + (y - paw.offsetHeight * 150 / 160) + 'px)';
+  };
+  const pawAway = ms => pawTo(pawX, -12, ms, 'cubic-bezier(.5,0,.7,.4)');
+  const flash = ch => {
+    const k = keys[(ch || '').toLowerCase()];
+    if (!k) return;
+    k.classList.add('down');
+    setTimeout(() => k.classList.remove('down'), 95);
+  };
+  const insert = ch => {
+    const s = ta.selectionStart, e = ta.selectionEnd;
+    ta.setRangeText(ch, s, e, 'end');
+    chars++;
+    tCh.textContent = chars;
+    if (document.activeElement !== ta) ta.scrollTop = ta.scrollHeight;
+  };
+  async function pawRun() {
+    if (busy || clamped) return;
+    busy = true;
+    ints++;
+    tInt.textContent = ints;
+    say('Pickle is helping.');
+    const run = RUNS[runI++ % RUNS.length];
+    const seq = run.hold ? [run.hold] : [...run.walk];
+    for (let i = 0; i < seq.length && !clamped; i++) {
+      const k = keys[seq[i]];
+      const p = keyPoint(k);
+      pawX = p.x;
+      if (i === 0) { pawTo(p.x, -12, 0); void paw.offsetWidth; }
+      pawTo(p.x, p.y, i === 0 ? 260 : 110);
+      await wait(i === 0 ? 260 : 110);
+      k.classList.add('down');
+      const reps = run.hold ? run.n : 1;
+      for (let r = 0; r < reps && !clamped; r++) { insert(seq[i]); await wait(run.hold ? (r === 0 ? 320 : 38) : 30); }
+      k.classList.remove('down');
+    }
+    pawAway(280);
+    await wait(300);
+    busy = false;
+    since = 0;
+    nextAt = Math.round(rand(14, 26));
+    say(clamped ? 'Pickle is asleep in the Overhang. Type in peace.' : 'Pickle is on the keyboard.');
+  }
+  async function demo() {
+    if (demoStarted) return;
+    demoStarted = true;
+    for (;;) {
+      if (!inView || userTyped || document.activeElement === ta) { await wait(400); continue; }
+      if (busy) { await wait(120); continue; }
+      if (demoI >= DEMO.length) {
+        await wait(2600);
+        if (!userTyped && document.activeElement !== ta) { ta.value = ''; demoI = 0; }
+        continue;
+      }
+      const ch = DEMO[demoI++];
+      ta.value += ch;
+      ta.scrollTop = ta.scrollHeight;
+      flash(ch);
+      since++;
+      if (!clamped && since >= nextAt && ch === ' ') await pawRun();
+      await wait(ch === '\n' ? 260 : rand(38, 95));
+    }
+  }
+  ta.addEventListener('focus', () => {
+    if (!userTyped) {
+      userTyped = true;
+      ta.value = 'Hi Dana,\n\n';
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+      since = 0;
+      nextAt = 10;
+    }
+    if (!clamped) say('Pickle is watching you type.');
+  });
+  ta.addEventListener('keydown', e => flash(e.key));
+  ta.addEventListener('input', e => {
+    if (busy || !e.inputType || !e.inputType.startsWith('insert')) return;
+    since++;
+    if (!clamped && since >= nextAt) pawRun();
+  });
+  sw.addEventListener('click', () => {
+    clamped = !clamped;
+    sw.setAttribute('aria-checked', String(clamped));
+    ham.classList.toggle('occupied', clamped);
+    cap.textContent = clamped ? 'Occupied' : 'Empty';
+    if (clamped) { pawAway(220); say('Pickle has moved into the Overhang. Type in peace.'); }
+    else say('Pickle is back on the keyboard.');
+  });
+  watch(sec, v => { inView = v; if (v && !reduced) demo(); }, { threshold: .25 });
+}
+
+/* ---------- to-scale planner ---------- */
+function initPlanner() {
+  const svg = $('#planner'), stat = $('#pl-static'), ringG = $('#pl-ring'), rot = $('#pl-ring-rot');
+  const plate = $('#pl-plate'), cat = $('#pl-cat'), dimG = $('#pl-dim'), pin = $('#pl-pin');
+  const slider = $('#cat-size'), out = $('#cat-size-out'), verdict = $('#cat-verdict');
+  const unitBtns = $$('.units button');
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs, parent) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || stat).appendChild(e);
+    return e;
+  };
+  const PV = { x: 0, y: 8 };
+  let unit = 'cm', angle = -18;
+
+  const grid = el('g', { style: 'stroke:var(--line);stroke-width:.18' });
+  for (let x = -100; x <= 60; x += 10) el('line', { x1: x, y1: -44, x2: x, y2: 44 }, grid);
+  for (let y = -40; y <= 40; y += 10) el('line', { x1: -104, y1: y, x2: 62, y2: y }, grid);
+  el('rect', { x: -150, y: -36, width: 145, height: 72, rx: 1.2, style: 'fill:#CDB28C' });
+  const grain = el('g', { style: 'stroke:#b89a74;stroke-width:.25;fill:none;opacity:.6' });
+  for (let i = 0; i < 14; i++) {
+    const y = -34 + i * 5.1 + Math.sin(i * 7) * 1.2;
+    el('path', { d: 'M-150 ' + y.toFixed(1) + ' C-110 ' + (y + 1.4).toFixed(1) + ' -60 ' + (y - 1.2).toFixed(1) + ' -5 ' + (y + .6).toFixed(1) }, grain);
+  }
+  el('rect', { x: -6.2, y: -36, width: 1.2, height: 72, style: 'fill:#B39570' });
+  el('rect', { x: -80, y: -28, width: 62, height: 3.2, rx: 1, style: 'fill:#1d1f22' });
+  el('rect', { x: -54, y: -25.2, width: 10, height: 8, rx: 1.5, style: 'fill:#2b2d31' });
+  const kb = el('g', { transform: 'translate(-67 10) rotate(-2)' });
+  el('rect', { x: 0, y: 0, width: 44, height: 13, rx: 1.2, style: 'fill:#2a2c30' }, kb);
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 14; c++) el('rect', { x: 1.1 + c * 3.03, y: 1.1 + r * 2.7, width: 2.5, height: 2.2, rx: .4, style: 'fill:#e9eaea' }, kb);
+  el('rect', { x: 12, y: 1.1 + 4 * 2.7 - .3, width: 18, height: 1.6, rx: .4, style: 'fill:#e9eaea' }, kb);
+  el('ellipse', { cx: -16, cy: 18, rx: 3.1, ry: 5.3, style: 'fill:#2a2c30' });
+  el('circle', { cx: -88, cy: 14, r: 4.2, style: 'fill:var(--note)' });
+  el('circle', { cx: -88, cy: 14, r: 3.3, style: 'fill:#4a2f1d' });
+  el('rect', { x: -84.4, y: 12.8, width: 3, height: 2.4, rx: 1, style: 'fill:var(--note)' });
+  el('rect', { x: -96, y: -16, width: 7.6, height: 7.6, transform: 'rotate(9 -92 -12)', style: 'fill:var(--note)' });
+  el('rect', { x: -13, y: PV.y - 2.3, width: 9.6, height: 4.6, rx: .4, style: 'fill:#1d1f22' });
+  el('rect', { x: -3.6, y: PV.y - 1.1, width: 4.1, height: 2.2, style: 'fill:#1d1f22' });
+  const lbl = (x, y, t, extra) => { const e = el('text', Object.assign({ x, y, class: 'pl-label' }, extra || {})); e.textContent = t; return e; };
+  lbl(-8.2, -30, 'Desk edge', { transform: 'rotate(90 -8.2 -30)' });
+  lbl(-48, 41.5, 'You sit here', { 'text-anchor': 'middle' });
+  el('path', { d: 'M-48 37.8 l-1.4 1.4 M-48 37.8 l1.4 1.4 M-48 37.8 v-3', style: 'stroke:var(--ink-2);stroke-width:.35;fill:none' });
+  lbl(-45, 7.4, 'Keyboard 44 cm', { 'text-anchor': 'middle' });
+
+  const a0 = Math.asin(4 / 19.8), ax = -19.8 * Math.cos(a0), ay = 19.8 * Math.sin(a0);
+  plate.setAttribute('d', 'M-23.4 -1.15 Q-24.9 0 -23.4 1.15 L' + ax.toFixed(2) + ' ' + ay.toFixed(2) + ' A19.8 19.8 0 0 1 ' + ax.toFixed(2) + ' ' + (-ay).toFixed(2) + ' Z');
+  pin.setAttribute('cx', PV.x); pin.setAttribute('cy', PV.y);
+  const dimLine = el('path', { d: 'M-20 -23.5 H20 M-20 -25 V-22 M20 -25 V-22', style: 'stroke:var(--ink);stroke-width:.3;fill:none' }, dimG);
+  const dimText = el('text', { x: 0, y: -25.2, 'text-anchor': 'middle', class: 'pl-label', style: 'fill:var(--ink)' }, dimG);
+  void dimLine;
+
+  const fmt = cm => unit === 'cm' ? Math.round(cm) + ' cm' : (cm / 2.54).toFixed(1) + ' in';
+  const verdicts = cm => cm <= 30 ? ['Roomy.', 'Space to turn around twice, and then once more.']
+    : cm <= 36 ? ['Just right.', 'Room to turn around twice before settling.']
+    : cm <= 40 ? ['Snug.', 'A close fit. Plenty of cats like it that way.']
+    : ['Too big.', 'They would overhang the Overhang. Look for a bigger bed.'];
+  function render() {
+    rot.setAttribute('transform', 'translate(' + PV.x + ' ' + PV.y + ') rotate(' + angle.toFixed(1) + ') translate(' + ARM + ' 0)');
+    ringG.setAttribute('aria-valuenow', Math.round(angle));
+    ringG.setAttribute('aria-valuetext', Math.round(angle) + ' degrees');
+    const cm = +slider.value;
+    const box = cm / .86;
+    cat.setAttribute('x', -box / 2); cat.setAttribute('y', -box / 2);
+    cat.setAttribute('width', box); cat.setAttribute('height', box);
+    cat.setAttribute('transform', 'rotate(' + (-angle * .6 + 18).toFixed(1) + ')');
+    out.textContent = fmt(cm);
+    dimText.textContent = 'Ø ' + fmt(40);
+    const [b, s] = verdicts(cm);
+    verdict.innerHTML = '<b>' + b + '</b>' + s;
+    slider.style.setProperty('--fill', ((cm - slider.min) / (slider.max - slider.min) * 100) + '%');
+  }
+  slider.addEventListener('input', render);
+  unitBtns.forEach(b => b.addEventListener('click', () => {
+    unit = b.dataset.unit;
+    unitBtns.forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    render();
+  }));
+  const toSvg = e => {
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  };
+  let drag = null;
+  ringG.addEventListener('pointerdown', e => {
+    const p = toSvg(e);
+    drag = { off: angle - Math.atan2(p.y - PV.y, p.x - PV.x) * 180 / Math.PI };
+    try { ringG.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+  });
+  ringG.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const p = toSvg(e);
+    angle = clamp(Math.atan2(p.y - PV.y, p.x - PV.x) * 180 / Math.PI + drag.off, -50, 50);
+    render();
+  });
+  const stop = () => { drag = null; };
+  ringG.addEventListener('pointerup', stop);
+  ringG.addEventListener('pointercancel', stop);
+  ringG.addEventListener('keydown', e => {
+    const d = { ArrowLeft: -5, ArrowDown: 5, ArrowRight: 5, ArrowUp: -5 }[e.key];
+    if (d == null) return;
+    e.preventDefault();
+    angle = clamp(angle + d, -50, 50);
+    render();
+  });
+  const fitView = () => {
+    const narrow = svg.getBoundingClientRect().width < 640;
+    svg.setAttribute('viewBox', narrow ? '-74 -44 136 88' : '-104 -44 166 88');
+  };
+  new ResizeObserver(fitView).observe(svg);
+  fitView();
+  render();
+}
+
+/* ---------- loupe over the real cover photo ---------- */
+function initLoupe() {
+  const card = $('#loupe-card'), img = $('#cover-img'), lens = $('#lens');
+  const pins = $$('.pin', card), lis = $$('#notes-list li');
+  const Z = 2.5;
+  let tx = .43, ty = .38, x = tx, y = ty, raf = 0;
+  function place() {
+    const r = card.getBoundingClientRect(), ir = img.getBoundingClientRect(), lw = lens.offsetWidth;
+    const px = x * r.width, py = y * r.height;
+    lens.style.left = px + 'px';
+    lens.style.top = py + 'px';
+    const ratio = (img.naturalWidth / img.naturalHeight) || 1;
+    let dw = ir.width, dh = ir.height;
+    if (dw / dh > ratio) dw = dh * ratio; else dh = dw / ratio;
+    const ox = ir.left - r.left + (ir.width - dw) / 2, oy = ir.top - r.top + (ir.height - dh) / 2;
+    lens.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")';
+    lens.style.backgroundSize = (dw * Z) + 'px ' + (dh * Z) + 'px';
+    lens.style.backgroundPosition = (-((px - ox) * Z - lw / 2)) + 'px ' + (-((py - oy) * Z - lw / 2)) + 'px';
+  }
+  const loop = () => {
+    x = lerp(x, tx, reduced ? 1 : .22);
+    y = lerp(y, ty, reduced ? 1 : .22);
+    place();
+    raf = Math.abs(x - tx) + Math.abs(y - ty) > .0005 ? requestAnimationFrame(loop) : 0;
+  };
+  const kick = () => { if (!raf) raf = requestAnimationFrame(loop); };
+  const pinPos = i => [parseFloat(pins[i].style.getPropertyValue('--x')) / 100, parseFloat(pins[i].style.getPropertyValue('--y')) / 100];
+  const lit = i => {
+    pins.forEach((p, j) => p.classList.toggle('lit', j === i));
+    lis.forEach((l, j) => l.classList.toggle('lit', j === i));
+  };
+  card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect();
+    tx = clamp((e.clientX - r.left) / r.width, 0, 1);
+    ty = clamp((e.clientY - r.top) / r.height, 0, 1);
+    kick();
+    let best = -1, bd = .1;
+    pins.forEach((p, i) => { const [px, py] = pinPos(i); const d = Math.hypot(px - tx, py - ty); if (d < bd) { bd = d; best = i; } });
+    lit(best);
+  });
+  card.addEventListener('pointerleave', () => { tx = .43; ty = .38; kick(); lit(-1); });
+  const goTo = i => { lit(i); [tx, ty] = pinPos(i); kick(); };
+  pins.forEach((p, i) => { p.addEventListener('click', () => goTo(i)); p.addEventListener('focus', () => goTo(i)); });
+  lis.forEach((l, i) => l.addEventListener('mouseenter', () => goTo(i)));
+  new ResizeObserver(place).observe(card);
+  if (img.complete) place(); else img.addEventListener('load', place);
+}
+
+/* ---------- feather game ---------- */
+function initGame() {
+  const box = $('#game'), cv = $('#game-canvas'), ctx = cv.getContext('2d');
+  const tOut = $('#g-time'), bOut = $('#g-best'), title = $('#g-title'), sub = $('#g-sub'), msg = $('#g-msg');
+  let C = tokens(), meshFill = null;
+  const makeMesh = () => {
+    const c = document.createElement('canvas');
+    c.width = c.height = 8;
+    const g = c.getContext('2d');
+    g.fillStyle = C.mesh; g.fillRect(0, 0, 8, 8);
+    g.fillStyle = C.meshHole;
+    g.beginPath(); g.arc(2, 2, 1.5, 0, 7); g.arc(6, 6, 1.5, 0, 7); g.fill();
+    meshFill = ctx.createPattern(c, 'repeat');
+  };
+  makeMesh();
+  onTheme(() => { C = tokens(); makeMesh(); draw(); });
+  let W = 1, H = 1, dpr = 1, S = 1, rimY = 0;
+  const N = 12, P = [], O = [];
+  let SEG = 10;
+  const anchor = { x: 0, y: 0 }, target = { x: 0, y: 0 };
+  let state = 'ready', start = 0, elapsed = 0, holdT = 0;
+  let best = +store.get('overhang-feather-best', 0) || 0;
+  if (best) bOut.textContent = best.toFixed(1) + ' s';
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  const startText = coarse ? 'Tap to start' : 'Move here to start';
+  title.textContent = startText;
+  const cat = { x: 0, r: 40, lx: 0, ly: 0, pupil: .35, ears: 0, bob: 0 };
+  const paw = { phase: 'idle', t: 0, dur: 0, side: 1, sx: 0, sy: 0, tx: 0, ty: 0, x: 0, y: 0, cool: .8, sdur: .2 };
+  const fv = { x: 0, y: 0 }, lastF = { x: 0, y: 0 };
+  let againBtn = null;
+
+  function resetRope(x, y) {
+    anchor.x = target.x = x; anchor.y = target.y = y;
+    for (let i = 0; i < N; i++) { P[i] = { x, y: y + i * SEG }; O[i] = { x, y: y + i * SEG }; }
+  }
+  function layout() {
+    const r = box.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    S = clamp(Math.min(W / 900, H / 480), .5, 1.2);
+    cat.r = 52 * S;
+    cat.x = W / 2;
+    rimY = H - 58 * S;
+    SEG = Math.max(8, H * .03);
+    if (state !== 'playing') resetRope(W * .3, H * .14);
+  }
+  const local = e => { const r = box.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  const aim = p => { target.x = clamp(p.x, 10, W - 10); target.y = clamp(p.y, 10, H * .6); };
+  box.addEventListener('pointermove', e => {
+    if (state === 'over') return;
+    aim(local(e));
+    if (state === 'ready' && e.pointerType === 'mouse') begin();
+  });
+  box.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    if (state === 'over') return;
+    aim(local(e));
+    if (state === 'ready') begin();
+  });
+  function begin() {
+    state = 'playing';
+    box.classList.add('playing');
+    start = performance.now();
+    paw.phase = 'idle';
+    paw.cool = .9;
+  }
+  function caught() {
+    state = 'over';
+    holdT = 0;
+    box.classList.remove('playing');
+    const s = elapsed, isBest = s > best;
+    if (isBest) { best = s; store.set('overhang-feather-best', +best.toFixed(2)); bOut.textContent = best.toFixed(1) + ' s'; }
+    title.textContent = 'Pickle got it at ' + s.toFixed(1) + ' s.';
+    sub.textContent = isBest ? 'New best. Your cat will still be faster.' : 'Your cat will be faster.';
+    if (!againBtn) {
+      againBtn = document.createElement('button');
+      againBtn.type = 'button';
+      againBtn.className = 'btn-key';
+      againBtn.textContent = 'Play again';
+      againBtn.addEventListener('click', () => {
+        state = 'ready';
+        againBtn.hidden = true;
+        title.textContent = startText;
+        sub.textContent = 'Pickle is watching.';
+        tOut.textContent = '0.0 s';
+        paw.phase = 'idle';
+        resetRope(W * .3, H * .14);
+      });
+      msg.appendChild(againBtn);
+    }
+    againBtn.hidden = false;
+  }
+  function physics(dt) {
+    const k = 1 - Math.pow(.0004, dt);
+    anchor.x = lerp(anchor.x, target.x, k);
+    anchor.y = lerp(anchor.y, target.y, k);
+    P[0].x = O[0].x = anchor.x;
+    P[0].y = O[0].y = anchor.y;
+    const g = 1500 * S * dt * dt;
+    for (let i = 1; i < N; i++) {
+      const p = P[i], o = O[i];
+      const vx = (p.x - o.x) * .986, vy = (p.y - o.y) * .986;
+      o.x = p.x; o.y = p.y;
+      p.x += vx; p.y += vy + g;
+    }
+    if (paw.phase === 'hold') { P[N - 1].x = paw.x; P[N - 1].y = paw.y; }
+    for (let it = 0; it < 10; it++) {
+      for (let i = 1; i < N; i++) {
+        const a = P[i - 1], b = P[i];
+        const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1e-6, diff = (d - SEG) / d;
+        if (i === 1) { b.x -= dx * diff; b.y -= dy * diff; }
+        else if (i === N - 1 && paw.phase === 'hold') { a.x += dx * diff; a.y += dy * diff; }
+        else { a.x += dx * diff * .5; a.y += dy * diff * .5; b.x -= dx * diff * .5; b.y -= dy * diff * .5; }
+      }
+    }
+    for (let i = 1; i < N; i++) { P[i].x = clamp(P[i].x, 6, W - 6); P[i].y = clamp(P[i].y, 6, H - 6); }
+  }
+  function think(dt, now) {
+    const f = P[N - 1];
+    fv.x = lerp(fv.x, (f.x - lastF.x) / dt, .3);
+    fv.y = lerp(fv.y, (f.y - lastF.y) / dt, .3);
+    lastF.x = f.x; lastF.y = f.y;
+    const hy = rimY - cat.r * .3;
+    const dx = f.x - cat.x, dy = f.y - hy, dist = Math.hypot(dx, dy) || 1;
+    cat.lx = lerp(cat.lx, dx / dist, .2);
+    cat.ly = lerp(cat.ly, dy / dist, .2);
+    const reach = Math.min(H * .8, 440 * S);
+    const near = dist < reach;
+    cat.pupil = lerp(cat.pupil, near || paw.phase !== 'idle' ? .95 : .4, .08);
+    cat.ears = lerp(cat.ears, paw.phase === 'wiggle' ? 1 : 0, .2);
+    cat.bob = paw.phase === 'wiggle' ? Math.sin(now / 28) * 2.2 * S : lerp(cat.bob, 0, .2);
+    if (state === 'over') {
+      holdT += dt;
+      if (paw.phase === 'hold' && holdT > 1.2) { paw.phase = 'back'; paw.t = 0; paw.tx = paw.x; paw.ty = paw.y; }
+    }
+    if (state === 'playing') {
+      elapsed = (now - start) / 1000;
+      tOut.textContent = elapsed.toFixed(1) + ' s';
+    }
+    const level = clamp(elapsed / 14, 0, 1);
+    paw.cool -= dt;
+    if (state === 'playing' && paw.phase === 'idle' && near && paw.cool <= 0) {
+      paw.phase = 'wiggle'; paw.t = 0;
+      paw.dur = lerp(.5, .16, level) * rand(.8, 1.25);
+      paw.side = f.x < cat.x ? -1 : 1;
+    } else if (paw.phase === 'wiggle') {
+      paw.t += dt;
+      if (state !== 'playing') paw.phase = 'idle';
+      else if (paw.t >= paw.dur) {
+        paw.phase = 'strike'; paw.t = 0;
+        paw.sx = cat.x + paw.side * cat.r * .55;
+        paw.sy = rimY;
+        const lead = lerp(.06, .16, level);
+        paw.tx = f.x + fv.x * lead; paw.ty = f.y + fv.y * lead;
+        const vx = paw.tx - paw.sx, vy = paw.ty - paw.sy, L = Math.hypot(vx, vy);
+        if (L > reach) { paw.tx = paw.sx + vx / L * reach; paw.ty = paw.sy + vy / L * reach; }
+        paw.sdur = lerp(.2, .13, level);
+      }
+    } else if (paw.phase === 'strike') {
+      paw.t += dt;
+      const k = easeOut(clamp(paw.t / paw.sdur, 0, 1));
+      paw.x = lerp(paw.sx, paw.tx, k); paw.y = lerp(paw.sy, paw.ty, k);
+      if (state === 'playing' && Math.hypot(paw.x - f.x, paw.y - f.y) < 28 * S) { paw.phase = 'hold'; caught(); }
+      else if (paw.t >= paw.sdur) { paw.phase = 'back'; paw.t = 0; }
+    } else if (paw.phase === 'back') {
+      paw.t += dt;
+      const k = easeInOut(clamp(paw.t / .26, 0, 1));
+      paw.x = lerp(paw.tx, paw.sx, k); paw.y = lerp(paw.ty, paw.sy, k);
+      if (k >= 1) { paw.phase = 'idle'; paw.cool = lerp(.7, .25, level) * rand(.8, 1.3); }
+    }
+  }
+  function drawFeather() {
+    ctx.strokeStyle = C.ink2;
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(P[0].x, P[0].y);
+    for (let i = 1; i < N - 1; i++) { const mx = (P[i].x + P[i + 1].x) / 2, my = (P[i].y + P[i + 1].y) / 2; ctx.quadraticCurveTo(P[i].x, P[i].y, mx, my); }
+    ctx.lineTo(P[N - 1].x, P[N - 1].y);
+    ctx.stroke();
+    ctx.fillStyle = C.ink;
+    ctx.beginPath(); ctx.arc(P[0].x, P[0].y, 4, 0, 7); ctx.fill();
+    const e = P[N - 1], q = P[N - 2];
+    const ang = Math.atan2(e.y - q.y, e.x - q.x) - Math.PI / 2;
+    const L = 70 * S, Wd = 15 * S;
+    ctx.save();
+    ctx.translate(e.x, e.y);
+    ctx.rotate(ang);
+    const grad = ctx.createLinearGradient(0, 0, 0, L);
+    grad.addColorStop(0, '#2a2a2c'); grad.addColorStop(.22, '#2a2a2c'); grad.addColorStop(.24, '#FFD43B'); grad.addColorStop(.8, '#FFD43B'); grad.addColorStop(1, '#FFF1B8');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(Wd, L * .25, Wd * 1.1, L * .7, 0, L);
+    ctx.bezierCurveTo(-Wd * 1.1, L * .7, -Wd, L * .25, 0, 0);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(20,20,20,.18)';
+    ctx.lineWidth = 1;
+    for (let i = 1; i < 9; i++) {
+      const yy = L * i / 10;
+      ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(Wd * .9, yy + 7 * S); ctx.moveTo(0, yy); ctx.lineTo(-Wd * .9, yy + 7 * S); ctx.stroke();
+    }
+    ctx.strokeStyle = '#efe6cc';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, -4); ctx.lineTo(0, L * .96); ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = '#1d1f22';
+    ctx.beginPath(); ctx.arc(e.x, e.y, 4.5 * S + 1, 0, 7); ctx.fill();
+  }
+  function drawPawTip(x, y, ang, r) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(ang);
+    ctx.fillStyle = C.cat;
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fill();
+    ctx.fillStyle = C.bean;
+    ctx.beginPath(); ctx.ellipse(0, r * .18, r * .42, r * .32, 0, 0, 7); ctx.fill();
+    [-.5, -.17, .17, .5].forEach((o, i) => { ctx.beginPath(); ctx.ellipse(o * r * 1.1, -r * (i === 0 || i === 3 ? .32 : .5), r * .15, r * .19, 0, 0, 7); ctx.fill(); });
+    ctx.restore();
+  }
+  function drawCat() {
+    const r = cat.r, x = cat.x + cat.bob, y = rimY - r * .3;
+    ctx.fillStyle = C.cat;
+    ctx.beginPath(); ctx.ellipse(cat.x + r * .7, rimY + r * .15, r * 1.3, r * .55, 0, 0, 7); ctx.fill();
+    for (const s of [-1, 1]) {
+      ctx.save();
+      ctx.translate(x + s * r * .56, y - r * .55);
+      ctx.rotate(s * (.22 + cat.ears * .55));
+      const h = r * .55 * (1 - cat.ears * .3);
+      ctx.fillStyle = C.cat;
+      ctx.beginPath(); ctx.moveTo(-r * .32, r * .18); ctx.lineTo(0, -h); ctx.lineTo(r * .32, r * .18); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = C.bean;
+      ctx.beginPath(); ctx.moveTo(-r * .15, r * .1); ctx.lineTo(0, -h * .6); ctx.lineTo(r * .15, r * .1); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+    ctx.fillStyle = C.cat;
+    ctx.beginPath(); ctx.ellipse(x, y, r, r * .86, 0, 0, 7); ctx.fill();
+    ctx.strokeStyle = C.catDark; ctx.lineCap = 'round'; ctx.lineWidth = r * .07; ctx.globalAlpha = .55;
+    [-1, 0, 1].forEach(s => { ctx.beginPath(); ctx.moveTo(x + s * r * .2, y - r * .8); ctx.lineTo(x + s * r * .15, y - r * .5); ctx.stroke(); });
+    ctx.globalAlpha = 1;
+    for (const s of [-1, 1]) {
+      const ex = x + s * r * .38, ey = y - r * .06, er = r * .21;
+      ctx.fillStyle = '#F2C14E';
+      ctx.beginPath(); ctx.arc(ex, ey, er, 0, 7); ctx.fill();
+      ctx.strokeStyle = C.catDark; ctx.lineWidth = r * .035; ctx.stroke();
+      const px = ex + cat.lx * er * .36, py = ey + cat.ly * er * .36;
+      ctx.fillStyle = '#141517';
+      ctx.beginPath(); ctx.ellipse(px, py, er * (.12 + .7 * cat.pupil), er * .88, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,.85)';
+      ctx.beginPath(); ctx.arc(px - er * .3, py - er * .36, er * .17, 0, 7); ctx.fill();
+    }
+    ctx.fillStyle = C.bean;
+    ctx.beginPath(); ctx.moveTo(x - r * .1, y + r * .2); ctx.lineTo(x + r * .1, y + r * .2); ctx.lineTo(x, y + r * .31); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = C.catDark; ctx.lineWidth = r * .04;
+    ctx.beginPath();
+    ctx.moveTo(x, y + r * .31); ctx.quadraticCurveTo(x - r * .06, y + r * .43, x - r * .17, y + r * .39);
+    ctx.moveTo(x, y + r * .31); ctx.quadraticCurveTo(x + r * .06, y + r * .43, x + r * .17, y + r * .39);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,248,236,.8)'; ctx.lineWidth = 1.2;
+    for (const s of [-1, 1]) for (let i = -1; i <= 1; i++) {
+      ctx.beginPath(); ctx.moveTo(x + s * r * .3, y + r * .28 + i * r * .06); ctx.lineTo(x + s * r * 1.15, y + r * .2 + i * r * .16); ctx.stroke();
+    }
+  }
+  function draw() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const hx = W / 2, hrx = Math.min(W * .44, 340 * S), hry = 26 * S;
+    ctx.strokeStyle = C.mesh; ctx.lineWidth = 9 * S;
+    ctx.beginPath(); ctx.ellipse(hx, rimY, hrx, hry, 0, Math.PI, Math.PI * 2); ctx.stroke();
+    drawCat();
+    ctx.fillStyle = meshFill;
+    ctx.beginPath(); ctx.ellipse(hx, rimY, hrx, hry, 0, 0, Math.PI); ctx.lineTo(hx - hrx, H + 2); ctx.lineTo(hx + hrx, H + 2); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = C.mesh; ctx.lineWidth = 9 * S;
+    ctx.beginPath(); ctx.ellipse(hx, rimY, hrx, hry, 0, 0, Math.PI); ctx.stroke();
+    const striking = paw.phase === 'strike' || paw.phase === 'back' || paw.phase === 'hold';
+    for (const s of [-1, 1]) {
+      if (striking && s === paw.side) continue;
+      ctx.fillStyle = C.cat;
+      ctx.beginPath(); ctx.ellipse(cat.x + s * cat.r * .55, rimY + hry * .55, cat.r * .27, cat.r * .18, 0, 0, 7); ctx.fill();
+    }
+    drawFeather();
+    if (striking) {
+      ctx.strokeStyle = C.cat; ctx.lineCap = 'round'; ctx.lineWidth = cat.r * .42;
+      ctx.beginPath(); ctx.moveTo(paw.sx, paw.sy + hry * .5); ctx.lineTo(paw.x, paw.y); ctx.stroke();
+      drawPawTip(paw.x, paw.y, Math.atan2(paw.y - paw.sy, paw.x - paw.sx) + Math.PI / 2, cat.r * .3);
+    }
+  }
+  let running = false, prevT = 0, acc = 0, t = 0;
+  const frame = now => {
+    if (!running) return;
+    requestAnimationFrame(frame);
+    const dt = Math.min(.05, (now - prevT) / 1000 || .016);
+    prevT = now;
+    t += dt;
+    if (state === 'ready' && !reduced) { target.x = W * .3 + Math.sin(t * .9) * W * .05; target.y = H * .14 + Math.sin(t * 1.7) * 6; }
+    acc += dt;
+    while (acc > 1 / 120) { physics(1 / 120); acc -= 1 / 120; }
+    think(dt, now);
+    draw();
+  };
+  new ResizeObserver(() => { layout(); draw(); }).observe(box);
+  layout();
+  watch(box, v => {
+    if (v && !running) { running = true; prevT = performance.now(); requestAnimationFrame(frame); }
+    else if (!v) running = false;
+  });
+}
+
+/* ---------- fit check ---------- */
+function initFit() {
+  const range = $('#thick'), out = $('#thick-out');
+  const slab = $('#fit-slab'), edge = $('#fit-slab-edge'), clash = $('#fit-clash'), clashTxt = $('#fit-clash-txt');
+  const rod = $('#fit-rod'), pad = $('#fit-pad'), handle = $('#fit-handle');
+  const dl = $('#fd-l'), db = $('#fd-b'), dtxt = $('#fd-txt'), maxTxt = $('#fit-max');
+  const verdict = $('#fit-verdict'), checks = ['#c1', '#c2', '#c3'].map(s => $(s));
+  const TOP = 70, K = 2, OPEN = PRODUCT.clampMaxMm, JAW = TOP + OPEN * K;
+  maxTxt.textContent = 'Opens to ' + OPEN + ' mm';
+  let shown = +range.value, goal = shown, raf = 0, wasBad = false;
+  function draw(mm) {
+    const h = mm * K, under = TOP + h;
+    slab.setAttribute('height', h);
+    edge.setAttribute('height', h);
+    const padTop = Math.min(under, JAW - 10);
+    pad.setAttribute('y', padTop);
+    rod.setAttribute('y', padTop + 8);
+    rod.setAttribute('height', Math.max(0, JAW - padTop - 8));
+    const over = under > JAW;
+    clash.setAttribute('y', JAW);
+    clash.setAttribute('height', over ? under - JAW : 0);
+    clashTxt.style.opacity = over ? 1 : 0;
+    clashTxt.setAttribute('y', Math.max(under, JAW + 14) + 16);
+    handle.setAttribute('transform', 'translate(228 193.5) scale(' + Math.cos(mm * .5).toFixed(3) + ' 1) translate(-228 -193.5)');
+    dl.setAttribute('y2', under);
+    db.setAttribute('y1', under); db.setAttribute('y2', under);
+    dtxt.setAttribute('y', TOP + h / 2 + 5);
+    dtxt.textContent = Math.round(mm) + ' mm';
+  }
+  function judge() {
+    const mm = goal, fails = [];
+    if (mm > OPEN) fails.push('Your top is ' + mm + ' mm and the clamp opens to ' + OPEN + ' mm.');
+    if (!checks[0].checked) fails.push('The clamp needs a clear underside to grip.');
+    if (!checks[1].checked) fails.push("Don't clamp glass.");
+    if (!checks[2].checked) fails.push('A desk that rocks will rock more with a cat hanging off it.');
+    const bad = fails.length > 0;
+    verdict.classList.toggle('bad', bad);
+    verdict.innerHTML = bad ? '<span class="pill">Not yet</span><span>' + fails.join(' ') + '</span>' : '<span class="pill">Fits</span><span>It\'ll grip. Clamp it next to your chair.</span>';
+    if (bad && !wasBad && !reduced) { verdict.classList.remove('shake'); void verdict.offsetWidth; verdict.classList.add('shake'); }
+    wasBad = bad;
+  }
+  const loop = () => {
+    shown = lerp(shown, goal, reduced ? 1 : .18);
+    draw(shown);
+    raf = Math.abs(shown - goal) > .05 ? requestAnimationFrame(loop) : 0;
+    if (!raf) draw(goal);
+  };
+  range.addEventListener('input', () => {
+    goal = +range.value;
+    out.textContent = goal + ' mm · ' + (goal / 25.4).toFixed(1) + ' in';
+    range.style.setProperty('--fill', ((goal - range.min) / (range.max - range.min) * 100) + '%');
+    if (!raf) raf = requestAnimationFrame(loop);
+    judge();
+  });
+  checks.forEach(c => c.addEventListener('change', judge));
+  range.style.setProperty('--fill', ((goal - range.min) / (range.max - range.min) * 100) + '%');
+  draw(goal);
+  judge();
+}
+
+/* ---------- cart, fly-to-cart, sticky bar, drawing ---------- */
+function initCart() {
+  const btn = $('#cart-btn'), count = $('#cart-count'), drawer = $('#cart'), back = $('#drawer-back');
+  const body = $('#cart-body'), sub = $('#cart-sub'), x = $('#cart-x'), checkout = $('#checkout'), note = $('#checkout-note'), qty = $('#qty');
+  let n = 0;
+  const render = () => {
+    count.textContent = n;
+    count.classList.toggle('has', n > 0);
+    btn.setAttribute('aria-label', n ? 'Open cart, ' + n + (n > 1 ? ' items' : ' item') : 'Open cart');
+    sub.textContent = money(n * PRODUCT.price);
+    body.innerHTML = n
+      ? '<div class="dr-item"><img src="photos/mesh-cover-cutout.webp" alt=""><div><b>' + PRODUCT.name + '</b><span>' + PRODUCT.variant + '</span>'
+        + '<div class="qty" style="margin-top:8px;width:max-content"><button type="button" data-cq="-1" aria-label="One fewer">−</button>'
+        + '<span class="num" style="width:30px;text-align:center;font-family:var(--mono)">' + n + '</span>'
+        + '<button type="button" data-cq="1" aria-label="One more">+</button></div></div><span class="num">' + money(n * PRODUCT.price) + '</span></div>'
+      : '<p class="dr-empty">Your cart is empty. Pickle checked.</p>';
+  };
+  body.addEventListener('click', e => {
+    const b = e.target.closest('[data-cq]');
+    if (!b) return;
+    n = clamp(n + +b.dataset.cq, 0, 99);
+    render();
+  });
+  let lastFocus = null;
+  const open = () => {
+    lastFocus = document.activeElement;
+    drawer.hidden = back.hidden = false;
+    requestAnimationFrame(() => { drawer.classList.add('show'); back.classList.add('show'); });
+    x.focus({ preventScroll: true });
+  };
+  const close = () => {
+    drawer.classList.remove('show');
+    back.classList.remove('show');
+    setTimeout(() => { drawer.hidden = back.hidden = true; }, 450);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  };
+  btn.addEventListener('click', open);
+  x.addEventListener('click', close);
+  back.addEventListener('click', close);
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !drawer.hidden) close(); });
+  checkout.addEventListener('click', () => { note.hidden = false; });
+  $$('[data-qty]').forEach(b => b.addEventListener('click', () => { qty.value = clamp((parseInt(qty.value, 10) || 1) + +b.dataset.qty, 1, 9); }));
+  qty.addEventListener('change', () => { qty.value = clamp(parseInt(qty.value, 10) || 1, 1, 9); });
+  const fly = (from, done) => {
+    if (reduced) { done(); return; }
+    const a = from.getBoundingClientRect(), b = btn.getBoundingClientRect();
+    const img = document.createElement('img');
+    img.src = 'photos/mesh-cover-cutout.webp';
+    img.className = 'fly';
+    img.alt = '';
+    document.body.appendChild(img);
+    const sx = a.left + a.width / 2 - 32, sy = a.top + a.height / 2 - 32, ex = b.left + b.width / 2 - 32, ey = b.top + b.height / 2 - 32;
+    const anim = img.animate([
+      { transform: 'translate(' + sx + 'px,' + sy + 'px) scale(.6)', opacity: 0 },
+      { transform: 'translate(' + (sx + ex) / 2 + 'px,' + (Math.min(sy, ey) - 120) + 'px) scale(1.1) rotate(-20deg)', opacity: 1, offset: .45 },
+      { transform: 'translate(' + ex + 'px,' + ey + 'px) scale(.2) rotate(-40deg)', opacity: .5 }
+    ], { duration: 760, easing: 'cubic-bezier(.4,0,.2,1)' });
+    anim.onfinish = () => { img.remove(); done(); };
+  };
+  $$('[data-atc]').forEach(b => b.addEventListener('click', () => {
+    const q = clamp(parseInt(qty.value, 10) || 1, 1, 9);
+    fly(b, () => {
+      n = clamp(n + q, 0, 99);
+      render();
+      btn.classList.remove('bump');
+      void btn.offsetWidth;
+      btn.classList.add('bump');
+      setTimeout(open, 260);
+    });
+  }));
+  render();
+
+  const bar = $('#sticky-buy'), barBtn = bar.querySelector('button'), atc = $('#atc'), last = $('#last');
+  let atcSeen = true, atcAbove = false, lastSeen = false;
+  const upd = () => {
+    const show = !atcSeen && atcAbove && !lastSeen;
+    bar.classList.toggle('show', show);
+    bar.setAttribute('aria-hidden', String(!show));
+    barBtn.tabIndex = show ? 0 : -1;
+  };
+  watch(atc, (v, e) => { atcSeen = v; atcAbove = !v && e.boundingClientRect.top < 0; upd(); });
+  watch(last, v => { lastSeen = v; upd(); });
+
+  const dlg = $('#drawing-dialog');
+  $$('[data-open-drawing]').forEach(b => b.addEventListener('click', () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }));
+  $('#drawing-close').addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+}
+
+/* ---------- if you leave the page alone, the cat notices ---------- */
+function initIdle() {
+  const el = $('#idle'), typed = $('#idle-typed'), note = $('#idle-note');
+  let timer = 0, shown = 0, token = 0, lastReset = 0;
+  const reset = () => {
+    const now = performance.now();
+    if (el.classList.contains('show')) { el.classList.remove('show'); token++; }
+    else if (now - lastReset < 400) return;
+    lastReset = now;
+    clearTimeout(timer);
+    if (shown < 2 && !reduced) timer = setTimeout(show, 32000);
+  };
+  async function show() {
+    const my = ++token;
+    shown++;
+    typed.textContent = '';
+    note.textContent = '';
+    el.classList.add('show');
+    await wait(700);
+    for (const ch of 'mmmmmmmmmmmmmmmmmmmmmm') { if (my !== token) return; typed.textContent += ch; await wait(45); }
+    if (my === token) note.textContent = 'Pickle got bored waiting. Still there?';
+  }
+  ['pointermove', 'pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => addEventListener(ev, reset, { passive: true }));
+  reset();
+}
+
+const run = fn => { try { fn(); } catch (err) { console.error(fn.name, err); } };
+[initStretch, initHang, initLede, initGallery, initHero3D, initParts, initTicker, initKeyboard, initPlanner, initLoupe, initGame, initFit, initCart, initIdle].forEach(run);
+})();
+
+</script>
+</body>
+</html>
