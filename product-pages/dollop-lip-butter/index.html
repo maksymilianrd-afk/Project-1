@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!--PAGE-START-->
-<title>Dollop Lip Butter</title>
-<meta name="description" content="Dollop Lip Butter: a sheer, glossy balm in a 15 g squeeze tube. Four dessert scents.">
+<title>Dollop Tinted Lip Balm</title>
+<meta name="description" content="Dollop Tinted Lip Balm: a sheer, glossy balm in a 15 g squeeze tube. Four shades, each with a dessert scent.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..600;1,300..400&display=swap">
@@ -90,9 +90,14 @@ button,input{font:inherit;color:inherit}
 .swatch-view img{width:100%;height:100%;object-fit:cover}
 .viewer.show-swatch .swatch-view{opacity:1;visibility:visible}
 .viewer.show-swatch .hint{opacity:0}
+.swatch-view .il{position:absolute;left:18px;top:16px;font-size:var(--t-label);color:rgba(29,27,28,.62)}
 .sil{--c:var(--shade);position:absolute;left:50%;top:50%;width:min(15%,64px);aspect-ratio:1/4.5;transform:translate(-50%,-50%);display:none;flex-direction:column;align-items:center}
 .gl-fail .sil{display:flex}
-.gl-ok .sil{display:none!important}
+.gl-ok .viewer .sil{display:none!important}
+/* without WebGL: no dead controls, no empty stages */
+.gl-fail .hint,.gl-fail .views,.gl-fail .pic .cap,.gl-fail .scale,.gl-fail .scale-cap{display:none}
+.gl-fail .how{height:auto}.gl-fail .how-pin{position:static;height:auto;grid-template-columns:minmax(0,1fr);padding-block:clamp(72px,10vw,120px)}.gl-fail .how-stage{display:none}
+main section[id]{scroll-margin-top:72px}
 .sil i{display:block;width:100%}
 .sil .cr{height:8%;background:var(--c);filter:brightness(.94)}
 .sil .bd{flex:1;background:var(--c);clip-path:polygon(0 0,100% 0,82% 100%,18% 100%)}
@@ -105,6 +110,7 @@ button,input{font:inherit;color:inherit}
 .price-row{display:flex;align-items:baseline;gap:12px}
 .price-row .price{font-size:1.25rem;font-weight:500}
 .field{border:0;padding:0;margin:0;min-width:0;display:grid;gap:12px}
+.field[hidden]{display:none}
 .field legend{padding:0;margin-bottom:4px;font-size:var(--t-small);font-weight:500}
 .field legend span{font-weight:400}
 .note{font-size:var(--t-small);color:var(--ink-2);font-style:italic;font-weight:300}
@@ -162,8 +168,9 @@ button,input{font:inherit;color:inherit}
 .how-pin{position:sticky;top:0;height:100vh;height:100svh;z-index:3;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;gap:2rem;padding:88px var(--gutter) 48px;max-width:1376px;margin-inline:auto}
 .how-copy{display:grid;gap:clamp(28px,4vw,48px);min-width:0}
 .steps{list-style:none;margin:0;padding:0;border-top:1px solid rgba(242,241,238,.16)}
-.steps li{display:grid;grid-template-columns:3rem minmax(0,1fr);padding:18px 0;border-bottom:1px solid rgba(242,241,238,.16);opacity:.4;transition:opacity .4s var(--ease)}
-.steps li.on{opacity:1}
+.steps li{display:grid;grid-template-columns:3rem minmax(0,1fr);padding:18px 0;border-bottom:1px solid rgba(242,241,238,.16)}
+.steps li h3{color:#8E8A87;transition:color .4s var(--ease)}
+.steps li.on h3{color:var(--night-ink)}
 .steps .n{font-size:var(--t-label);font-weight:500;letter-spacing:.08em;padding-top:.3em;color:var(--night-2)}
 .steps h3{font-weight:400;font-size:1.125rem;letter-spacing:-.01em}
 .how-stage{height:100%;min-height:260px}
@@ -179,32 +186,34 @@ button,input{font:inherit;color:inherit}
 .sec-title{margin-bottom:clamp(32px,4.4vw,56px)}
 .scale{position:relative;min-width:0;padding-top:calc(100% * 2.7 / 15 + 16px)}
 .scale-stage{--len:10.5;position:absolute;left:0;top:0;width:calc(100% * var(--len) / 15);aspect-ratio:var(--len) / 2.7}
-.scale-stage .w{position:absolute;right:-22px;top:4%;bottom:4%;border-left:1px solid rgba(29,27,28,.4)}
+.scale-stage .w{position:absolute;right:-22px;top:calc(50% - var(--wh, 85%) / 2);height:var(--wh, 85%);border-left:1px solid rgba(29,27,28,.4)}
 .scale-stage .w::before,.scale-stage .w::after{content:"";position:absolute;left:-4px;width:7px;border-top:1px solid rgba(29,27,28,.4)}
 .scale-stage .w::before{top:0}.scale-stage .w::after{bottom:0}
 .scale-stage .w span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:var(--t-label);color:var(--ink-2);white-space:nowrap}
 .ruler{display:block;width:100%;height:auto;overflow:visible}
 .ruler line{stroke:var(--ink)}
 .ruler text{font-family:var(--font);font-size:24px;fill:var(--ink-2)}
+@media (max-width:600px){.ruler text{font-size:52px}.ruler .minor{display:none}}
 .scale-cap{margin-top:16px;font-size:var(--t-small);color:var(--ink-2)}
 .specs{display:grid;grid-template-columns:auto minmax(0,1fr);margin:0;border-top:1px solid var(--line);font-size:.9375rem}
 .specs dt,.specs dd{margin:0;padding:13px 0;border-bottom:1px solid var(--line)}
 .specs dt{padding-right:28px;color:var(--ink-2)}
-@media (max-width:900px){.details-grid{grid-template-columns:minmax(0,1fr);align-items:start}.scale-stage .w{right:-14px}.scale-stage .w span{left:auto;right:8px;top:auto;bottom:calc(100% + 6px);transform:none}}
+@media (max-width:900px){.details-grid{grid-template-columns:minmax(0,1fr);align-items:start}.scale-stage .w{right:-16px}}
 
 /* ---------- shades ---------- */
 .shades{padding:0 var(--gutter) clamp(72px,10vw,120px)}
 .shade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
-.card{display:grid;gap:12px;align-content:start;min-width:0}
+.card{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:12px;align-content:start;min-width:0}
 .pic{position:relative;display:block;width:100%;aspect-ratio:3/4;border:0;padding:0;background:var(--soft);cursor:pointer;overflow:hidden}
 .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s var(--ease)}
 .pic img:not([src]){visibility:hidden}
 .pic .sw{opacity:0}
-.pic:hover .sw,.pic:focus-visible .sw,.card.show-sw .pic .sw{opacity:1}
+.pic:focus-visible .sw,.card.show-sw .pic .sw{opacity:1}
+@media (hover:hover){.pic:hover .sw{opacity:1}.pic:hover .cap{opacity:1}}
 .pic .sil{--c:var(--tube);width:16%}
 .card.ready .pic .sil{display:none}
 .pic .cap{position:absolute;left:12px;bottom:10px;font-size:.75rem;color:rgba(29,27,28,.62);opacity:0;transition:opacity .4s}
-.pic:hover .cap,.card.show-sw .pic .cap{opacity:1}
+.card.show-sw .pic .cap{opacity:1}
 .card h3{font-weight:500;font-size:1.0625rem;letter-spacing:-.01em;display:flex;justify-content:space-between;gap:12px}
 .card h3 span{font-weight:400;color:var(--ink-2)}
 .card p{font-size:var(--t-small);color:var(--ink-2)}
@@ -217,7 +226,7 @@ button,input{font:inherit;color:inherit}
 .faq{padding:clamp(72px,10vw,120px) var(--gutter);border-top:1px solid var(--line)}
 .faq-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px)}
 .faq .acc summary{font-size:1.0625rem;font-weight:400;padding:20px 0}
-.faq-grid > .h2{position:sticky;top:96px;align-self:start}
+@media (min-width:901px){.faq-grid > .h2{position:sticky;top:96px;align-self:start}}
 @media (max-width:900px){.faq-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- footer ---------- */
@@ -280,7 +289,7 @@ button,input{font:inherit;color:inherit}
 
 <canvas id="gl" aria-hidden="true"></canvas>
 
-<p class="announce">Any three for £30 · Free UK delivery over £25</p>
+<p class="announce" id="announce">Any three for £30 · Free UK delivery over £25</p>
 <header class="top" id="topbar">
   <a class="wordmark" href="#shop">dollop</a>
   <nav aria-label="Main">
@@ -299,7 +308,7 @@ button,input{font:inherit;color:inherit}
       <div class="viewer" id="viewer" data-stage="hero">
         <div class="sil" aria-hidden="true"><i class="cr"></i><i class="bd"></i><i class="cp"></i></div>
         <p class="hint" aria-hidden="true">Drag to rotate</p>
-        <div class="swatch-view" aria-hidden="true"><img id="swatchView" alt=""></div>
+        <div class="swatch-view" aria-hidden="true"><img id="swatchView" alt=""><p class="il">Illustration, not a photo</p></div>
         <div class="views" role="group" aria-label="Product views">
           <button type="button" data-view="front" aria-pressed="true">Front</button>
           <button type="button" data-view="back" aria-pressed="false">Back</button>
@@ -310,23 +319,23 @@ button,input{font:inherit;color:inherit}
 
       <div class="buy above">
         <div style="display:grid;gap:14px">
-          <p class="crumb">Lips / Lip butter</p>
-          <h1 id="pname">Lip Butter</h1>
-          <p class="desc">A sheer, glossy balm in a soft squeeze tube. Four dessert scents.</p>
-          <div class="price-row"><span class="price num" id="priceTop">£12</span><span class="muted small">15 g ℮</span></div>
+          <p class="crumb">Lips / Lip balm</p>
+          <h1 id="pname">Tinted Lip Balm</h1>
+          <p class="desc">A sheer, glossy balm in a soft squeeze tube. Four shades, each with a dessert scent.</p>
+          <div class="price-row"><span class="price num" id="priceTop">£12</span><span class="muted small" id="sizeTop">15 g</span></div>
         </div>
 
-        <fieldset class="field">
-          <legend>Shade: <span id="shadeName">Spun Sugar</span></legend>
+        <fieldset class="field" id="shadeField">
+          <legend>Shade: <span id="shadeName">Rose</span></legend>
           <div class="dots" id="shadeDots"></div>
-          <p class="note" id="shadeNote">Sheer pink · candyfloss and vanilla scent</p>
+          <p class="note" id="shadeNote">Sheer rose · candyfloss scent</p>
         </fieldset>
 
         <fieldset class="field">
           <legend>Buy</legend>
           <div class="options">
-            <label class="opt"><input type="radio" name="opt" id="opt-one" value="one" checked><span class="r"></span><span class="t">One tube<small>Choose a quantity</small></span><span class="p num">£12</span></label>
-            <label class="opt"><input type="radio" name="opt" id="opt-three" value="three"><span class="r"></span><span class="t">Any three<small>Save £6 vs buying separately</small></span><span class="p num">£30</span></label>
+            <label class="opt"><input type="radio" name="opt" id="opt-one" value="one" checked autocomplete="off"><span class="r"></span><span class="t">One tube<small>Choose a quantity</small></span><span class="p num" data-price="single">£12</span></label>
+            <label class="opt"><input type="radio" name="opt" id="opt-three" value="three" autocomplete="off"><span class="r"></span><span class="t">Any three<small data-price="save">Save £6 vs buying separately</small></span><span class="p num" data-price="bundle">£30</span></label>
             <div class="trio" id="trio" hidden></div>
           </div>
         </fieldset>
@@ -337,18 +346,16 @@ button,input{font:inherit;color:inherit}
         </div>
 
         <ul class="assure">
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1"><path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2v2h-5"/><circle cx="4.5" cy="11.5" r="1.3"/><circle cx="12" cy="11.5" r="1.3"/></svg>Free UK delivery over £25</li>
-          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 6.5h7.5a3 3 0 0 1 0 6H6M3 6.5l2.5-2.5M3 6.5 5.5 9"/></svg>Unopened tubes can be returned within 30 days</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1"><path d="M1.5 4.5h8v6h-8zM9.5 6.5h3l2 2v2h-5"/><circle cx="4.5" cy="11.5" r="1.3"/><circle cx="12" cy="11.5" r="1.3"/></svg><span id="assureShip">UK delivery £2.99, free over £25</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 6.5h7.5a3 3 0 0 1 0 6H6M3 6.5l2.5-2.5M3 6.5 5.5 9"/></svg>Change your mind within 14 days of delivery</li>
         </ul>
 
         <div class="acc">
-          <details><summary>Details<i aria-hidden="true"></i></summary><div class="body"><p>Sheer tint with a glossy finish. 15 g ℮ (0.5 oz) squeeze tube with a twist-off white cap, about <span data-size="dims">105 × 23 mm</span>. Each shade has its own scent.</p></div></details>
-          <details><summary>How to use<i aria-hidden="true"></i></summary><div class="body"><p>Squeeze a pea-sized amount onto the tip and apply to your lips. Wipe the tip after use and replace the cap.</p></div></details>
           <details><summary>Ingredients<i aria-hidden="true"></i></summary><div class="body">
             <!-- TODO before launch: paste the full INCI list for each shade from the supplier's safety assessment. -->
-            <p>The full ingredients list is printed on the tube and the box. If you have allergies, check it before use and patch test on your inner wrist first.</p>
+            <p>The full ingredients list (INCI) for each shade will be listed here. If you have allergies, check it before you buy, and patch test on your inner wrist first.</p>
           </div></details>
-          <details><summary>Delivery &amp; returns<i aria-hidden="true"></i></summary><div class="body"><p>Free UK delivery on orders over £25. For smaller orders, the delivery cost and estimated date are shown at checkout.</p><p>Unopened tubes can be returned within 30 days. For hygiene reasons we can't accept opened lip products unless they arrived damaged.</p></div></details>
+          <details><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>UK delivery is <span data-fee>£2.99</span>, and free on orders over £25. You'll see the estimated delivery date at checkout.</p><p>You can cancel your order within 14 days of delivery and send it back for a refund. If a tube is faulty or not as described, tell us within 30 days and we'll refund it, opened or not. This doesn't affect your statutory rights.</p></div></details>
         </div>
       </div>
     </div>
@@ -379,15 +386,14 @@ button,input{font:inherit;color:inherit}
             <div class="scale-stage" data-stage="scale"><span class="w" aria-hidden="true"><span data-size="width">23 mm</span></span></div>
             <svg class="ruler" id="ruler" viewBox="0 0 1500 80" role="img" aria-label="A 15 centimetre ruler with the tube lying on it, drawn to scale." data-size="aria"></svg>
           </div>
-          <p class="scale-cap">Shown to scale on a 15 cm ruler. About <span data-size="length">10.5 cm</span> long with the cap on.</p>
+          <p class="scale-cap">Approximate size, drawn on a 15 cm ruler. About <span data-size="length">10.5 cm</span> long with the cap on.</p>
         </div>
         <dl class="specs">
-          <dt>Net weight</dt><dd>15 g ℮ (0.5 oz)</dd>
+          <dt>Net weight</dt><dd>15 g</dd>
           <dt>Size</dt><dd>About <span data-size="dims">105 × 23 mm</span></dd>
           <dt>Cap</dt><dd>Twist-off, white</dd>
           <dt>Finish</dt><dd>Sheer tint, glossy</dd>
           <dt>Scent</dt><dd>One per shade</dd>
-          <dt>After opening</dt><dd>See the open-jar symbol on the tube</dd>
         </dl>
       </div>
     </div>
@@ -398,7 +404,7 @@ button,input{font:inherit;color:inherit}
     <div class="wrap">
       <h2 class="h2 sec-title" id="sh-h">The shades</h2>
       <div class="shade-grid" id="shadeGrid"></div>
-      <p class="sw-note">Swatches are illustrations. The tint is sheer and builds with layers, so it looks a little different on everyone.</p>
+      <p class="sw-note">Swatches are illustrations, not photos. The tint is sheer, so it looks different on everyone.</p>
     </div>
   </section>
 
@@ -407,14 +413,14 @@ button,input{font:inherit;color:inherit}
     <div class="faq-grid wrap">
       <h2 class="h2" id="faq-h">Good to know</h2>
       <div class="acc">
-        <details><summary>Is it tinted?<i aria-hidden="true"></i></summary><div class="body"><p>Lightly. Each shade gives a sheer wash of colour, so your natural lip colour shows through. Vanilla Pod is almost clear.</p></div></details>
-        <details><summary>Does it feel sticky?<i aria-hidden="true"></i></summary><div class="body"><p>Glossy balms can feel slightly tacky at first. A pea-sized amount covers both lips and keeps it light.</p></div></details>
+        <details><summary>Is it tinted?<i aria-hidden="true"></i></summary><div class="body"><p>Lightly. Each shade gives a sheer wash of colour, so your natural lip colour shows through. Bare is almost clear.</p></div></details>
+        <details><summary>Does it feel sticky?<i aria-hidden="true"></i></summary><div class="body"><p>Glossy balms can feel slightly tacky at first. Use a small amount.</p></div></details>
         <details><summary>Does it contain SPF?<i aria-hidden="true"></i></summary><div class="body"><p>No. It doesn't protect against the sun, so wear an SPF lip product outdoors.</p></div></details>
         <details><summary>I have sensitive lips. Can I use it?<i aria-hidden="true"></i></summary><div class="body"><p>Check the ingredients on the box and patch test on your inner wrist first. Scent ingredients are a common cause of irritation. Stop using it if your lips sting, itch or swell.</p></div></details>
-        <details><summary>Is it edible?<i aria-hidden="true"></i></summary><div class="body"><p>No. The shades are scented, not flavoured. Keep it away from young children.</p></div></details>
+        <details><summary>Is it edible?<i aria-hidden="true"></i></summary><div class="body"><p>No. It's scented, but it isn't food. Keep it away from young children.</p></div></details>
         <details><summary>What happens if it gets warm?<i aria-hidden="true"></i></summary><div class="body"><p>It softens with warmth. Keep it out of direct sun and hot cars, where it can turn runny.</p></div></details>
         <details><summary>How do I keep it clean?<i aria-hidden="true"></i></summary><div class="body"><p>Wipe the tip after use and replace the cap. Don't share it.</p></div></details>
-        <details id="delivery"><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>Free UK delivery on orders over £25. For smaller orders, the delivery cost and estimated date are shown at checkout.</p><p>Unopened tubes can be returned within 30 days. For hygiene reasons we can't accept opened lip products unless they arrived damaged.</p></div></details>
+        <details id="delivery"><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>UK delivery is <span data-fee>£2.99</span>, and free on orders over £25. You'll see the estimated delivery date at checkout.</p><p>You can cancel your order within 14 days of delivery and send it back for a refund. If a tube is faulty or not as described, tell us within 30 days and we'll refund it, opened or not. This doesn't affect your statutory rights.</p></div></details>
       </div>
     </div>
   </section>
@@ -423,38 +429,39 @@ button,input{font:inherit;color:inherit}
 <footer class="foot">
   <div class="foot-grid wrap">
     <div>
-      <p class="muted" style="max-width:34ch">Lip Butter in four sheer shades. 15 g squeeze tube.</p>
+      <p class="muted" style="max-width:34ch">Tinted lip balm in four sheer shades. 15 g squeeze tube.</p>
       <!-- TODO before launch: trader name, geographic address and contact email go in CONFIG.trader; they render here. -->
       <p class="muted" id="trader" hidden></p>
     </div>
     <div>
       <h4>Shop</h4>
-      <ul><li><a href="#shop">Lip Butter</a></li><li><a href="#shades">Shades</a></li><li><a href="#shop" data-pick-three>Any three for £30</a></li></ul>
+      <ul><li><a href="#shop">Tinted Lip Balm</a></li><li><a href="#shades">Shades</a></li><li><a href="#shop" data-pick-three data-price="offer">Any three for £30</a></li></ul>
     </div>
     <div>
       <h4>Help</h4>
       <ul><li><a href="#faq">FAQ</a></li><li><a href="#delivery" data-open-delivery>Delivery and returns</a></li></ul>
     </div>
   </div>
-  <div class="base wrap"><span class="wordmark">dollop</span><span>© 2026 Dollop. Prices include VAT.</span></div>
+  <div class="base wrap"><span class="wordmark">dollop</span><span>© 2026 Dollop</span></div>
 </footer>
 
 <div class="sticky" id="sticky" aria-hidden="true">
-  <p class="nm"><i aria-hidden="true"></i><span id="stickyText">Spun Sugar · £12</span></p>
+  <p class="nm"><i aria-hidden="true"></i><span id="stickyText">Rose · £12</span></p>
   <button class="btn" type="button" id="stickyAdd" tabindex="-1">Add to bag</button>
 </div>
 
 <div class="scrim" id="scrim"></div>
-<aside class="bag" id="bag" aria-labelledby="bag-h" aria-hidden="true">
+<aside class="bag" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-h" aria-hidden="true">
   <div class="bag-head"><h2 id="bag-h">Your bag (<span id="bagCount2" class="num">0</span>)</h2><button class="textbtn" type="button" id="bagClose">Close</button></div>
   <div class="ship"><span id="shipMsg">Free UK delivery over £25.</span><div class="bar" aria-hidden="true"><i id="shipFill" style="transform:scaleX(0)"></i></div></div>
   <ul id="bagItems"></ul>
   <div class="bag-foot">
-    <div class="line" id="saveLine" hidden><span class="muted">Any three for £30</span><span class="num" id="saveAmt">−£0</span></div>
-    <div class="line total"><span>Subtotal</span><span class="num" id="subtotal">£0</span></div>
-    <p class="fine">Prices include VAT. Delivery is calculated at checkout.</p>
-    <a class="btn btn-block" id="checkout" href="#" role="button">Checkout</a>
-    <p class="fine" id="checkoutNote" hidden>Checkout isn't connected yet. Add your Shopify store details to CONFIG to switch it on.</p>
+    <div class="line" id="saveLine" hidden><span class="muted" data-price="offer">Any three for £30</span><span class="num" id="saveAmt">−£0</span></div>
+    <div class="line"><span>Subtotal</span><span class="num" id="subtotal">£0</span></div>
+    <div class="line"><span>UK delivery</span><span class="num" id="delAmt">£0</span></div>
+    <div class="line total"><span>Total</span><span class="num" id="total">£0</span></div>
+    <a class="btn btn-block" id="checkout" href="#">Checkout</a>
+    <p class="fine" id="checkoutNote" hidden>Checkout is unavailable right now. Please try again shortly.</p>
   </div>
 </aside>
 
@@ -466,8 +473,12 @@ var root = document.documentElement;
 /* Store settings. Fill these in before launch. */
 var CONFIG = {
   price: 12, bundleSize: 3, bundlePrice: 30, freeShip: 25,
+  // TODO before launch: your real UK delivery fee for orders under the free threshold
+  deliveryFee: 2.99,
   // Shopify cart permalink: https://{shopifyDomain}/cart/{variantId}:{qty},...
+  // The any-three price needs a matching discount in Shopify: an automatic discount, or a code set here.
   shopifyDomain: "",
+  discountCode: "",
   variantIds: { spun: "", vanilla: "", cold: "", butter: "" },
   trader: { name: "", address: "", email: "" },
   // TODO before launch: measure a real tube (cap on) and put the numbers here. The ruler, the 3D tube and the copy all follow them.
@@ -475,15 +486,16 @@ var CONFIG = {
 };
 
 var SHADES = [
-  { id:"spun",    name:"Spun Sugar",  tint:"Sheer pink",                 scent:"candyfloss and vanilla scent", tube:"#E9849A", soft:"#F0E3E3", ink:"#7E4A56", swatch:"#E07A92", sheer:.72, pearl:0 },
-  { id:"vanilla", name:"Vanilla Pod", tint:"Clear, with a hint of cream", scent:"vanilla custard scent",        tube:"#E2D7C2", soft:"#EFEDE7", ink:"#6E6253", swatch:"#F2E7D6", sheer:.93, pearl:0 },
-  { id:"cold",    name:"Cold Brew",   tint:"Sheer caramel",              scent:"iced coffee and cream scent",  tube:"#9C5E47", soft:"#E7DFDA", ink:"#F2EAE4", swatch:"#A9644A", sheer:.66, pearl:0 },
-  { id:"butter",  name:"Buttercream", tint:"Sheer peach pink",           scent:"buttercream icing scent",      tube:"#EFBBAB", soft:"#F2E9E4", ink:"#82625A", swatch:"#EE9F8E", sheer:.78, pearl:1 }
+  // ids stay fixed (bag, Shopify variants, saved choice); names and copy can change
+  { id:"spun",    name:"Rose",    tint:"Sheer rose",    scent:"candyfloss scent",   tube:"#E9849A", soft:"#F0E3E3", ink:"#7E4A56", swatch:"#DE6F8A", sheer:.82, pearl:0 },
+  { id:"vanilla", name:"Bare",    tint:"Almost clear",  scent:"vanilla scent",      tube:"#E2D7C2", soft:"#EFEDE7", ink:"#6E6253", swatch:"#F7F1E8", sheer:.97, pearl:0 },
+  { id:"cold",    name:"Caramel", tint:"Sheer caramel", scent:"coffee scent",       tube:"#9C5E47", soft:"#E7DFDA", ink:"#5A3424", swatch:"#A9644A", sheer:.78, pearl:0 },
+  { id:"butter",  name:"Peach",   tint:"Sheer peach",   scent:"vanilla cake scent", tube:"#EFBBAB", soft:"#F2E9E4", ink:"#82625A", swatch:"#EC9784", sheer:.86, pearl:0 }
 ];
 var byId = {}; SHADES.forEach(function(s){ byId[s.id] = s; });
 var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 var bus = new EventTarget();
-var D = window.Dollop = { SHADES: SHADES, shade: SHADES[0], bus: bus, reduced: reduced, view: "front", stills: {}, drag: { yaw: 0, vel: 0, pitch: 0, active: false, last: -1e9 } };
+var D = window.Dollop = { CONFIG: CONFIG, SHADES: SHADES, shade: SHADES[0], bus: bus, reduced: reduced, view: "front", stills: {}, drag: { yaw: 0, vel: 0, pitch: 0, active: false, last: -1e9 } };
 
 function $(s, el){ return (el || document).querySelector(s); }
 function $$(s, el){ return Array.prototype.slice.call((el || document).querySelectorAll(s)); }
@@ -518,12 +530,12 @@ D.setShade = setShade;
 /* ---------------- stills rendered by the 3D module ---------------- */
 function fillStills(){
   var st = D.stills[D.shade.id];
-  if (st) { $("#swatchView").src = st.swatch; $("#swatchView").alt = D.shade.name + " swatched on skin"; }
-  $('[data-view="swatch"]').disabled = !st;
-  if (!st && D.view === "swatch") setView("front");
+  if (st && st.swatch) { $("#swatchView").src = st.swatch; $("#swatchView").alt = D.shade.name + " shade, illustrated swatch"; }
+  $('[data-view="swatch"]').disabled = !(st && st.swatch);
+  if (!(st && st.swatch) && D.view === "swatch") setView("front");
   $$("img[data-still]").forEach(function(img){
     var k = img.getAttribute("data-still").split(":"), s = D.stills[k[1]];
-    if (s && img.getAttribute("src") !== s[k[0]]) { img.src = s[k[0]]; var card = img.closest(".card"); if (card) card.classList.add("ready"); }
+    if (s && s[k[0]] && img.getAttribute("src") !== s[k[0]]) { img.src = s[k[0]]; var card = img.closest(".card"); if (card) card.classList.add("ready"); }
   });
 }
 bus.addEventListener("stills", function(){ fillStills(); renderBag(); });
@@ -537,6 +549,7 @@ function setView(v){
   bus.dispatchEvent(new CustomEvent("view", { detail: v }));
 }
 $$(".views button").forEach(function(b){ b.addEventListener("click", function(){ setView(b.getAttribute("data-view")); }); });
+D.setView = setView;
 (function(){
   var down = false, lx = 0, ly = 0, lt = 0;
   viewer.addEventListener("pointerdown", function(e){
@@ -551,7 +564,7 @@ $$(".views button").forEach(function(b){ b.addEventListener("click", function(){
     var now = performance.now(), dx = e.clientX - lx, dy = e.clientY - ly, dt = Math.max(8, now - lt);
     D.drag.yaw += dx * 0.009;
     D.drag.pitch = clamp(D.drag.pitch + dy * 0.003, -0.3, 0.3);
-    D.drag.vel = dx * 0.009 / (dt / 1000);
+    D.drag.vel = clamp(dx * 0.009 / (dt / 1000), -6, 6); // a flick turns it, it doesn't spin it
     lx = e.clientX; ly = e.clientY; lt = now; D.drag.last = now;
   });
   function up(){ if (!down) return; down = false; D.drag.active = false; D.drag.last = performance.now(); if (performance.now() - lt > 80) D.drag.vel = 0; viewer.classList.remove("dragging"); }
@@ -559,7 +572,8 @@ $$(".views button").forEach(function(b){ b.addEventListener("click", function(){
 })();
 
 /* ---------------- buy box ---------------- */
-var qty = 1, opt = "one", trio = ["spun", "cold", "butter"];
+// read the option from the DOM: the browser may restore "Any three" on Back
+var qty = 1, opt = (document.querySelector('input[name="opt"]:checked') || {}).value || "one", trio = ["spun", "cold", "butter"];
 $("#trio").innerHTML = [0,1,2].map(function(i){
   return '<fieldset class="slot"><legend>Tube ' + (i + 1) + '</legend><div class="dots sm">' + dotsHTML("trio" + i, trio[i]) + '</div></fieldset>';
 }).join("");
@@ -567,14 +581,22 @@ $("#trio").addEventListener("change", function(e){ var i = +e.target.name.slice(
 function renderBuy(){
   var one = opt === "one";
   $("#trio").hidden = one;
+  $("#shadeField").hidden = !one; // the three slots replace the single shade picker
   $("#qtyBox").hidden = !one;
   $(".cart-row").style.gridTemplateColumns = one ? "" : "minmax(0,1fr)";
   $("#qty").textContent = qty;
   $("#addMain").textContent = one ? "Add to bag · " + money(qty * CONFIG.price) : "Add set to bag · " + money(CONFIG.bundlePrice);
   $("#priceTop").textContent = money(one ? CONFIG.price : CONFIG.bundlePrice);
+  $("#sizeTop").textContent = one ? "15 g" : "3 × 15 g";
   $("#stickyText").textContent = one ? D.shade.name + " · " + money(CONFIG.price) : "Any three · " + money(CONFIG.bundlePrice);
 }
-$$('input[name="opt"]').forEach(function(r){ r.addEventListener("change", function(){ opt = r.value; renderBuy(); }); });
+function seedTrio(){
+  // the shade the shopper already chose goes in the first slot
+  trio[0] = D.shade.id;
+  var r0 = document.querySelector('input[name="trio0"][value="' + D.shade.id + '"]'); if (r0) r0.checked = true;
+}
+$$('input[name="opt"]').forEach(function(r){ r.addEventListener("change", function(){ opt = r.value; if (opt === "three") seedTrio(); renderBuy(); }); });
+window.addEventListener("pageshow", function(){ var c = document.querySelector('input[name="opt"]:checked'); if (c && c.value !== opt) { opt = c.value; renderBuy(); } });
 $("#qtyDown").addEventListener("click", function(){ qty = Math.max(1, qty - 1); renderBuy(); });
 $("#qtyUp").addEventListener("click", function(){ qty = Math.min(10, qty + 1); renderBuy(); });
 function addCurrent(){
@@ -584,18 +606,19 @@ function addCurrent(){
 }
 $("#addMain").addEventListener("click", addCurrent);
 $("#stickyAdd").addEventListener("click", addCurrent);
-$$("[data-pick-three]").forEach(function(a){ a.addEventListener("click", function(){ $("#opt-three").checked = true; opt = "three"; renderBuy(); }); });
+$$("[data-pick-three]").forEach(function(a){ a.addEventListener("click", function(){ $("#opt-three").checked = true; opt = "three"; seedTrio(); renderBuy(); }); });
 $$("[data-open-delivery]").forEach(function(a){ a.addEventListener("click", function(){ $("#delivery").open = true; }); });
+if (opt === "three") seedTrio();
 renderBuy();
 
 /* ---------------- shade cards ---------------- */
 $("#shadeGrid").innerHTML = SHADES.map(function(s){
   return '<article class="card' + (s === D.shade ? " selected" : "") + '" data-shade="' + s.id + '" style="--soft:' + s.soft + ';--tube:' + s.tube + '">' +
-    '<button class="pic" type="button" aria-label="' + s.name + ': show the swatch">' +
+    '<button class="pic" type="button" aria-pressed="false" aria-label="' + s.name + ': show the swatch illustration">' +
       '<span class="sil" aria-hidden="true"><i class="cr"></i><i class="bd"></i><i class="cp"></i></span>' +
       '<img class="pr" data-still="product:' + s.id + '" alt="' + s.name + ' tube">' +
-      '<img class="sw" data-still="swatch:' + s.id + '" alt="' + s.name + ' swatched on skin">' +
-      '<span class="cap">Swatch</span></button>' +
+      '<img class="sw" data-still="swatch:' + s.id + '" alt="' + s.name + ' shade, illustrated swatch">' +
+      '<span class="cap">Swatch illustration</span></button>' +
     '<h3>' + s.name + '<span class="num">' + money(CONFIG.price) + '</span></h3>' +
     '<p>' + line(s) + '</p>' +
     '<div class="acts"><button class="textbtn" type="button" data-select="' + s.id + '">Select</button><button class="textbtn" type="button" data-add="' + s.id + '">Add to bag</button></div>' +
@@ -604,7 +627,8 @@ $("#shadeGrid").innerHTML = SHADES.map(function(s){
 $("#shadeGrid").addEventListener("click", function(e){
   var card = e.target.closest(".card"); if (!card) return;
   var id = card.getAttribute("data-shade");
-  if (e.target.closest(".pic")) { card.classList.toggle("show-sw"); return; }
+  var pic = e.target.closest(".pic");
+  if (pic) { var on = card.classList.toggle("show-sw"); pic.setAttribute("aria-pressed", String(on)); return; }
   if (e.target.closest("[data-add]")) { add(id, 1); openBag(); return; }
   if (e.target.closest("[data-select]")) { setShade(id); setView("front"); $("#shop").scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); }
 });
@@ -624,27 +648,34 @@ function checkoutUrl(){
   if (!CONFIG.shopifyDomain) return "";
   var parts = [];
   for (var id in bag) { if (!CONFIG.variantIds[id]) return ""; parts.push(CONFIG.variantIds[id] + ":" + bag[id]); }
-  return parts.length ? "https://" + CONFIG.shopifyDomain + "/cart/" + parts.join(",") : "";
+  return parts.length ? "https://" + CONFIG.shopifyDomain + "/cart/" + parts.join(",") + (CONFIG.discountCode ? "?discount=" + encodeURIComponent(CONFIG.discountCode) : "") : "";
 }
 function renderBag(){
+  // remember which control had focus, so keyboard users keep their place after the list is rebuilt
+  var f = document.activeElement, fKey = null;
+  if (f && bagEl.contains(f)) ["data-inc", "data-dec", "data-rm", "data-quick"].forEach(function(a){ if (f.hasAttribute(a)) fKey = "[" + a + '="' + f.getAttribute(a) + '"]'; });
   var t = totals(), ids = Object.keys(bag).filter(function(k){ return bag[k] > 0; });
   $("#bagItems").innerHTML = ids.length ? ids.map(function(id){
     var s = byId[id], st = D.stills[id];
     return '<li style="--soft:' + s.soft + ';--tube:' + s.tube + '"><span class="thumb">' + (st ? '<img src="' + st.product + '" alt="">' : '<i></i>') + '</span>' +
-      '<div><div class="nm"><span>Lip Butter</span><small>' + s.name + ' · 15 g</small></div>' +
+      '<div><div class="nm"><span>Tinted Lip Balm</span><small>' + s.name + ' · 15 g</small></div>' +
       '<div class="ctl"><div class="qty"><button type="button" data-dec="' + id + '" aria-label="Decrease ' + s.name + '">−</button><output class="num">' + bag[id] + '</output><button type="button" data-inc="' + id + '" aria-label="Increase ' + s.name + '">+</button></div>' +
       '<button class="textbtn" type="button" data-rm="' + id + '">Remove</button></div></div>' +
       '<span class="pr num">' + money(bag[id] * CONFIG.price) + '</span></li>';
   }).join("") : '<li class="empty">Your bag is empty.<div class="dots">' + SHADES.map(function(s){ return '<button type="button" class="dot" data-quick="' + s.id + '" aria-label="Add ' + s.name + '" title="Add ' + s.name + '" style="border:0;background:none;padding:0"><span style="--c:' + s.tube + '"></span></button>'; }).join("") + '</div></li>';
   $("#bagCount").textContent = t.n; $("#bagCount2").textContent = t.n;
   $("#saveLine").hidden = t.save <= 0; $("#saveAmt").textContent = "−" + money(t.save);
+  var fee = t.n === 0 || t.total >= CONFIG.freeShip ? 0 : CONFIG.deliveryFee;
   $("#subtotal").textContent = money(t.total);
+  $("#delAmt").textContent = t.n === 0 ? "£0" : fee ? money(fee) : "Free";
+  $("#total").textContent = money(t.total + fee);
   var left = CONFIG.freeShip - t.total;
   $("#shipFill").style.transform = "scaleX(" + clamp(t.total / CONFIG.freeShip, 0, 1).toFixed(3) + ")";
-  $("#shipMsg").textContent = t.n === 0 ? "Free UK delivery over £25." : left > 0 ? money(left) + " away from free UK delivery." : "You've got free UK delivery.";
+  $("#shipMsg").textContent = t.n === 0 ? "Free UK delivery over " + money(CONFIG.freeShip) + "." : left > 0 ? money(left) + " away from free UK delivery." : "You've got free UK delivery.";
   var co = $("#checkout"), url = checkoutUrl();
   co.setAttribute("aria-disabled", String(t.n === 0));
   if (url) co.href = url; else co.setAttribute("href", "#");
+  if (fKey) { var again = $("#bagItems " + fKey) || $("#bagItems button") || $("#bagClose"); again.focus({ preventScroll: true }); }
 }
 $("#bagItems").addEventListener("click", function(e){
   var b = e.target.closest("button"); if (!b) return;
@@ -657,17 +688,22 @@ $("#bagItems").addEventListener("click", function(e){
 });
 $("#checkout").addEventListener("click", function(e){
   if (count() === 0) { e.preventDefault(); return; }
-  if (!checkoutUrl()) { e.preventDefault(); $("#checkoutNote").hidden = false; }
+  if (!checkoutUrl()) { e.preventDefault(); $("#checkoutNote").hidden = false; console.warn("Checkout: set CONFIG.shopifyDomain and CONFIG.variantIds to link to your Shopify cart."); }
 });
 var lastFocus = null;
+var behind = [$("#topbar"), $("main"), $(".foot"), $("#sticky"), $(".announce")];
 function openBag(){
   lastFocus = document.activeElement; bagEl.inert = false;
+  behind.forEach(function(el){ if (el) el.inert = true; });
+  root.style.overflow = "hidden";
   bagEl.classList.add("open"); scrim.classList.add("show");
   bagEl.setAttribute("aria-hidden", "false"); bagBtn.setAttribute("aria-expanded", "true");
   setTimeout(function(){ $("#bagClose").focus({ preventScroll: true }); }, 60);
 }
 function closeBag(){
   bagEl.classList.remove("open"); scrim.classList.remove("show"); bagEl.inert = true;
+  behind.forEach(function(el){ if (el) el.inert = false; });
+  root.style.overflow = "";
   bagEl.setAttribute("aria-hidden", "true"); bagBtn.setAttribute("aria-expanded", "false");
   if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
 }
@@ -677,13 +713,26 @@ scrim.addEventListener("click", closeBag);
 document.addEventListener("keydown", function(e){ if (e.key === "Escape" && bagEl.classList.contains("open")) closeBag(); });
 renderBag();
 
+/* ---------------- prices and delivery (all from CONFIG) ---------------- */
+(function(){
+  var save = CONFIG.price * CONFIG.bundleSize - CONFIG.bundlePrice;
+  var offer = "Any " + (CONFIG.bundleSize === 3 ? "three" : CONFIG.bundleSize) + " for " + money(CONFIG.bundlePrice);
+  $$('[data-price="single"]').forEach(function(el){ el.textContent = money(CONFIG.price); });
+  $$('[data-price="bundle"]').forEach(function(el){ el.textContent = money(CONFIG.bundlePrice); });
+  $$('[data-price="save"]').forEach(function(el){ el.textContent = save > 0 ? "Save " + money(save) + " vs buying separately" : "Mix shades or double up"; });
+  $$('[data-price="offer"]').forEach(function(el){ el.textContent = offer; });
+  $$("[data-fee]").forEach(function(el){ el.textContent = money(CONFIG.deliveryFee); });
+  $("#announce").textContent = offer + " · Free UK delivery over " + money(CONFIG.freeShip);
+  $("#assureShip").textContent = "UK delivery " + money(CONFIG.deliveryFee) + ", free over " + money(CONFIG.freeShip);
+})();
+
 /* ---------------- size (from CONFIG) ---------------- */
 (function(){
   var L = CONFIG.size.lengthMm, W = CONFIG.size.widthMm;
   $$('[data-size="dims"]').forEach(function(el){ el.textContent = L + " × " + W + " mm"; });
   $$('[data-size="length"]').forEach(function(el){ el.textContent = (L / 10).toFixed(L % 10 ? 1 : 0) + " cm"; });
   $$('[data-size="width"]').forEach(function(el){ el.textContent = W + " mm"; });
-  var stage = $(".scale-stage"); if (stage) stage.style.setProperty("--len", String(L / 10));
+  var stage = $(".scale-stage"); if (stage) { stage.style.setProperty("--len", String(L / 10)); stage.style.setProperty("--wh", (W / 27 * 100).toFixed(1) + "%"); }
   var r = $("#ruler"); if (r) r.setAttribute("aria-label", "A 15 centimetre ruler with the tube lying on it, drawn to scale. The tube is about " + L + " millimetres long.");
 })();
 
@@ -699,7 +748,7 @@ renderBag();
   for (var mm = 0; mm <= 150; mm++) {
     var len = mm % 10 === 0 ? 30 : mm % 5 === 0 ? 20 : 11, x = Math.min(1499.5, Math.max(.5, mm * 10));
     h += '<line x1="' + x + '" x2="' + x + '" y1="0" y2="' + len + '" stroke-width="' + (mm % 10 === 0 ? 1.3 : .9) + '"/>';
-    if (mm % 10 === 0 && mm > 0 && mm < 150) h += '<text x="' + x + '" y="62" text-anchor="middle">' + (mm / 10) + '</text>';
+    if (mm % 10 === 0 && mm > 0 && mm < 150) h += '<text x="' + x + '" y="62" text-anchor="middle"' + (mm % 50 ? ' class="minor"' : '') + '>' + (mm / 10) + '</text>';
   }
   h += '<line x1="0" x2="1500" y1=".5" y2=".5" stroke-width="1"/><text x="0" y="62">0</text><text x="1500" y="62" text-anchor="end">15</text>';
   $("#ruler").innerHTML = h;
@@ -713,7 +762,8 @@ function onScroll(){
   topbar.classList.toggle("scrolled", scrollY > 80);
   var r = how.getBoundingClientRect(), p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
   steps.forEach(function(li, i){ var next = STEP_AT[i + 1] == null ? 9 : STEP_AT[i + 1]; li.classList.toggle("on", p >= STEP_AT[i] && p < next); });
-  var show = addMain.getBoundingClientRect().bottom < 64 && foot.getBoundingClientRect().top > vh && !bagEl.classList.contains("open");
+  var pinned = r.top <= 0 && r.bottom >= vh; // keep the bar off the How to use stage
+  var show = addMain.getBoundingClientRect().bottom < 64 && foot.getBoundingClientRect().top > vh && !pinned && !bagEl.classList.contains("open");
   if (show !== sticky.classList.contains("show")) {
     sticky.classList.toggle("show", show); sticky.setAttribute("aria-hidden", String(!show)); $("#stickyAdd").tabIndex = show ? 0 : -1;
   }
@@ -734,7 +784,7 @@ bus.addEventListener("shade", function(e){ try { localStorage.setItem("dollop-sh
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js" } }
 </script>
-<script type="module">
+<script type="module" onerror="document.documentElement.classList.add('gl-fail')">
 import * as THREE from "three";
 const D = window.Dollop;
 const FONT = '"Host Grotesk", "Helvetica Neue", Arial, sans-serif';
@@ -807,16 +857,12 @@ function createKit(renderer) {
       };
       const F = 0.75, B = 0.25;
       along("dollop", F - 0.012, 0.4, `500 118px ${FONT}`, "-4px");
-      along("lip butter", F + 0.05, 0.405, `400 34px ${FONT}`, "0px");
+      along("tinted lip balm", F + 0.05, 0.405, `400 34px ${FONT}`, "0px");
       along(f.name.toLowerCase(), F + 0.05, 0.05, `italic 400 30px ${FONT}`, "0px");
-      along("15 g ℮", F - 0.035, 0.05, `400 27px ${FONT}`, "0px");
+      along("15 g", F - 0.035, 0.05, `400 27px ${FONT}`, "0px");
       along("Squeeze a little onto the tip and apply to lips.", B - 0.05, 0.05, `400 21px ${FONT}`);
       along("For external use only. Stop use if irritation occurs.", B - 0.027, 0.05, `400 21px ${FONT}`);
       along("Keep out of reach of young children.", B - 0.004, 0.05, `400 21px ${FONT}`);
-      along("Ingredients: see box.  LOT 2610B", B + 0.026, 0.05, `400 21px ${FONT}`);
-      lctx.save(); lctx.translate(B * LW - 10, (1 - 0.88) * LH); lctx.rotate(-Math.PI / 2);
-      let x = -150; [2,1,1,3,1,2,2,1,1,1,3,2,1,2,1,1,2,3,1,1,2,1,3,1,1,2,1,2,2,1,1,3,1,2,1,1,2,2,1,3,1,1].forEach((w, i) => { if (i % 2 === 0) lctx.fillRect(x, 0, w * 3.2, 92); x += w * 3.2; });
-      lctx.restore();
       labelTex.needsUpdate = true;
     }
     // satin soft-touch film; the print is a little glossier than the film, which is what makes it look printed
@@ -974,47 +1020,58 @@ function createKit(renderer) {
       const s = new THREE.Scene();
       s.add(new THREE.Mesh(new THREE.SphereGeometry(60, 24, 12), new THREE.MeshBasicMaterial({ side: THREE.BackSide, color: new THREE.Color(0.22, 0.21, 0.2) })));
       const panel = (w, h, k, x, y, z) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(k, k * 0.98, k * 0.95), side: THREE.DoubleSide })); m.position.set(x, y, z); m.lookAt(0, 0, 0); s.add(m); };
-      panel(30, 7, 5.5, 0, 22, 30); panel(10, 16, 3, -26, 6, 14); panel(8, 8, 1.5, 22, -4, 18);
+      // the long softbox sits high, so a flat film misses it and only slopes and streaks catch the light
+      panel(34, 5, 6, 0, 26, 21); panel(10, 16, 2.4, -26, 6, 14); panel(8, 8, 1.2, 22, -4, 18);
       swatchEnv = pmrem.fromScene(s, 0.01).texture;
     }
     const env = swatchEnv;
     const scene = new THREE.Scene(); scene.environment = env;
     const key = new THREE.DirectionalLight(0xfff4ec, 1.9); key.position.set(-3, 8, 9); scene.add(key);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x8a7a70, 0.6));
-    let seed = 7 + shade.id.length; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    let seed = 7; for (const ch of shade.id) seed = (seed * 31 + ch.charCodeAt(0)) % 2147483647;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     const nc = document.createElement("canvas"); nc.width = nc.height = 512; const nx = nc.getContext("2d");
     nx.fillStyle = "#808080"; nx.fillRect(0, 0, 512, 512);
-    for (let i = 0; i < 14000; i++) { const g = 108 + rnd() * 44; nx.fillStyle = `rgb(${g},${g},${g})`; nx.fillRect(rnd() * 512, rnd() * 512, 1.6, 1.6); }
-    const nt = new THREE.CanvasTexture(nc); nt.wrapS = nt.wrapT = THREE.RepeatWrapping; nt.repeat.set(4, 4);
-    const skin = new THREE.MeshStandardMaterial({ color: "#EBD2C2", roughness: 0.8, bumpMap: nt, bumpScale: 0.5, envMap: env, envMapIntensity: 0.35 });
+    for (let i = 0; i < 9000; i++) { const g = 100 + rnd() * 56; nx.fillStyle = `rgba(${g},${g},${g},.5)`; nx.beginPath(); nx.arc(rnd() * 512, rnd() * 512, 0.8 + rnd() * 1.6, 0, 7); nx.fill(); }
+    const nt = new THREE.CanvasTexture(nc); nt.wrapS = nt.wrapT = THREE.RepeatWrapping; nt.repeat.set(2, 2);
+    // skin: soft tone variation plus fine texture
+    const mc = document.createElement("canvas"); mc.width = mc.height = 256; const mx = mc.getContext("2d");
+    mx.fillStyle = "#EBD2C2"; mx.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 40; i++) { const x = rnd() * 256, y = rnd() * 256, r = 20 + rnd() * 60, g = mx.createRadialGradient(x, y, 0, x, y, r); const c = rnd() > 0.5 ? "214,176,156" : "245,224,212"; g.addColorStop(0, `rgba(${c},.18)`); g.addColorStop(1, `rgba(${c},0)`); mx.fillStyle = g; mx.fillRect(0, 0, 256, 256); }
+    const mt = new THREE.CanvasTexture(mc); mt.colorSpace = THREE.SRGBColorSpace;
+    const skin = new THREE.MeshStandardMaterial({ map: mt, roughness: 0.8, envMap: env, envMapIntensity: 0.35 });
     scene.add(new THREE.Mesh(new THREE.PlaneGeometry(60, 60), skin));
-    // the swipe: round where the tip lands, thinning as it lifts off, with fine applicator ridges
-    const NX = 220, NY = 56;
-    const ridge = []; for (let k = 0; k < 5; k++) ridge.push([5 + rnd() * 20, rnd() * 6.28, 0.25 + rnd() * 0.5]);
+    // the swipe: a thin sheer film, round where the tip lands and thinning as it lifts off,
+    // with faint applicator streaks and a little balm pooled at the edges
+    const NX = 220, NY = 64;
+    const streaks = []; for (let k = 0; k < 6; k++) streaks.push([6 + rnd() * 26, rnd() * 6.28, (rnd() - 0.5) * 2]);
+    const phase = rnd() * 1.2, curve = 0.18 + rnd() * 0.16, width = 1.15 + rnd() * 0.2;
     const pos = new Float32Array((NX + 1) * (NY + 1) * 3), ids = [];
     for (let i = 0; i <= NX; i++) {
       const t = i / NX, x = -5.4 + t * 10.8;
-      const yc = 0.26 * Math.sin(t * 2.4 - 0.2) - t * 0.35;
-      const start = Math.sqrt(Math.max(0, 1 - Math.pow(1 - Math.min(1, t / 0.13), 2)));
-      const end = Math.sqrt(Math.max(0, 1 - Math.pow(Math.max(0, (t - 0.84) / 0.16), 2)));
-      const w = 1.3 * start * end * (1 - 0.36 * t) * (1 + 0.04 * Math.sin(t * 17));
-      const thick = 0.2 * (0.55 + 0.45 * (1 - t)) * Math.pow(start * end, 0.6) + 0.002;
+      const yc = curve * Math.sin(t * 2.4 - 0.2 + phase) - t * 0.3;
+      const start = Math.sqrt(Math.max(0, 1 - Math.pow(1 - Math.min(1, t / 0.12), 2)));
+      const end = Math.sqrt(Math.max(0, 1 - Math.pow(Math.max(0, (t - 0.82) / 0.18), 2)));
+      const w = width * start * end * (1 - 0.34 * t) * (1 + 0.035 * Math.sin(t * 15 + phase));
+      const thick = 0.045 * (0.6 + 0.4 * (1 - t)) * Math.pow(start * end, 0.4) + 0.002;
       for (let j = 0; j <= NY; j++) {
-        const sN = j / NY * 2 - 1;
-        let r = 0; ridge.forEach((q) => { r += Math.sin(sN * q[0] + q[1] + t * q[2] * 3) * 0.014; });
+        const sN = j / NY * 2 - 1, edge = Math.abs(sN);
+        let r = 0; streaks.forEach((q) => { r += Math.sin(sN * q[0] + q[1] + t * q[2]); });
         const dome = Math.sqrt(Math.max(0, 1 - sN * sN));
+        const rim = 0.45 * Math.exp(-Math.pow((1 - edge) / 0.1, 2)) * dome;
         const k = (i * (NY + 1) + j) * 3;
-        pos[k] = x; pos[k + 1] = yc + sN * w * (sN > 0 ? 1 : 0.94); pos[k + 2] = thick * Math.pow(dome, 0.7) * (1 + r);
+        pos[k] = x; pos[k + 1] = yc + sN * w * (sN > 0 ? 1 : 0.94);
+        pos[k + 2] = thick * (Math.pow(dome, 0.25) + rim) + 0.009 * dome * r / streaks.length;
       }
     }
     for (let i = 0; i < NX; i++) for (let j = 0; j < NY; j++) { const a = i * (NY + 1) + j, b = a + 1, c = a + NY + 1, d = c + 1; ids.push(a, c, b, b, c, d); }
     const sgeo = new THREE.BufferGeometry(); sgeo.setAttribute("position", new THREE.BufferAttribute(pos, 3)); sgeo.setIndex(ids); sgeo.computeVertexNormals();
     const tint = new THREE.Color(shade.swatch);
-    const mat = new THREE.MeshPhysicalMaterial({ color: tint.clone().lerp(new THREE.Color(0xffffff), 0.2), roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03, transmission: shade.sheer, thickness: 0.3, ior: 1.47, attenuationColor: tint, attenuationDistance: 0.4, specularIntensity: 1, envMap: env, envMapIntensity: 1.1 });
-    const smear = new THREE.Mesh(sgeo, mat); smear.position.z = 0.003; smear.rotation.z = 0.5; smear.scale.setScalar(0.8); scene.add(smear);
+    const mat = new THREE.MeshPhysicalMaterial({ color: tint.clone().lerp(new THREE.Color(0xffffff), 0.45), roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.03, transmission: shade.sheer, thickness: 0.06, ior: 1.47, attenuationColor: tint, attenuationDistance: 1.0, specularIntensity: 1, envMap: env, envMapIntensity: 1.2 });
+    const smear = new THREE.Mesh(sgeo, mat); smear.position.z = 0.003; smear.rotation.z = 0.42 + rnd() * 0.16; smear.scale.setScalar(0.8); scene.add(smear);
     const cam = new THREE.PerspectiveCamera(30, W / H, 1, 200); cam.position.set(0, -12, 19); cam.lookAt(0, -0.2, 0);
     const out = grab(scene, cam, W, H);
-    sgeo.dispose(); mat.dispose(); nt.dispose(); skin.dispose();
+    sgeo.dispose(); mat.dispose(); nt.dispose(); mt.dispose(); skin.dispose();
     return out;
   }
   return { makeTube, makeShadow, productShot, swatchShot, envTex };
@@ -1025,7 +1082,9 @@ async function main() {
   const canvas = document.getElementById("gl");
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.setSize(innerWidth, innerHeight, false);
+  // size from the layout box, not innerWidth, so a visible scrollbar doesn't squash the scene
+  const vw0 = () => document.documentElement.clientWidth, vh0 = () => innerHeight;
+  renderer.setSize(vw0(), vh0(), false);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;
 
@@ -1035,7 +1094,7 @@ async function main() {
   const scene = new THREE.Scene(); scene.environment = kit.envTex;
   const key = new THREE.DirectionalLight(0xffffff, 0.35); key.position.set(-6, 10, 10); scene.add(key);
   const FOV = 12, CAM_Z = 150; // a long lens, like a product photographer's: less perspective, true scale on the ruler
-  const camera = new THREE.PerspectiveCamera(FOV, innerWidth / innerHeight, 1, 400);
+  const camera = new THREE.PerspectiveCamera(FOV, vw0() / vh0(), 1, 400);
   camera.position.set(0, 0, CAM_Z);
   const VIS_H = 2 * CAM_Z * Math.tan(THREE.MathUtils.degToRad(FOV / 2));
 
@@ -1067,13 +1126,17 @@ async function main() {
     const hTop = docTop(howSec), hLen = Math.max(1, howSec.offsetHeight - vh);
     const scaleAt = docTop(stages.scale) + stages.scale.offsetHeight / 2 - vh * 0.5;
     const narrow = innerWidth < 860;
+    const hero = { at: 0, el: stages.hero, fit: "v", k: narrow ? 0.66 : 0.72, rx: 0.02, ry: -0.3, rz: 0, cap: 0, sq: 0, bead: 0, free: 1, shadow: 1 };
     const list = [
-      { at: 0, el: stages.hero, fit: "v", k: narrow ? 0.66 : 0.72, rx: 0.02, ry: -0.3, rz: 0, cap: 0, sq: 0, bead: 0, free: 1, shadow: 1 },
+      hero,
+      // stay in the viewer until How to use is close; on phones jump while both stages are off screen
+      Object.assign({}, hero, { at: hTop - vh * (narrow ? 1 : 0.6), snapNext: narrow }),
       { at: hTop, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.06, ry: -0.3, rz: -0.06, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0, scrub: true },
       { at: hTop + hLen * 0.32, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: -0.18, rz: -0.18, cap: 1, sq: 0, bead: 0, free: 0, shadow: 0, scrub: true },
       { at: hTop + hLen * 0.64, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.16, ry: 0.05, rz: -0.6, cap: 1, sq: 0.8, bead: 1, free: 0, shadow: 0, scrub: true },
       { at: hTop + hLen * 0.98, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: 0.15, rz: -0.66, cap: 1, sq: 0.15, bead: 1, free: 0, shadow: 0 },
-      { at: Math.max(hTop + hLen + 2, scaleAt), el: stages.scale, fit: "exact", k: 1, rx: 0, ry: 0.12, rz: -Math.PI / 2, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0.8 }
+      { at: hTop + hLen + vh * 0.3, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: 0.15, rz: -0.66, cap: 1, sq: 0.15, bead: 1, free: 0, shadow: 0 },
+      { at: Math.max(hTop + hLen + vh * 0.3 + 2, scaleAt), el: stages.scale, fit: "exact", k: 1, rx: 0, ry: 0, rz: -Math.PI / 2, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0.8, wfix: 1 }
     ];
     for (let i = 1; i < list.length; i++) if (list[i].at <= list[i - 1].at) list[i].at = list[i - 1].at + 1;
     stations = list;
@@ -1086,30 +1149,31 @@ async function main() {
     const size = s.fit === "exact" ? r.width : s.k * Math.min(r.height, r.width * 2.4);
     return { px: r.left + r.width / 2, py: r.top + r.height / 2, size };
   }
-  const KEYS = ["rx", "ry", "rz", "cap", "sq", "bead", "free", "shadow"];
+  const KEYS = ["rx", "ry", "rz", "cap", "sq", "bead", "free", "shadow", "wfix"];
   const target = {};
   function computeTarget() {
-    const vw = innerWidth, vh = innerHeight, sY = scrollY;
+    const vw = vw0(), vh = vh0(), sY = scrollY;
     let i = 0;
     while (i < stations.length - 1 && sY >= stations[i + 1].at) i++;
     const A = stations[i], B = stations[Math.min(i + 1, stations.length - 1)];
     const t = A === B ? 0 : Math.min(1, Math.max(0, (sY - A.at) / (B.at - A.at)));
-    const e = A.scrub ? sstep(0, 1, t) : sstep(0.1, 0.9, t);
+    // reduced motion: step between states instead of animating; snapNext: switch stage at once
+    const e = D.reduced ? (t < 0.5 ? 0 : 1) : A.snapNext ? (t > 0 ? 1 : 0) : A.scrub ? sstep(0, 1, t) : sstep(0.1, 0.9, t);
     const pa = stagePose(A), pb = stagePose(B);
     const wpp = VIS_H / vh;
     target.x = (lerp(pa.px, pb.px, e) - vw / 2) * wpp;
     target.y = -(lerp(pa.py, pb.py, e) - vh / 2) * wpp;
     target.s = lerp(pa.size, pb.size, e) * wpp / L_TOTAL;
-    KEYS.forEach((k) => { target[k] = lerp(A[k], B[k], e); });
+    KEYS.forEach((k) => { target[k] = lerp(A[k] || 0, B[k] || 0, e); });
   }
 
   /* views in the product viewer */
-  const VIEW = { front: { ry: 0, cap: 0 }, back: { ry: Math.PI, cap: 0 }, open: { ry: -0.35, cap: 1 }, swatch: { ry: 0, cap: 0 } };
-  let viewRy = 0, viewCap = 0;
+  const VIEW = { front: { ry: 0, cap: 0, rz: 0 }, back: { ry: Math.PI, cap: 0, rz: 0 }, open: { ry: -0.3, cap: 1, rz: -1.22 }, swatch: { ry: 0, cap: 0, rz: 0 } };
+  let viewRy = 0, viewCap = 0, viewRz = 0;
   D.bus.addEventListener("view", (e) => {
     const v = VIEW[e.detail] || VIEW.front;
     const total = viewRy + D.drag.yaw;
-    viewRy = v.ry; viewCap = v.cap;
+    viewRy = v.ry; viewCap = v.cap; viewRz = v.rz;
     // keep the turn short: drop the whole spins added by dragging
     D.drag.yaw = Math.round((total - viewRy) / (Math.PI * 2)) * Math.PI * 2;
     D.drag.vel = 0; D.drag.pitch = 0;
@@ -1120,7 +1184,7 @@ async function main() {
   let first = true, awake = 0, time = 0, last = performance.now();
   function wake() { awake = 1.2; }
   window.addEventListener("scroll", wake, { passive: true });
-  window.addEventListener("resize", () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); buildStations(); wake(); });
+  window.addEventListener("resize", () => { renderer.setSize(vw0(), vh0(), false); camera.aspect = vw0() / vh0(); camera.updateProjectionMatrix(); buildStations(); wake(); });
   if ("ResizeObserver" in window) new ResizeObserver(() => { buildStations(); wake(); }).observe(document.body);
   buildStations();
 
@@ -1131,16 +1195,24 @@ async function main() {
 
     // drag inertia, then a very slow idle turn once nobody is touching it
     const dr = D.drag;
-    if (!dr.active && dr.vel) { dr.yaw += dr.vel * dt; dr.vel *= Math.pow(0.03, dt); if (Math.abs(dr.vel) < 0.02) dr.vel = 0; }
+    if (!dr.active && dr.vel) { dr.yaw += dr.vel * dt; dr.vel *= Math.pow(0.02, dt); if (Math.abs(dr.vel) < 0.05) dr.vel = 0; }
     if (!dr.active) dr.pitch *= Math.pow(0.08, dt);
+    // once the turn has settled, drop whole spins so they never unwind later while scrolling
+    if (!dr.active && !dr.vel && Math.abs(dr.yaw) > Math.PI) {
+      const turns = Math.round(dr.yaw / (Math.PI * 2));
+      if (turns) { dr.yaw -= turns * Math.PI * 2; if (cur.ry != null) cur.ry -= turns * Math.PI * 2 * target.free; }
+    }
+    // leaving the product viewer in swatch view: go back to the tube
+    if (D.view === "swatch" && target.free < 0.98 && D.setView) D.setView("front");
     const idle = !dr.active && !dr.vel && now - dr.last > 3000 && !D.reduced && D.view === "front";
     const free = target.free;
     const goal = Object.assign({}, target);
     goal.ry = target.ry + free * (viewRy + dr.yaw + (idle ? Math.sin(time * 0.25) * 0.1 : 0));
     goal.rx = target.rx + free * dr.pitch;
     goal.cap = Math.max(target.cap, free * viewCap);
+    goal.rz = target.rz + free * viewRz;
     // position and size follow the scroll exactly; only the pose is smoothed
-    const k = first ? 1 : 1 - Math.exp(-dt * (dr.active ? 14 : 6));
+    const k = first || D.reduced ? 1 : 1 - Math.exp(-dt * (dr.active ? 14 : 6));
     for (const key in goal) cur[key] = first || key === "x" || key === "y" || key === "s" ? goal[key] : cur[key] + (goal[key] - cur[key]) * k;
     first = false;
 
@@ -1162,12 +1234,18 @@ async function main() {
     const hidden = D.view === "swatch" && cur.free > 0.5;
     tube.root.visible = !hidden;
     tube.root.position.set(cur.x, cur.y, 0);
-    tube.root.scale.setScalar(cur.s);
+    // on the ruler, follow the measured width as well as the length (CONFIG.size)
+    const sz = D.CONFIG.size, wr = (sz.widthMm / 23.2) / (sz.lengthMm / 105);
+    const wf = 1 + (cur.wfix || 0) * (wr - 1);
+    tube.root.scale.set(cur.s * wf, cur.s, cur.s * wf);
     tube.root.rotation.set(cur.rx, cur.ry, cur.rz);
     tube.pose({ cap: cur.cap, sq: cur.sq, bead: cur.bead });
     shadow.update(tube.root, hidden ? 0 : Math.max(0, Math.min(1, cur.shadow)));
     renderer.render(scene, camera);
   }
+
+  // if the typeface arrives late, reprint the label in it
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { tube.drawLabel(D.shade); wake(); });
 
   computeTarget();
   renderer.render(scene, camera);
@@ -1179,17 +1257,18 @@ async function main() {
   const toURL = (c) => new Promise((res) => c.toBlob((b) => res(b ? URL.createObjectURL(b) : c.toDataURL()), "image/png"));
   const pause = () => new Promise((r) => (window.requestIdleCallback ? requestIdleCallback(r, { timeout: 500 }) : setTimeout(r, 60)));
   const order = [D.shade].concat(D.SHADES.filter((s) => s !== D.shade));
-  for (const s of order) {
-    await pause();
-    // each still borrows the page canvas, so redraw the page scene in the same task (no blank frame)
-    const pc = kit.productShot(s); renderer.render(scene, camera);
-    const product = await toURL(pc);
-    await pause();
-    const sc = kit.swatchShot(s); renderer.render(scene, camera);
-    const swatch = await toURL(sc);
-    D.stills[s.id] = { product, swatch };
-    D.bus.dispatchEvent(new CustomEvent("stills"));
-    wake();
+  try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]); } catch (e) {}
+  for (const kind of ["product", "swatch"]) {
+    for (const s of order) {
+      await pause();
+      // each still borrows the page canvas, so redraw the page scene in the same task (no blank frame)
+      const c = kind === "product" ? kit.productShot(s) : kit.swatchShot(s);
+      renderer.render(scene, camera);
+      const url = await toURL(c);
+      D.stills[s.id] = Object.assign({}, D.stills[s.id], { [kind]: url });
+      D.bus.dispatchEvent(new CustomEvent("stills"));
+      wake();
+    }
   }
 }
 main().catch((err) => { document.documentElement.classList.add("gl-fail"); console.warn("3D view unavailable; the page works without it.", err); });
