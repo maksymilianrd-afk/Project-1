@@ -6,7 +6,8 @@ Each page builds into a single self-contained `index.html` (scripts and images i
 
 ```
 npm install
-node build.mjs ocean-drive-neon   # writes ocean-drive-neon/index.html
+node build.mjs ocean-drive-neon              # writes ocean-drive-neon/index.html
+node build.mjs ocean-drive-neon --artifact   # also writes artifact.html for publishing as a claude.ai Artifact
 ```
 
 Edit `<page>/src/index.html` (markup and styles) and `<page>/src/app.js` (3D and interactions), then rebuild. Photos live in `<page>/img/` and are referenced as `{{img:file.webp}}`.
@@ -15,4 +16,4 @@ Add `?still` to the URL to turn off the camera easing, the flicker and the passi
 
 | Page | Product |
 |---|---|
-| `ocean-drive-neon/` | 300 mm LED neon sign (R + star over a night beach print). See its `RESEARCH.md`. |
+| `ocean-drive-neon/` | 300 mm LED neon sign (R + star over a night beach print). See its `RESEARCH.md`. Preview: https://claude.ai/artifact/FknJ9cueznFrMzEUXTAxuD |

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ocean Drive LED Neon Sign</title>
+<title>Ocean Drive Neon Sign</title>
 <meta name="description" content="A 300 mm LED neon sign: a palm-lined night beach printed on acrylic, a white R and a star lit in silicone LED flex. USB powered, four-step dimmer, wall or chain mount.">
 <meta name="theme-color" content="#09080b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@ body::after{
 /* header ----------------------------------------------------------- */
 .hdr{
   position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:16px var(--gut);pointer-events:none;
+  padding:calc(16px + env(safe-area-inset-top, 0px)) var(--gut) 16px;pointer-events:none;
   background:linear-gradient(rgb(9 8 11/.75),rgb(9 8 11/0));
   opacity:0;transform:translateY(-10px);transition:opacity .8s .9s,transform .8s .9s var(--ease);
 }
@@ -122,7 +122,7 @@ body::after{
 @keyframes press{50%{transform:translateY(1px) scale(.93)}}
 .led{position:absolute;top:22%;right:9%;width:5px;height:5px;border-radius:50%;background:#2a5a2a;
   box-shadow:0 0 calc(var(--glow)*8px) #7dff6a;opacity:calc(.35 + var(--glow)*.65);filter:brightness(calc(.6 + var(--glow)))}
-.dock{position:fixed;right:max(var(--gut),18px);bottom:22px;z-index:55;display:flex;align-items:center;gap:14px;
+.dock{position:fixed;right:max(var(--gut),18px);bottom:calc(22px + env(safe-area-inset-bottom, 0px));z-index:55;display:flex;align-items:center;gap:14px;
   opacity:0;transform:translateY(20px);transition:opacity .8s 1.2s,transform .8s 1.2s var(--ease)}
 .on .dock{opacity:1;transform:none}
 .dock .remote{--w:132px}
@@ -131,7 +131,7 @@ body::after{
 .levels{display:flex;gap:3px;margin-top:4px}
 .levels i{width:14px;height:3px;background:rgb(var(--ink)/.2)}
 .levels i.on{background:rgb(var(--lit))}
-@media (max-width:640px){.dock{right:12px;bottom:14px}.dock .remote{--w:116px}.dock-read{display:none}}
+@media (max-width:640px){.dock{right:12px;bottom:calc(14px + env(safe-area-inset-bottom, 0px))}.dock .remote{--w:116px}.dock-read{display:none}}
 
 /* shared section layout ---------------------------------------------- */
 .sec{position:relative;isolation:isolate;min-height:100svh;padding:120px var(--gut) 90px;display:flex;align-items:center}
@@ -382,7 +382,7 @@ body::after{
 .ft-row p{margin:0;max-width:70ch}
 
 /* toast ------------------------------------------------------------- */
-#toast{position:fixed;left:50%;bottom:26px;z-index:90;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+#toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom, 0px));z-index:90;transform:translate(-50%,24px);opacity:0;pointer-events:none;
   padding:12px 18px 11px;background:rgb(var(--ink));color:#0b0a0c;border-radius:99px;transition:opacity .35s,transform .45s var(--ease);max-width:calc(100vw - 32px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media (max-width:640px){#toast{bottom:90px}}
