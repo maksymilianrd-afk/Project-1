@@ -26,7 +26,7 @@
   --shade-soft:#F0E3E3;
   --font:"Host Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
   --t-h1:clamp(2.4rem,3.7vw,3.5rem);
-  --t-h2:clamp(2rem,3.4vw,3.25rem);
+  --t-h2:clamp(1.75rem,2.4vw,2.5rem);
   --t-body:1rem;
   --t-small:.875rem;
   --t-label:.75rem;
@@ -65,8 +65,8 @@ button,input{font:inherit;color:inherit}
 
 /* ---------- announcement + header ---------- */
 .announce{background:var(--ink);color:var(--ground);font-size:var(--t-label);font-weight:500;letter-spacing:.04em;text-align:center;padding:calc(env(safe-area-inset-top,0px) + 9px) var(--gutter) 9px}
-.top{position:sticky;top:0;z-index:40;height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-inline:var(--gutter);background:var(--ground);border-bottom:1px solid transparent;transition:background-color .3s,border-color .3s}
-.top.scrolled{background:color-mix(in srgb,var(--ground) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+.top{position:sticky;top:0;z-index:40;height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-inline:max(var(--gutter), calc((100% - 1280px) / 2));background:var(--ground);border-bottom:1px solid transparent;transition:background-color .3s,border-color .3s}
+.top.scrolled{background:var(--ground);border-bottom-color:var(--line)}
 .wordmark{font-weight:500;font-size:1.25rem;letter-spacing:-.04em;text-decoration:none;line-height:1}
 .top nav{display:flex;align-items:center;gap:clamp(18px,2.6vw,36px);font-size:var(--t-small)}
 .top nav a{text-decoration:none;text-underline-offset:4px}
@@ -75,22 +75,23 @@ button,input{font:inherit;color:inherit}
 @media (max-width:760px){.top nav a{display:none}}
 
 /* ---------- product ---------- */
+.pdp.wrap{max-width:calc(1280px + 2 * var(--gutter))}
 .pdp{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,80px);padding:8px var(--gutter) clamp(64px,9vw,120px);align-items:start}
 .viewer{position:sticky;top:72px;height:min(calc(100svh - 96px),780px);min-height:520px;background:var(--shade-soft);transition:background-color .6s var(--ease);overflow:hidden;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}
 .viewer::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 38%,rgba(255,255,255,.55),rgba(255,255,255,0) 70%),linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(0,0,0,.035));pointer-events:none}
 .viewer.dragging{cursor:grabbing}
-.hint{position:absolute;left:18px;top:16px;z-index:4;font-size:var(--t-label);color:var(--ink-2);pointer-events:none;transition:opacity .4s}
+.hint{position:absolute;left:24px;top:20px;z-index:4;font-size:var(--t-label);color:var(--ink-2);pointer-events:none;transition:opacity .4s}
 .viewer.touched .hint{opacity:0}
-.views{position:absolute;left:18px;right:18px;bottom:16px;z-index:4;display:flex;gap:6px;flex-wrap:wrap}
-.views button{appearance:none;height:34px;padding:0 14px;border:1px solid rgba(29,27,28,.16);border-radius:3px;background:rgba(255,255,255,.55);font-size:var(--t-label);font-weight:500;cursor:pointer;color:var(--ink-2);transition:background-color .18s,color .18s,border-color .18s}
+.views{position:absolute;left:24px;right:24px;bottom:20px;z-index:4;display:flex;gap:20px;flex-wrap:wrap}
+.views button{appearance:none;height:auto;padding:4px 0;border:0;border-bottom:1px solid transparent;border-radius:0;background:none;font-size:var(--t-small);font-weight:400;cursor:pointer;color:var(--ink-2);transition:color .18s,border-color .18s}
 .views button:hover{color:var(--ink)}
-.views button[aria-pressed="true"]{background:var(--surface);color:var(--ink);border-color:var(--ink)}
+.views button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 .views button[disabled]{opacity:.4;cursor:default}
 .swatch-view{position:absolute;inset:0;z-index:3;opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s;background:#EBD2C2}
 .swatch-view img{width:100%;height:100%;object-fit:cover}
 .viewer.show-swatch .swatch-view{opacity:1;visibility:visible}
 .viewer.show-swatch .hint{opacity:0}
-.swatch-view .il{position:absolute;left:18px;top:16px;font-size:var(--t-label);color:rgba(29,27,28,.62)}
+.swatch-view .il{position:absolute;left:24px;top:20px;font-size:var(--t-label);color:rgba(29,27,28,.62)}
 .sil{--c:var(--shade);position:absolute;left:50%;top:50%;width:min(15%,64px);aspect-ratio:1/4.5;transform:translate(-50%,-50%);display:none;flex-direction:column;align-items:center}
 .gl-fail .sil{display:flex}
 .gl-ok .viewer .sil{display:none!important}
@@ -183,12 +184,14 @@ main section[id]{scroll-margin-top:72px}
 /* ---------- details / scale ---------- */
 .details{padding:clamp(72px,10vw,120px) var(--gutter)}
 .details-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(36px,6vw,96px);align-items:end}
-.sec-title{margin-bottom:clamp(32px,4.4vw,56px)}
-.scale{position:relative;min-width:0;padding-top:calc(100% * 2.7 / 15 + 16px)}
-.scale-stage{--len:10.5;position:absolute;left:0;top:0;width:calc(100% * var(--len) / 15);aspect-ratio:var(--len) / 2.7}
-.scale-stage .w{position:absolute;right:-22px;top:calc(50% - var(--wh, 85%) / 2);height:var(--wh, 85%);border-left:1px solid rgba(29,27,28,.4)}
+.sec-title{margin-bottom:clamp(24px,3vw,40px)}
+.scale{position:relative;min-width:0;padding-top:calc(100% * 2.7 / 15)}
+.scale-stage{--len:10.5;position:absolute;left:0;top:10px;width:calc(100% * var(--len) / 15);aspect-ratio:var(--len) / 2.7}
+.scale-stage .w{opacity:0;transition:opacity .4s var(--ease);position:absolute;right:-22px;top:calc(50% - var(--wh, 85%) / 2);height:var(--wh, 85%);border-left:1px solid rgba(29,27,28,.4)}
 .scale-stage .w::before,.scale-stage .w::after{content:"";position:absolute;left:-4px;width:7px;border-top:1px solid rgba(29,27,28,.4)}
 .scale-stage .w::before{top:0}.scale-stage .w::after{bottom:0}
+.scale.landed .scale-stage .w{opacity:1}
+.gl-fail .scale-stage .w{opacity:1}
 .scale-stage .w span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:var(--t-label);color:var(--ink-2);white-space:nowrap}
 .ruler{display:block;width:100%;height:auto;overflow:visible}
 .ruler line{stroke:var(--ink)}
@@ -230,15 +233,13 @@ main section[id]{scroll-margin-top:72px}
 @media (max-width:900px){.faq-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- footer ---------- */
-.foot{border-top:1px solid var(--line);padding:56px var(--gutter) calc(env(safe-area-inset-bottom,0px) + 40px)}
-.foot-grid{display:grid;grid-template-columns:2fr repeat(2,minmax(0,1fr));gap:32px;font-size:var(--t-small)}
-.foot h4{font-size:var(--t-small);font-weight:500;margin-bottom:12px}
-.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;color:var(--ink-2)}
+.foot{border-top:1px solid var(--line);padding:40px var(--gutter) calc(env(safe-area-inset-bottom,0px) + 40px)}
 .foot a{text-decoration:none}
 .foot a:hover{text-decoration:underline;text-underline-offset:4px}
-.foot .base{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;margin-top:56px;font-size:.8125rem;color:var(--ink-2)}
+.foot .base{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;font-size:var(--t-small);color:var(--ink-2)}
+.foot .base nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.foot .trader{margin-top:12px;font-size:.8125rem;color:var(--ink-2)}
 .foot .base .wordmark{font-size:1.125rem;color:var(--ink)}
-@media (max-width:700px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1 / -1}}
 
 /* ---------- mobile sticky bar ---------- */
 .sticky{display:none}
@@ -293,9 +294,9 @@ main section[id]{scroll-margin-top:72px}
 <header class="top" id="topbar">
   <a class="wordmark" href="#shop">dollop</a>
   <nav aria-label="Main">
-    <a href="#shades">Shades</a>
     <a href="#how">How to use</a>
     <a href="#details">Details</a>
+    <a href="#shades">Shades</a>
     <a href="#faq">FAQ</a>
     <button class="bag-btn" id="bagBtn" type="button" aria-controls="bag" aria-expanded="false">Bag (<span id="bagCount" class="num">0</span>)</button>
   </nav>
@@ -319,7 +320,6 @@ main section[id]{scroll-margin-top:72px}
 
       <div class="buy above">
         <div style="display:grid;gap:14px">
-          <p class="crumb">Lips / Lip balm</p>
           <h1 id="pname">Tinted Lip Balm</h1>
           <p class="desc">A sheer, glossy balm in a soft squeeze tube. Four shades, each with a dessert scent.</p>
           <div class="price-row"><span class="price num" id="priceTop">£12</span><span class="muted small" id="sizeTop">15 g</span></div>
@@ -332,10 +332,10 @@ main section[id]{scroll-margin-top:72px}
         </fieldset>
 
         <fieldset class="field">
-          <legend>Buy</legend>
+          <legend class="sr">Buy</legend>
           <div class="options">
-            <label class="opt"><input type="radio" name="opt" id="opt-one" value="one" checked autocomplete="off"><span class="r"></span><span class="t">One tube<small>Choose a quantity</small></span><span class="p num" data-price="single">£12</span></label>
-            <label class="opt"><input type="radio" name="opt" id="opt-three" value="three" autocomplete="off"><span class="r"></span><span class="t">Any three<small data-price="save">Save £6 vs buying separately</small></span><span class="p num" data-price="bundle">£30</span></label>
+            <label class="opt"><input type="radio" name="opt" id="opt-one" value="one" checked autocomplete="off"><span class="r"></span><span class="t">One tube<small>Single 15 g tube</small></span><span class="p num" data-price="single">£12</span></label>
+            <label class="opt"><input type="radio" name="opt" id="opt-three" value="three" autocomplete="off"><span class="r"></span><span class="t">Any three<small data-price="save">Save £6 on three single tubes</small></span><span class="p num" data-price="bundle">£30</span></label>
             <div class="trio" id="trio" hidden></div>
           </div>
         </fieldset>
@@ -351,11 +351,9 @@ main section[id]{scroll-margin-top:72px}
         </ul>
 
         <div class="acc">
-          <details><summary>Ingredients<i aria-hidden="true"></i></summary><div class="body">
-            <!-- TODO before launch: paste the full INCI list for each shade from the supplier's safety assessment. -->
-            <p>The full ingredients list (INCI) for each shade will be listed here. If you have allergies, check it before you buy, and patch test on your inner wrist first.</p>
-          </div></details>
-          <details><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>UK delivery is <span data-fee>£2.99</span>, and free on orders over £25. You'll see the estimated delivery date at checkout.</p><p>You can cancel your order within 14 days of delivery and send it back for a refund. If a tube is faulty or not as described, tell us within 30 days and we'll refund it, opened or not. This doesn't affect your statutory rights.</p></div></details>
+          <!-- Ingredients stay hidden until CONFIG.inci has the real list for the shade on show. -->
+          <details id="ingredients" hidden><summary>Ingredients<i aria-hidden="true"></i></summary><div class="body"><p id="inciText"></p><p>If you have allergies, check the list before you buy, and patch test on your inner wrist first.</p></div></details>
+          <details id="delivery"><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>UK delivery is <span data-fee>£2.99</span>, and free on orders over £25. You'll see the estimated delivery date at checkout.</p><p>You can cancel your order within 14 days of delivery and send it back for a refund. If a tube is faulty or not as described, tell us within 30 days and we'll refund it, opened or not. This doesn't affect your statutory rights.</p></div></details>
         </div>
       </div>
     </div>
@@ -420,29 +418,18 @@ main section[id]{scroll-margin-top:72px}
         <details><summary>Is it edible?<i aria-hidden="true"></i></summary><div class="body"><p>No. It's scented, but it isn't food. Keep it away from young children.</p></div></details>
         <details><summary>What happens if it gets warm?<i aria-hidden="true"></i></summary><div class="body"><p>It softens with warmth. Keep it out of direct sun and hot cars, where it can turn runny.</p></div></details>
         <details><summary>How do I keep it clean?<i aria-hidden="true"></i></summary><div class="body"><p>Wipe the tip after use and replace the cap. Don't share it.</p></div></details>
-        <details id="delivery"><summary>Delivery and returns<i aria-hidden="true"></i></summary><div class="body"><p>UK delivery is <span data-fee>£2.99</span>, and free on orders over £25. You'll see the estimated delivery date at checkout.</p><p>You can cancel your order within 14 days of delivery and send it back for a refund. If a tube is faulty or not as described, tell us within 30 days and we'll refund it, opened or not. This doesn't affect your statutory rights.</p></div></details>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="foot-grid wrap">
-    <div>
-      <p class="muted" style="max-width:34ch">Tinted lip balm in four sheer shades. 15 g squeeze tube.</p>
-      <!-- TODO before launch: trader name, geographic address and contact email go in CONFIG.trader; they render here. -->
-      <p class="muted" id="trader" hidden></p>
-    </div>
-    <div>
-      <h4>Shop</h4>
-      <ul><li><a href="#shop">Tinted Lip Balm</a></li><li><a href="#shades">Shades</a></li><li><a href="#shop" data-pick-three data-price="offer">Any three for £30</a></li></ul>
-    </div>
-    <div>
-      <h4>Help</h4>
-      <ul><li><a href="#faq">FAQ</a></li><li><a href="#delivery" data-open-delivery>Delivery and returns</a></li></ul>
-    </div>
+  <div class="base wrap">
+    <span class="wordmark">dollop</span>
+    <nav aria-label="Footer"><a href="#delivery" data-open-delivery>Delivery and returns</a><a href="#faq">FAQ</a><span>© 2026 Dollop</span></nav>
   </div>
-  <div class="base wrap"><span class="wordmark">dollop</span><span>© 2026 Dollop</span></div>
+  <!-- TODO before launch: trader name, geographic address and contact email go in CONFIG.trader; they render here. -->
+  <p class="trader wrap" id="trader" hidden></p>
 </footer>
 
 <div class="sticky" id="sticky" aria-hidden="true">
@@ -481,6 +468,8 @@ var CONFIG = {
   discountCode: "",
   variantIds: { spun: "", vanilla: "", cold: "", butter: "" },
   trader: { name: "", address: "", email: "" },
+  // TODO before launch: the full ingredients (INCI) list per shade from the supplier's safety assessment
+  inci: { spun: "", vanilla: "", cold: "", butter: "" },
   // TODO before launch: measure a real tube (cap on) and put the numbers here. The ruler, the 3D tube and the copy all follow them.
   size: { lengthMm: 105, widthMm: 23 }
 };
@@ -523,6 +512,9 @@ function setShade(id){
   $("#stickyText").textContent = (opt === "three" ? "Any three · " + money(CONFIG.bundlePrice) : s.name + " · " + money(CONFIG.price));
   $$(".card").forEach(function(c){ c.classList.toggle("selected", c.getAttribute("data-shade") === id); });
   fillStills();
+  var inci = CONFIG.inci && CONFIG.inci[id];
+  $("#ingredients").hidden = !inci;
+  if (inci) $("#inciText").textContent = "Ingredients: " + inci;
   if (changed) bus.dispatchEvent(new CustomEvent("shade", { detail: s }));
 }
 D.setShade = setShade;
@@ -719,7 +711,7 @@ renderBag();
   var offer = "Any " + (CONFIG.bundleSize === 3 ? "three" : CONFIG.bundleSize) + " for " + money(CONFIG.bundlePrice);
   $$('[data-price="single"]').forEach(function(el){ el.textContent = money(CONFIG.price); });
   $$('[data-price="bundle"]').forEach(function(el){ el.textContent = money(CONFIG.bundlePrice); });
-  $$('[data-price="save"]').forEach(function(el){ el.textContent = save > 0 ? "Save " + money(save) + " vs buying separately" : "Mix shades or double up"; });
+  $$('[data-price="save"]').forEach(function(el){ el.textContent = save > 0 ? "Save " + money(save) + " on " + (CONFIG.bundleSize === 3 ? "three" : CONFIG.bundleSize) + " single tubes" : "Mix shades or double up"; });
   $$('[data-price="offer"]').forEach(function(el){ el.textContent = offer; });
   $$("[data-fee]").forEach(function(el){ el.textContent = money(CONFIG.deliveryFee); });
   $("#announce").textContent = offer + " · Free UK delivery over " + money(CONFIG.freeShip);
@@ -963,7 +955,7 @@ function createKit(renderer) {
       const d = Math.max(0, Math.min(1, state.bead || 0));
       const e = 1 - Math.pow(1 - d, 3);
       bead.visible = e > 0.01 && c > 0.5;
-      if (bead.visible) { bead.scale.set(e, 0.88 * e, e); bead.position.y = -0.6 * 0.26 * e + 0.02; }
+      if (bead.visible) { bead.scale.set(1.12 * e, 0.68 * e, 1.12 * e); bead.position.y = -0.32 * 0.26 * e + 0.05; }
     }
     drawLabel(shade); setColour(new THREE.Color(shade.tube), new THREE.Color(shade.ink), shade.pearl || 0, new THREE.Color(shade.swatch));
     return { root, drawLabel, setColour, pose, tubeMat };
@@ -1135,8 +1127,9 @@ async function main() {
       { at: hTop + hLen * 0.32, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: -0.18, rz: -0.18, cap: 1, sq: 0, bead: 0, free: 0, shadow: 0, scrub: true },
       { at: hTop + hLen * 0.64, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.16, ry: 0.05, rz: -0.6, cap: 1, sq: 0.8, bead: 1, free: 0, shadow: 0, scrub: true },
       { at: hTop + hLen * 0.98, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: 0.15, rz: -0.66, cap: 1, sq: 0.15, bead: 1, free: 0, shadow: 0 },
-      { at: hTop + hLen + vh * 0.3, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0.1, ry: 0.15, rz: -0.66, cap: 1, sq: 0.15, bead: 1, free: 0, shadow: 0 },
-      { at: Math.max(hTop + hLen + vh * 0.3 + 2, scaleAt), el: stages.scale, fit: "exact", k: 1, rx: 0, ry: 0, rz: -Math.PI / 2, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0.8, wfix: 1 }
+      // cap back on and level while still on the dark ground, then down onto the ruler
+      { at: hTop + hLen + vh * 0.3, el: stages.how, fit: "v", k: narrow ? 0.86 : 0.74, rx: 0, ry: 0, rz: -Math.PI / 2, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0 },
+      { at: Math.max(hTop + hLen + vh * 0.3 + 2, scaleAt), el: stages.scale, fit: "exact", k: 1, rx: 0, ry: 0, rz: -Math.PI / 2, cap: 0, sq: 0, bead: 0, free: 0, shadow: 0.3, wfix: 1 }
     ];
     for (let i = 1; i < list.length; i++) if (list[i].at <= list[i - 1].at) list[i].at = list[i - 1].at + 1;
     stations = list;
@@ -1181,6 +1174,7 @@ async function main() {
   });
 
   const cur = {};
+  const scaleBox = document.querySelector(".scale"); let scaleLanded = false;
   let first = true, awake = 0, time = 0, last = performance.now();
   function wake() { awake = 1.2; }
   window.addEventListener("scroll", wake, { passive: true });
@@ -1237,6 +1231,8 @@ async function main() {
     // on the ruler, follow the measured width as well as the length (CONFIG.size)
     const sz = D.CONFIG.size, wr = (sz.widthMm / 23.2) / (sz.lengthMm / 105);
     const wf = 1 + (cur.wfix || 0) * (wr - 1);
+    const landed = target.wfix > 0.95 && Math.abs(goal.rz - cur.rz) < 0.02;
+    if (landed !== scaleLanded) { scaleLanded = landed; scaleBox.classList.toggle("landed", landed); }
     tube.root.scale.set(cur.s * wf, cur.s, cur.s * wf);
     tube.root.rotation.set(cur.rx, cur.ry, cur.rz);
     tube.pose({ cap: cur.cap, sq: cur.sq, bead: cur.bead });

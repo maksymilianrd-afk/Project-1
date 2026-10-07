@@ -20,7 +20,7 @@ Source listing: AliExpress item 1005009003621619, "Lip Balm Moisturizing Mirror 
 - **Every product image is rendered from one 3D model.** The live tube, the four shade stills and the swatches all come from that model, built to the photo proportions. The swatches are labelled as illustrations, because nobody has photographed the real balm on skin yet.
 - **No claims that can't be backed.** No hydrating, shea, hyaluronic, vegan, cruelty-free, SPF or "non-toxic" claims. The copy sticks to what the listing and photos show: 15 g squeeze tube, twist-off cap, sheer tint, glossy finish, dessert scents.
 - **Honest FAQ.** It can feel slightly tacky, softens in heat, isn't edible, has no SPF, should be patch tested and needs a wiped tip. These are what reviewers complain about, plus the real risks of a scented lip product.
-- **Pricing that follows UK rules.** "Any three for £30" is described as "Save £6 vs buying separately", worked out from `CONFIG`. There's no struck-through reference price. The delivery fee for small orders is stated up front (`CONFIG.deliveryFee`, set to £2.99 as a placeholder).
+- **Pricing that follows UK rules.** "Any three for £30" is described as "Save £6 on three single tubes", worked out from `CONFIG`. There's no struck-through reference price. The delivery fee for small orders is stated up front (`CONFIG.deliveryFee`, set to £2.99 as a placeholder).
 - **Returns copy matches consumer law.** It offers 14 days to cancel, and a refund for faulty or not-as-described tubes within 30 days, opened or not. There's no hygiene exception, because nothing shows the tubes are sealed.
 - **Nothing invented on the pack.** The back print is plain usage text. It has no LOT code, no barcode and no open-jar symbol until the real artwork exists. "Prices include VAT" is gone until VAT status is known.
 - **No reviews and no star ratings** until there are real ones.
@@ -34,7 +34,7 @@ Source listing: AliExpress item 1005009003621619, "Lip Balm Moisturizing Mirror 
    - `shopifyDomain` and `variantIds`: these switch Checkout to a real Shopify cart link. The any-three price also needs a matching automatic discount in Shopify, or a code in `discountCode`.
    - `deliveryFee`: your real UK delivery charge under the free threshold.
    - `trader`: business name, geographic address and contact email. UK online sellers must show these.
-4. Paste the supplier's full INCI list into the Ingredients accordion (there's a TODO comment in `index.html`).
+4. Put the supplier's full INCI list for each shade in `CONFIG.inci`. The Ingredients accordion stays hidden until the list for the selected shade is filled in.
 5. Check the prices, the delivery threshold and the returns policy against what you actually offer.
 6. Check each shade's tube colour and tint against a real sample, then edit `SHADES` if needed.
 7. Clear the name: run a UKIPO class 3 search for DOLLOP and similar marks before printing anything. A US mark, DOLLUP BEAUTY, covers lip balm.
